@@ -1,0 +1,122 @@
+[
+  {
+    "symbol": "BTC-USD",
+    "base": "BTC",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETH-USD",
+    "base": "ETH",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BNB-USD",
+    "base": "BNB",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XRP-USD",
+    "base": "XRP",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA-USD",
+    "base": "ADA",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL-USD",
+    "base": "SOL",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOT-USD",
+    "base": "DOT",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVAX-USD",
+    "base": "AVAX",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MATIC-USD",
+    "base": "MATIC",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK-USD",
+    "base": "LINK",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UNI-USD",
+    "base": "UNI",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LTC-USD",
+    "base": "LTC",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BCH-USD",
+    "base": "BCH",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALGO-USD",
+    "base": "ALGO",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATOM-USD",
+    "base": "ATOM",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  }
+]

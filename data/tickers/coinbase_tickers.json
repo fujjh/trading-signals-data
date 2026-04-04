@@ -1,0 +1,9274 @@
+[
+  {
+    "symbol": "BTC/USD",
+    "base": "BTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BTC/USDC",
+    "base": "BTC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USD",
+    "base": "ETH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USDC",
+    "base": "ETH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USD",
+    "base": "XRP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USDC",
+    "base": "XRP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USD",
+    "base": "SOL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USDC",
+    "base": "SOL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDT/USD",
+    "base": "USDT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZEC/USD",
+    "base": "ZEC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZEC/USDC",
+    "base": "ZEC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TAO/USD",
+    "base": "TAO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TAO/USDC",
+    "base": "TAO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BTC/EUR",
+    "base": "BTC",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDC/EUR",
+    "base": "USDC",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DAI/USD",
+    "base": "DAI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DAI/USDC",
+    "base": "DAI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALGO/USD",
+    "base": "ALGO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALGO/USDC",
+    "base": "ALGO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USD",
+    "base": "DOGE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USDC",
+    "base": "DOGE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MON/USD",
+    "base": "MON",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MON/USDC",
+    "base": "MON",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CTSI/USD",
+    "base": "CTSI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CTSI/USDC",
+    "base": "CTSI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USDC",
+    "base": "ADA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USD",
+    "base": "ADA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NOM/USD",
+    "base": "NOM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NOM/USDC",
+    "base": "NOM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LTC/USD",
+    "base": "LTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LTC/USDC",
+    "base": "LTC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USD",
+    "base": "LINK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USDC",
+    "base": "LINK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USD",
+    "base": "HBAR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USDC",
+    "base": "HBAR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EDGEX/USD",
+    "base": "EDGEX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EDGEX/USDC",
+    "base": "EDGEX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USD",
+    "base": "XLM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USDC",
+    "base": "XLM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ABT/USD",
+    "base": "ABT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ABT/USDC",
+    "base": "ABT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUI/USD",
+    "base": "SUI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUI/USDC",
+    "base": "SUI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FET/USD",
+    "base": "FET",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FET/USDC",
+    "base": "FET",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HYPE/USD",
+    "base": "HYPE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HYPE/USDC",
+    "base": "HYPE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USD",
+    "base": "AVAX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USDC",
+    "base": "AVAX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BERA/USD",
+    "base": "BERA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BERA/USDC",
+    "base": "BERA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VVV/USD",
+    "base": "VVV",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VVV/USDC",
+    "base": "VVV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RLS/USD",
+    "base": "RLS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RLS/USDC",
+    "base": "RLS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BTC/GBP",
+    "base": "BTC",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WIF/USD",
+    "base": "WIF",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WIF/USDC",
+    "base": "WIF",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FARTCOIN/USD",
+    "base": "FARTCOIN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FARTCOIN/USDC",
+    "base": "FARTCOIN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEAR/USD",
+    "base": "NEAR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEAR/USDC",
+    "base": "NEAR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SEI/USD",
+    "base": "SEI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SEI/USDC",
+    "base": "SEI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RENDER/USD",
+    "base": "RENDER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RENDER/USDC",
+    "base": "RENDER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BONK/USD",
+    "base": "BONK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BONK/USDC",
+    "base": "BONK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETH/EUR",
+    "base": "ETH",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ONDO/USD",
+    "base": "ONDO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ONDO/USDC",
+    "base": "ONDO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UNI/USD",
+    "base": "UNI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UNI/USDC",
+    "base": "UNI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RARI/USD",
+    "base": "RARI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RARI/USDC",
+    "base": "RARI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDT/USDC",
+    "base": "USDT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PEPE/USD",
+    "base": "PEPE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PEPE/USDC",
+    "base": "PEPE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KITE/USD",
+    "base": "KITE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KITE/USDC",
+    "base": "KITE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALGO/EUR",
+    "base": "ALGO",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL/EUR",
+    "base": "SOL",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VET/USD",
+    "base": "VET",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VET/USDC",
+    "base": "VET",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIDA/USD",
+    "base": "FIDA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIDA/USDC",
+    "base": "FIDA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICP/USD",
+    "base": "ICP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICP/USDC",
+    "base": "ICP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AAVE/USD",
+    "base": "AAVE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AAVE/USDC",
+    "base": "AAVE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDC/GBP",
+    "base": "USDC",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EDGE/USD",
+    "base": "EDGE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EDGE/USDC",
+    "base": "EDGE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRAC/USD",
+    "base": "TRAC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRAC/USDC",
+    "base": "TRAC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JTO/USD",
+    "base": "JTO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JTO/USDC",
+    "base": "JTO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDT/GBP",
+    "base": "USDT",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EURC/USDC",
+    "base": "EURC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "QNT/USD",
+    "base": "QNT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "QNT/USDC",
+    "base": "QNT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PENGU/USD",
+    "base": "PENGU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PENGU/USDC",
+    "base": "PENGU",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CORECHAIN/USD",
+    "base": "CORECHAIN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CORECHAIN/USDC",
+    "base": "CORECHAIN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SKY/USD",
+    "base": "SKY",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SKY/USDC",
+    "base": "SKY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PUMP/USD",
+    "base": "PUMP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PUMP/USDC",
+    "base": "PUMP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZK/USD",
+    "base": "ZK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZK/USDC",
+    "base": "ZK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XPL/USD",
+    "base": "XPL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XPL/USDC",
+    "base": "XPL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BCH/USD",
+    "base": "BCH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BCH/USDC",
+    "base": "BCH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IMU/USD",
+    "base": "IMU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IMU/USDC",
+    "base": "IMU",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PAXG/USD",
+    "base": "PAXG",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PAXG/USDC",
+    "base": "PAXG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BTC/USDT",
+    "base": "BTC",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DASH/USD",
+    "base": "DASH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DASH/USDC",
+    "base": "DASH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRIA/USD",
+    "base": "TRIA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRIA/USDC",
+    "base": "TRIA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KERNEL/USD",
+    "base": "KERNEL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KERNEL/USDC",
+    "base": "KERNEL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LTC/EUR",
+    "base": "LTC",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WLFI/USD",
+    "base": "WLFI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WLFI/USDC",
+    "base": "WLFI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USD",
+    "base": "DOT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USDC",
+    "base": "DOT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XRP/EUR",
+    "base": "XRP",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETH/GBP",
+    "base": "ETH",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DRIFT/USD",
+    "base": "DRIFT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DRIFT/USDC",
+    "base": "DRIFT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ENA/USD",
+    "base": "ENA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ENA/USDC",
+    "base": "ENA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BARD/USD",
+    "base": "BARD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BARD/USDC",
+    "base": "BARD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL/GBP",
+    "base": "SOL",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TURBO/USD",
+    "base": "TURBO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TURBO/USDC",
+    "base": "TURBO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LIGHTER/USD",
+    "base": "LIGHTER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LIGHTER/USDC",
+    "base": "LIGHTER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IP/USD",
+    "base": "IP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IP/USDC",
+    "base": "IP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NMR/USD",
+    "base": "NMR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NMR/USDC",
+    "base": "NMR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USELESS/USD",
+    "base": "USELESS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USELESS/USDC",
+    "base": "USELESS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRV/USD",
+    "base": "CRV",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRV/USDC",
+    "base": "CRV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETC/USD",
+    "base": "ETC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETC/USDC",
+    "base": "ETC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRUMP/USD",
+    "base": "TRUMP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRUMP/USDC",
+    "base": "TRUMP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDT/EUR",
+    "base": "USDT",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ACH/USD",
+    "base": "ACH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ACH/USDC",
+    "base": "ACH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APT/USD",
+    "base": "APT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APT/USDC",
+    "base": "APT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRL/USD",
+    "base": "PRL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRL/USDC",
+    "base": "PRL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USDT",
+    "base": "SOL",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALT/USD",
+    "base": "ALT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALT/USDC",
+    "base": "ALT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AERO/USD",
+    "base": "AERO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AERO/USDC",
+    "base": "AERO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AMP/USD",
+    "base": "AMP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AMP/USDC",
+    "base": "AMP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PROMPT/USD",
+    "base": "PROMPT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PROMPT/USDC",
+    "base": "PROMPT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HFT/USD",
+    "base": "HFT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HFT/USDC",
+    "base": "HFT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINEA/USD",
+    "base": "LINEA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINEA/USDC",
+    "base": "LINEA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BIO/USD",
+    "base": "BIO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BIO/USDC",
+    "base": "BIO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "YB/USD",
+    "base": "YB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "YB/USDC",
+    "base": "YB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BASED1/USD",
+    "base": "BASED1",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BASED1/USDC",
+    "base": "BASED1",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AKT/USD",
+    "base": "AKT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AKT/USDC",
+    "base": "AKT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BTRST/USD",
+    "base": "BTRST",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BTRST/USDC",
+    "base": "BTRST",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KTA/USD",
+    "base": "KTA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KTA/USDC",
+    "base": "KTA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/USD",
+    "base": "SHIB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/USDC",
+    "base": "SHIB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "W/USD",
+    "base": "W",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "W/USDC",
+    "base": "W",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATOM/USD",
+    "base": "ATOM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATOM/USDC",
+    "base": "ATOM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POL/USD",
+    "base": "POL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POL/USDC",
+    "base": "POL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SKL/USD",
+    "base": "SKL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SKL/USDC",
+    "base": "SKL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIL/USD",
+    "base": "FIL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIL/USDC",
+    "base": "FIL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RSR/USD",
+    "base": "RSR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RSR/USDC",
+    "base": "RSR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZRO/USD",
+    "base": "ZRO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZRO/USDC",
+    "base": "ZRO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TIA/USD",
+    "base": "TIA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TIA/USDC",
+    "base": "TIA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XAN/USD",
+    "base": "XAN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XAN/USDC",
+    "base": "XAN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ANKR/USD",
+    "base": "ANKR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ANKR/USDC",
+    "base": "ANKR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZORA/USD",
+    "base": "ZORA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZORA/USDC",
+    "base": "ZORA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FAI/USD",
+    "base": "FAI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FAI/USDC",
+    "base": "FAI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BNB/USD",
+    "base": "BNB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BNB/USDC",
+    "base": "BNB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WLD/USD",
+    "base": "WLD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WLD/USDC",
+    "base": "WLD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OP/USD",
+    "base": "OP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OP/USDC",
+    "base": "OP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MOG/USD",
+    "base": "MOG",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MOG/USDC",
+    "base": "MOG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EUL/USD",
+    "base": "EUL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EUL/USDC",
+    "base": "EUL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLOW/USD",
+    "base": "FLOW",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLOW/USDC",
+    "base": "FLOW",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIGHT/USD",
+    "base": "FIGHT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIGHT/USDC",
+    "base": "FIGHT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USDT",
+    "base": "ETH",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NKN/USD",
+    "base": "NKN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NKN/USDC",
+    "base": "NKN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CAKE/USD",
+    "base": "CAKE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CAKE/USDC",
+    "base": "CAKE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPK/USD",
+    "base": "SPK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPK/USDC",
+    "base": "SPK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XTZ/USD",
+    "base": "XTZ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XTZ/USDC",
+    "base": "XTZ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OGN/USD",
+    "base": "OGN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OGN/USDC",
+    "base": "OGN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IRYS/USD",
+    "base": "IRYS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IRYS/USDC",
+    "base": "IRYS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICP/EUR",
+    "base": "ICP",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CFG/USD",
+    "base": "CFG",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CFG/USDC",
+    "base": "CFG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APE/USD",
+    "base": "APE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APE/USDC",
+    "base": "APE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ARB/USD",
+    "base": "ARB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ARB/USDC",
+    "base": "ARB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ASTER/USD",
+    "base": "ASTER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ASTER/USDC",
+    "base": "ASTER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ROSE/USD",
+    "base": "ROSE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ROSE/USDC",
+    "base": "ROSE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA/EUR",
+    "base": "ADA",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PYR/USD",
+    "base": "PYR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PYR/USDC",
+    "base": "PYR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZRX/USD",
+    "base": "ZRX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZRX/USDC",
+    "base": "ZRX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KAT/USD",
+    "base": "KAT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KAT/USDC",
+    "base": "KAT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INJ/USD",
+    "base": "INJ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INJ/USDC",
+    "base": "INJ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TOWNS/USD",
+    "base": "TOWNS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TOWNS/USDC",
+    "base": "TOWNS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZEN/USD",
+    "base": "ZEN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZEN/USDC",
+    "base": "ZEN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XCN/USD",
+    "base": "XCN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XCN/USDC",
+    "base": "XCN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICNT/USD",
+    "base": "ICNT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICNT/USDC",
+    "base": "ICNT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SAPIEN/USD",
+    "base": "SAPIEN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SAPIEN/USDC",
+    "base": "SAPIEN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BNKR/USD",
+    "base": "BNKR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BNKR/USDC",
+    "base": "BNKR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ORCA/USD",
+    "base": "ORCA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ORCA/USDC",
+    "base": "ORCA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IMX/USD",
+    "base": "IMX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IMX/USDC",
+    "base": "IMX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POPCAT/USD",
+    "base": "POPCAT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POPCAT/USDC",
+    "base": "POPCAT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ROBO/USD",
+    "base": "ROBO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ROBO/USDC",
+    "base": "ROBO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COTI/USD",
+    "base": "COTI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COTI/USDC",
+    "base": "COTI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MAGIC/USD",
+    "base": "MAGIC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MAGIC/USDC",
+    "base": "MAGIC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STX/USD",
+    "base": "STX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STX/USDC",
+    "base": "STX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZETA/USD",
+    "base": "ZETA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZETA/USDC",
+    "base": "ZETA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STRK/USD",
+    "base": "STRK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STRK/USDC",
+    "base": "STRK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "REZ/USD",
+    "base": "REZ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "REZ/USDC",
+    "base": "REZ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SAND/USD",
+    "base": "SAND",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SAND/USDC",
+    "base": "SAND",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IOTX/USD",
+    "base": "IOTX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IOTX/USDC",
+    "base": "IOTX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TOSHI/USD",
+    "base": "TOSHI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TOSHI/USDC",
+    "base": "TOSHI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HNT/USD",
+    "base": "HNT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HNT/USDC",
+    "base": "HNT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CHZ/USD",
+    "base": "CHZ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CHZ/USDC",
+    "base": "CHZ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AXS/USD",
+    "base": "AXS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AXS/USDC",
+    "base": "AXS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JASMY/USD",
+    "base": "JASMY",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JASMY/USDC",
+    "base": "JASMY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SXT/USD",
+    "base": "SXT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SXT/USDC",
+    "base": "SXT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CTX/USD",
+    "base": "CTX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CTX/USDC",
+    "base": "CTX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PERP/USD",
+    "base": "PERP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PERP/USDC",
+    "base": "PERP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLR/USD",
+    "base": "FLR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLR/USDC",
+    "base": "FLR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRO/USD",
+    "base": "CRO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRO/USDC",
+    "base": "CRO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LTC/GBP",
+    "base": "LTC",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PYTH/USD",
+    "base": "PYTH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PYTH/USDC",
+    "base": "PYTH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZKC/USD",
+    "base": "ZKC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZKC/USDC",
+    "base": "ZKC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPX/USD",
+    "base": "SPX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPX/USDC",
+    "base": "SPX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MASK/USD",
+    "base": "MASK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MASK/USDC",
+    "base": "MASK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIS/USD",
+    "base": "FIS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIS/USDC",
+    "base": "FIS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "YFI/USD",
+    "base": "YFI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "YFI/USDC",
+    "base": "YFI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GST/USD",
+    "base": "GST",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GST/USDC",
+    "base": "GST",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "L3/USD",
+    "base": "L3",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "L3/USDC",
+    "base": "L3",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRCL/USD",
+    "base": "PRCL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRCL/USDC",
+    "base": "PRCL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MOODENG/USD",
+    "base": "MOODENG",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MOODENG/USDC",
+    "base": "MOODENG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OPN/USD",
+    "base": "OPN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OPN/USDC",
+    "base": "OPN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALGO/GBP",
+    "base": "ALGO",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WET/USD",
+    "base": "WET",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WET/USDC",
+    "base": "WET",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA/GBP",
+    "base": "ADA",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MNDE/USD",
+    "base": "MNDE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MNDE/USDC",
+    "base": "MNDE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HONEY/USD",
+    "base": "HONEY",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HONEY/USDC",
+    "base": "HONEY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DIA/USD",
+    "base": "DIA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DIA/USDC",
+    "base": "DIA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COSMOSDYDX/USD",
+    "base": "COSMOSDYDX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COSMOSDYDX/USDC",
+    "base": "COSMOSDYDX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRO/USD",
+    "base": "PRO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRO/USDC",
+    "base": "PRO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TREE/USD",
+    "base": "TREE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TREE/USDC",
+    "base": "TREE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APR/USD",
+    "base": "APR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APR/USDC",
+    "base": "APR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRIME/USD",
+    "base": "PRIME",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PRIME/USDC",
+    "base": "PRIME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/GBP",
+    "base": "DOGE",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FORTH/USD",
+    "base": "FORTH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FORTH/USDC",
+    "base": "FORTH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK/EUR",
+    "base": "LINK",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SQD/USD",
+    "base": "SQD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SQD/USDC",
+    "base": "SQD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GWEI/USD",
+    "base": "GWEI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GWEI/USDC",
+    "base": "GWEI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "B3/USD",
+    "base": "B3",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "B3/USDC",
+    "base": "B3",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRB/USD",
+    "base": "TRB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRB/USDC",
+    "base": "TRB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BLUR/USD",
+    "base": "BLUR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BLUR/USDC",
+    "base": "BLUR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EIGEN/USD",
+    "base": "EIGEN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EIGEN/USDC",
+    "base": "EIGEN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CHECK/USD",
+    "base": "CHECK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CHECK/USDC",
+    "base": "CHECK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RECALL/USD",
+    "base": "RECALL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RECALL/USDC",
+    "base": "RECALL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AIOZ/USD",
+    "base": "AIOZ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AIOZ/USDC",
+    "base": "AIOZ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/EUR",
+    "base": "DOGE",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PENDLE/USD",
+    "base": "PENDLE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PENDLE/USDC",
+    "base": "PENDLE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUSHI/USD",
+    "base": "SUSHI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUSHI/USDC",
+    "base": "SUSHI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COMP/USD",
+    "base": "COMP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COMP/USDC",
+    "base": "COMP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MANA/USD",
+    "base": "MANA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MANA/USDC",
+    "base": "MANA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVNT/USD",
+    "base": "AVNT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVNT/USDC",
+    "base": "AVNT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MET/USD",
+    "base": "MET",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MET/USDC",
+    "base": "MET",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAT/USD",
+    "base": "BAT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAT/USDC",
+    "base": "BAT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KAITO/USD",
+    "base": "KAITO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KAITO/USDC",
+    "base": "KAITO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FET/USDT",
+    "base": "FET",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MEZO/USD",
+    "base": "MEZO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MEZO/USDC",
+    "base": "MEZO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STG/USD",
+    "base": "STG",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STG/USDC",
+    "base": "STG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATH/USD",
+    "base": "ATH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATH/USDC",
+    "base": "ATH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USDT",
+    "base": "XRP",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MORPHO/USD",
+    "base": "MORPHO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MORPHO/USDC",
+    "base": "MORPHO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRV/GBP",
+    "base": "CRV",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CBETH/USD",
+    "base": "CBETH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CBETH/USDC",
+    "base": "CBETH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RED/USD",
+    "base": "RED",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RED/USDC",
+    "base": "RED",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SAFE/USD",
+    "base": "SAFE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SAFE/USDC",
+    "base": "SAFE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALEPH/USD",
+    "base": "ALEPH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALEPH/USDC",
+    "base": "ALEPH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AXL/USD",
+    "base": "AXL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AXL/USDC",
+    "base": "AXL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SYRUP/USD",
+    "base": "SYRUP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SYRUP/USDC",
+    "base": "SYRUP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CVX/USD",
+    "base": "CVX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CVX/USDC",
+    "base": "CVX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SD/USD",
+    "base": "SD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SD/USDC",
+    "base": "SD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MATH/USD",
+    "base": "MATH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MATH/USDC",
+    "base": "MATH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRUST/USD",
+    "base": "TRUST",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRUST/USDC",
+    "base": "TRUST",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK/GBP",
+    "base": "LINK",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "S/USD",
+    "base": "S",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "S/USDC",
+    "base": "S",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BIRB/USD",
+    "base": "BIRB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BIRB/USDC",
+    "base": "BIRB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PROVE/USD",
+    "base": "PROVE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PROVE/USDC",
+    "base": "PROVE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SWELL/USD",
+    "base": "SWELL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SWELL/USDC",
+    "base": "SWELL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KARRAT/USD",
+    "base": "KARRAT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KARRAT/USDC",
+    "base": "KARRAT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LCX/USD",
+    "base": "LCX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LCX/USDC",
+    "base": "LCX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SKR/USD",
+    "base": "SKR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SKR/USDC",
+    "base": "SKR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GRT/USD",
+    "base": "GRT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GRT/USDC",
+    "base": "GRT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RSC/USD",
+    "base": "RSC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RSC/USDC",
+    "base": "RSC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CVC/USD",
+    "base": "CVC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CVC/USDC",
+    "base": "CVC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USDT",
+    "base": "HBAR",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TON/USD",
+    "base": "TON",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TON/USDC",
+    "base": "TON",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MINA/USD",
+    "base": "MINA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MINA/USDC",
+    "base": "MINA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VTHO/USD",
+    "base": "VTHO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VTHO/USDC",
+    "base": "VTHO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COW/USD",
+    "base": "COW",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COW/USDC",
+    "base": "COW",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZKP/USD",
+    "base": "ZKP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZKP/USDC",
+    "base": "ZKP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SENT/USD",
+    "base": "SENT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SENT/USDC",
+    "base": "SENT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WCT/USD",
+    "base": "WCT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WCT/USDC",
+    "base": "WCT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LRC/USD",
+    "base": "LRC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LRC/USDC",
+    "base": "LRC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "2Z/USD",
+    "base": "2Z",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "2Z/USDC",
+    "base": "2Z",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XLM/EUR",
+    "base": "XLM",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUPER/USD",
+    "base": "SUPER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUPER/USDC",
+    "base": "SUPER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GHST/USD",
+    "base": "GHST",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GHST/USDC",
+    "base": "GHST",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/EUR",
+    "base": "AVAX",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MANTLE/USD",
+    "base": "MANTLE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MANTLE/USDC",
+    "base": "MANTLE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FORT/USD",
+    "base": "FORT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FORT/USDC",
+    "base": "FORT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPELL/USD",
+    "base": "SPELL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPELL/USDC",
+    "base": "SPELL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LA/USD",
+    "base": "LA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LA/USDC",
+    "base": "LA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KEYCAT/USD",
+    "base": "KEYCAT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KEYCAT/USDC",
+    "base": "KEYCAT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "C98/USD",
+    "base": "C98",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "C98/USDC",
+    "base": "C98",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PLUME/USD",
+    "base": "PLUME",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PLUME/USDC",
+    "base": "PLUME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CLANKER/USD",
+    "base": "CLANKER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CLANKER/USDC",
+    "base": "CLANKER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETC/GBP",
+    "base": "ETC",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALCX/USD",
+    "base": "ALCX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALCX/USDC",
+    "base": "ALCX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETHFI/USD",
+    "base": "ETHFI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETHFI/USDC",
+    "base": "ETHFI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOLO/USD",
+    "base": "DOLO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOLO/USDC",
+    "base": "DOLO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USD1/USD",
+    "base": "USD1",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USD1/USDC",
+    "base": "USD1",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALEO/USD",
+    "base": "ALEO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALEO/USDC",
+    "base": "ALEO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DEEP/USD",
+    "base": "DEEP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DEEP/USDC",
+    "base": "DEEP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AERGO/USD",
+    "base": "AERGO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AERGO/USDC",
+    "base": "AERGO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RLC/USD",
+    "base": "RLC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RLC/USDC",
+    "base": "RLC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLOCK/USD",
+    "base": "FLOCK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLOCK/USDC",
+    "base": "FLOCK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "A8/USD",
+    "base": "A8",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "A8/USDC",
+    "base": "A8",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PNG/USD",
+    "base": "PNG",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PNG/USDC",
+    "base": "PNG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USDT",
+    "base": "ADA",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JUPITER/USD",
+    "base": "JUPITER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JUPITER/USDC",
+    "base": "JUPITER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "THQ/USD",
+    "base": "THQ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "THQ/USDC",
+    "base": "THQ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NOICE/USD",
+    "base": "NOICE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NOICE/USDC",
+    "base": "NOICE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UNI/EUR",
+    "base": "UNI",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETC/EUR",
+    "base": "ETC",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LRDS/USD",
+    "base": "LRDS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LRDS/USDC",
+    "base": "LRDS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VARA/USD",
+    "base": "VARA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VARA/USDC",
+    "base": "VARA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALICE/USD",
+    "base": "ALICE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALICE/USDC",
+    "base": "ALICE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ILV/USD",
+    "base": "ILV",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ILV/USDC",
+    "base": "ILV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POWR/USD",
+    "base": "POWR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POWR/USDC",
+    "base": "POWR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BIGTIME/USD",
+    "base": "BIGTIME",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BIGTIME/USDC",
+    "base": "BIGTIME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OXT/USD",
+    "base": "OXT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OXT/USDC",
+    "base": "OXT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZAMA/USD",
+    "base": "ZAMA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZAMA/USDC",
+    "base": "ZAMA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STORJ/USD",
+    "base": "STORJ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STORJ/USDC",
+    "base": "STORJ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KNC/USD",
+    "base": "KNC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KNC/USDC",
+    "base": "KNC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BICO/USD",
+    "base": "BICO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BICO/USDC",
+    "base": "BICO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XYO/USD",
+    "base": "XYO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XYO/USDC",
+    "base": "XYO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IDEX/USD",
+    "base": "IDEX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IDEX/USDC",
+    "base": "IDEX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRU/USD",
+    "base": "TRU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRU/USDC",
+    "base": "TRU",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MAMO/USD",
+    "base": "MAMO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MAMO/USDC",
+    "base": "MAMO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DIMO/USD",
+    "base": "DIMO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DIMO/USDC",
+    "base": "DIMO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRV/EUR",
+    "base": "CRV",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CELO/USD",
+    "base": "CELO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CELO/USDC",
+    "base": "CELO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RAVE/USD",
+    "base": "RAVE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RAVE/USDC",
+    "base": "RAVE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LDO/USD",
+    "base": "LDO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LDO/USDC",
+    "base": "LDO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XSGD/USDC",
+    "base": "XSGD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USDT",
+    "base": "AVAX",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USDT",
+    "base": "DOGE",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HIGH/USD",
+    "base": "HIGH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HIGH/USDC",
+    "base": "HIGH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LPT/USD",
+    "base": "LPT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LPT/USDC",
+    "base": "LPT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/EUR",
+    "base": "SHIB",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TNSR/USD",
+    "base": "TNSR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TNSR/USDC",
+    "base": "TNSR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HOME/USD",
+    "base": "HOME",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HOME/USDC",
+    "base": "HOME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AAVE/GBP",
+    "base": "AAVE",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/GBP",
+    "base": "SHIB",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAL/USD",
+    "base": "BAL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAL/USDC",
+    "base": "BAL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RARE/USD",
+    "base": "RARE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RARE/USDC",
+    "base": "RARE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HYPER/USD",
+    "base": "HYPER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HYPER/USDC",
+    "base": "HYPER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "METIS/USD",
+    "base": "METIS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "METIS/USDC",
+    "base": "METIS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ESP/USD",
+    "base": "ESP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ESP/USDC",
+    "base": "ESP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INX/USD",
+    "base": "INX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INX/USDC",
+    "base": "INX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "G/USD",
+    "base": "G",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "G/USDC",
+    "base": "G",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ELA/USD",
+    "base": "ELA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ELA/USDC",
+    "base": "ELA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SWFTC/USD",
+    "base": "SWFTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SWFTC/USDC",
+    "base": "SWFTC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JITOSOL/USD",
+    "base": "JITOSOL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JITOSOL/USDC",
+    "base": "JITOSOL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UMA/USD",
+    "base": "UMA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UMA/USDC",
+    "base": "UMA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOOD/USD",
+    "base": "DOOD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOOD/USDC",
+    "base": "DOOD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "API3/USD",
+    "base": "API3",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "API3/USDC",
+    "base": "API3",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ARKM/USD",
+    "base": "ARKM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ARKM/USDC",
+    "base": "ARKM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PIRATE/USD",
+    "base": "PIRATE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PIRATE/USDC",
+    "base": "PIRATE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AZTEC/USD",
+    "base": "AZTEC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AZTEC/USDC",
+    "base": "AZTEC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KSM/USD",
+    "base": "KSM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KSM/USDC",
+    "base": "KSM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KMNO/USD",
+    "base": "KMNO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KMNO/USDC",
+    "base": "KMNO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ACS/USD",
+    "base": "ACS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ACS/USDC",
+    "base": "ACS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LQTY/USD",
+    "base": "LQTY",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LQTY/USDC",
+    "base": "LQTY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UNI/GBP",
+    "base": "UNI",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLUID/USD",
+    "base": "FLUID",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLUID/USDC",
+    "base": "FLUID",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEWT/USD",
+    "base": "NEWT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEWT/USDC",
+    "base": "NEWT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FOX/USD",
+    "base": "FOX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FOX/USDC",
+    "base": "FOX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BEAM/USD",
+    "base": "BEAM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BEAM/USDC",
+    "base": "BEAM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SYND/USD",
+    "base": "SYND",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SYND/USDC",
+    "base": "SYND",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GMT/USD",
+    "base": "GMT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GMT/USDC",
+    "base": "GMT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ENS/USD",
+    "base": "ENS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ENS/USDC",
+    "base": "ENS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAT/EUR",
+    "base": "BAT",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDC/SGD",
+    "base": "USDC",
+    "quote": "SGD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BREV/USD",
+    "base": "BREV",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BREV/USDC",
+    "base": "BREV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COOKIE/USD",
+    "base": "COOKIE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COOKIE/USDC",
+    "base": "COOKIE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TROLL/USD",
+    "base": "TROLL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TROLL/USDC",
+    "base": "TROLL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IO/USD",
+    "base": "IO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IO/USDC",
+    "base": "IO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AGLD/USD",
+    "base": "AGLD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AGLD/USDC",
+    "base": "AGLD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FUN1/USD",
+    "base": "FUN1",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FUN1/USDC",
+    "base": "FUN1",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZETACHAIN/USD",
+    "base": "ZETACHAIN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ZETACHAIN/USDC",
+    "base": "ZETACHAIN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SNX/USD",
+    "base": "SNX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SNX/USDC",
+    "base": "SNX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEAR/USDT",
+    "base": "NEAR",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ACX/USD",
+    "base": "ACX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ACX/USDC",
+    "base": "ACX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KAVA/USD",
+    "base": "KAVA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KAVA/USDC",
+    "base": "KAVA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEON/USD",
+    "base": "NEON",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEON/USDC",
+    "base": "NEON",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POLS/USD",
+    "base": "POLS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POLS/USDC",
+    "base": "POLS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CELR/USD",
+    "base": "CELR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CELR/USDC",
+    "base": "CELR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LMTS/USD",
+    "base": "LMTS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LMTS/USDC",
+    "base": "LMTS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHPING/USD",
+    "base": "SHPING",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHPING/USDC",
+    "base": "SHPING",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DEGEN/USD",
+    "base": "DEGEN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DEGEN/USDC",
+    "base": "DEGEN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "1INCH/USD",
+    "base": "1INCH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "1INCH/USDC",
+    "base": "1INCH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVT/USD",
+    "base": "AVT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVT/USDC",
+    "base": "AVT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GODS/USD",
+    "base": "GODS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GODS/USDC",
+    "base": "GODS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "REQ/USD",
+    "base": "REQ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "REQ/USDC",
+    "base": "REQ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALLO/USD",
+    "base": "ALLO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALLO/USDC",
+    "base": "ALLO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LAYER/USD",
+    "base": "LAYER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LAYER/USDC",
+    "base": "LAYER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XTZ/EUR",
+    "base": "XTZ",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BLZ/USD",
+    "base": "BLZ",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BLZ/USDC",
+    "base": "BLZ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUKU/USD",
+    "base": "SUKU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUKU/USDC",
+    "base": "SUKU",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BOBBOB/USD",
+    "base": "BOBBOB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BOBBOB/USDC",
+    "base": "BOBBOB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICP/GBP",
+    "base": "ICP",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WELL/USD",
+    "base": "WELL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WELL/USDC",
+    "base": "WELL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGINME/USD",
+    "base": "DOGINME",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGINME/USDC",
+    "base": "DOGINME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "QI/USD",
+    "base": "QI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "QI/USDC",
+    "base": "QI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ARPA/USD",
+    "base": "ARPA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ARPA/USDC",
+    "base": "ARPA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MLN/USD",
+    "base": "MLN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MLN/USDC",
+    "base": "MLN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BOBA/USD",
+    "base": "BOBA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BOBA/USDC",
+    "base": "BOBA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICP/USDT",
+    "base": "ICP",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AAVE/EUR",
+    "base": "AAVE",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/USDT",
+    "base": "SHIB",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLOKI/USD",
+    "base": "FLOKI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FLOKI/USDC",
+    "base": "FLOKI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHDW/USD",
+    "base": "SHDW",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SHDW/USDC",
+    "base": "SHDW",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USDT",
+    "base": "XLM",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USDT",
+    "base": "LINK",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MPLX/USD",
+    "base": "MPLX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MPLX/USDC",
+    "base": "MPLX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VOXEL/USD",
+    "base": "VOXEL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VOXEL/USDC",
+    "base": "VOXEL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUP/USD",
+    "base": "SUP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SUP/USDC",
+    "base": "SUP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPA/USD",
+    "base": "SPA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SPA/USDC",
+    "base": "SPA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DBR/USD",
+    "base": "DBR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DBR/USDC",
+    "base": "DBR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RNBW/USD",
+    "base": "RNBW",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RNBW/USDC",
+    "base": "RNBW",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GLM/USD",
+    "base": "GLM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GLM/USDC",
+    "base": "GLM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ME/USD",
+    "base": "ME",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ME/USDC",
+    "base": "ME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDC/CAD",
+    "base": "USDC",
+    "quote": "CAD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PLU/USD",
+    "base": "PLU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PLU/USDC",
+    "base": "PLU",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GNO/USD",
+    "base": "GNO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GNO/USDC",
+    "base": "GNO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WMTX/USD",
+    "base": "WMTX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WMTX/USDC",
+    "base": "WMTX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RPL/USD",
+    "base": "RPL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RPL/USDC",
+    "base": "RPL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UP/USD",
+    "base": "UP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UP/USDC",
+    "base": "UP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DNT/USD",
+    "base": "DNT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DNT/USDC",
+    "base": "DNT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AUCTION/USD",
+    "base": "AUCTION",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AUCTION/USDC",
+    "base": "AUCTION",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GIGA/USD",
+    "base": "GIGA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GIGA/USDC",
+    "base": "GIGA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CHZ/EUR",
+    "base": "CHZ",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOT/EUR",
+    "base": "DOT",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APE/EUR",
+    "base": "APE",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AST/USD",
+    "base": "AST",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AST/USDC",
+    "base": "AST",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BCH/EUR",
+    "base": "BCH",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PUNDIX/USD",
+    "base": "PUNDIX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PUNDIX/USDC",
+    "base": "PUNDIX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BNT/USD",
+    "base": "BNT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BNT/USDC",
+    "base": "BNT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ASM/USD",
+    "base": "ASM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ASM/USDC",
+    "base": "ASM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OCEAN/USD",
+    "base": "OCEAN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OCEAN/USDC",
+    "base": "OCEAN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GFI/USD",
+    "base": "GFI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GFI/USDC",
+    "base": "GFI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EGLD/USD",
+    "base": "EGLD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EGLD/USDC",
+    "base": "EGLD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CHZ/GBP",
+    "base": "CHZ",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HOPR/USD",
+    "base": "HOPR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "HOPR/USDC",
+    "base": "HOPR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KRL/USD",
+    "base": "KRL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "KRL/USDC",
+    "base": "KRL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ANKR/EUR",
+    "base": "ANKR",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MDT/USD",
+    "base": "MDT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MDT/USDC",
+    "base": "MDT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ELSA/USD",
+    "base": "ELSA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ELSA/USDC",
+    "base": "ELSA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WAL/USD",
+    "base": "WAL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WAL/USDC",
+    "base": "WAL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AURORA/USD",
+    "base": "AURORA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AURORA/USDC",
+    "base": "AURORA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "T/USD",
+    "base": "T",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "T/USDC",
+    "base": "T",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AWE/USD",
+    "base": "AWE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AWE/USDC",
+    "base": "AWE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TIME/USD",
+    "base": "TIME",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TIME/USDC",
+    "base": "TIME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WAXL/USD",
+    "base": "WAXL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "WAXL/USDC",
+    "base": "WAXL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OSMO/USD",
+    "base": "OSMO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OSMO/USDC",
+    "base": "OSMO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FARM/USD",
+    "base": "FARM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FARM/USDC",
+    "base": "FARM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATOM/USDT",
+    "base": "ATOM",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OMNI/USD",
+    "base": "OMNI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OMNI/USDC",
+    "base": "OMNI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AUDD/USDC",
+    "base": "AUDD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATOM/EUR",
+    "base": "ATOM",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "00/USD",
+    "base": "00",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "00/USDC",
+    "base": "00",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XTZ/GBP",
+    "base": "XTZ",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APE/USDT",
+    "base": "APE",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BCH/GBP",
+    "base": "BCH",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GTC/USD",
+    "base": "GTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GTC/USDC",
+    "base": "GTC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATOM/GBP",
+    "base": "ATOM",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CHZ/USDT",
+    "base": "CHZ",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GRT/EUR",
+    "base": "GRT",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NCT/USD",
+    "base": "NCT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NCT/USDC",
+    "base": "NCT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RAY/USD",
+    "base": "RAY",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RAY/USDC",
+    "base": "RAY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ERA/USD",
+    "base": "ERA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ERA/USDC",
+    "base": "ERA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOT/GBP",
+    "base": "DOT",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDS/USD",
+    "base": "USDS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDS/USDC",
+    "base": "USDS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SEAM/USD",
+    "base": "SEAM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SEAM/USDC",
+    "base": "SEAM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DEXT/USD",
+    "base": "DEXT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DEXT/USDC",
+    "base": "DEXT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PNUT/USD",
+    "base": "PNUT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PNUT/USDC",
+    "base": "PNUT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "1INCH/EUR",
+    "base": "1INCH",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAND/USD",
+    "base": "BAND",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SNX/EUR",
+    "base": "SNX",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAND/USDC",
+    "base": "BAND",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BLAST/USD",
+    "base": "BLAST",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BLAST/USDC",
+    "base": "BLAST",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AUDIO/USD",
+    "base": "AUDIO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AUDIO/USDC",
+    "base": "AUDIO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MSOL/USD",
+    "base": "MSOL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MSOL/USDC",
+    "base": "MSOL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "QNT/USDT",
+    "base": "QNT",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VELO/USD",
+    "base": "VELO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VELO/USDC",
+    "base": "VELO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "STX/USDT",
+    "base": "STX",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RAD/USD",
+    "base": "RAD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "RAD/USDC",
+    "base": "RAD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "OP/USDT",
+    "base": "OP",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INV/USD",
+    "base": "INV",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INV/USDC",
+    "base": "INV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POND/USD",
+    "base": "POND",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "POND/USDC",
+    "base": "POND",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GRT/GBP",
+    "base": "GRT",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ENS/EUR",
+    "base": "ENS",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIL/GBP",
+    "base": "FIL",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MANA/EUR",
+    "base": "MANA",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INDEX/USD",
+    "base": "INDEX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "INDEX/USDC",
+    "base": "INDEX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BADGER/USD",
+    "base": "BADGER",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BADGER/USDC",
+    "base": "BADGER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRO/EUR",
+    "base": "CRO",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIL/EUR",
+    "base": "FIL",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "1INCH/GBP",
+    "base": "1INCH",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ROSE/USDT",
+    "base": "ROSE",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "IMX/USDT",
+    "base": "IMX",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SNX/GBP",
+    "base": "SNX",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MINA/EUR",
+    "base": "MINA",
+    "quote": "EUR",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRO/USDT",
+    "base": "CRO",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MASK/GBP",
+    "base": "MASK",
+    "quote": "GBP",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "JASMY/USDT",
+    "base": "JASMY",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USDT",
+    "base": "DOT",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "USDC/AUD",
+    "base": "USDC",
+    "quote": "AUD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK/ETH",
+    "base": "LINK",
+    "quote": "ETH",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ENS/USDT",
+    "base": "ENS",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETH/BTC",
+    "base": "ETH",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LSETH/USD",
+    "base": "LSETH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LSETH/USDC",
+    "base": "LSETH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL/ETH",
+    "base": "SOL",
+    "quote": "ETH",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CBETH/ETH",
+    "base": "CBETH",
+    "quote": "ETH",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SOL/BTC",
+    "base": "SOL",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PAX/USD",
+    "base": "PAX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "PAX/USDC",
+    "base": "PAX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA/ETH",
+    "base": "ADA",
+    "quote": "ETH",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LINK/BTC",
+    "base": "LINK",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ADA/BTC",
+    "base": "ADA",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XLM/BTC",
+    "base": "XLM",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BCH/BTC",
+    "base": "BCH",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AAVE/BTC",
+    "base": "AAVE",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOT/BTC",
+    "base": "DOT",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ALGO/BTC",
+    "base": "ALGO",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICP/BTC",
+    "base": "ICP",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "UNI/BTC",
+    "base": "UNI",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/BTC",
+    "base": "DOGE",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/BTC",
+    "base": "AVAX",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIL/BTC",
+    "base": "FIL",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "LTC/BTC",
+    "base": "LTC",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ETC/BTC",
+    "base": "ETC",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "CRV/BTC",
+    "base": "CRV",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XTZ/BTC",
+    "base": "XTZ",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAT/BTC",
+    "base": "BAT",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "DASH/BTC",
+    "base": "DASH",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ATOM/BTC",
+    "base": "ATOM",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "COMP/BTC",
+    "base": "COMP",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GRT/BTC",
+    "base": "GRT",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "APT/USDT",
+    "base": "APT",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BAT/ETH",
+    "base": "BAT",
+    "quote": "ETH",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EOS/USD",
+    "base": "EOS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": false
+  },
+  {
+    "symbol": "EOS/USDC",
+    "base": "EOS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": false
+  },
+  {
+    "symbol": "LSETH/ETH",
+    "base": "LSETH",
+    "quote": "ETH",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MKR/USD",
+    "base": "MKR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": false
+  },
+  {
+    "symbol": "MKR/USDC",
+    "base": "MKR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": false
+  },
+  {
+    "symbol": "RNDR/USD",
+    "base": "RNDR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": false
+  },
+  {
+    "symbol": "RNDR/USDC",
+    "base": "RNDR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": false
+  },
+  {
+    "symbol": "SAND/USDT",
+    "base": "SAND",
+    "quote": "USDT",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SIGN/USD",
+    "base": "SIGN",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SIGN/USDC",
+    "base": "SIGN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "YFI/BTC",
+    "base": "YFI",
+    "quote": "BTC",
+    "exchange": "coinbase",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "BTC/USD:USD-301220",
+    "base": "BTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "BTC/USD:USD-260424",
+    "base": "BTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USD:USD-301220",
+    "base": "ETH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USD:USD-260424",
+    "base": "ETH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "PAXG/USD:USD-301220",
+    "base": "PAXG",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USD:USD-301220",
+    "base": "SOL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ZEC/USD:USD-301220",
+    "base": "ZEC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "BCH/USD:USD-301220",
+    "base": "BCH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USD:USD-260424",
+    "base": "SOL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LTC/USD:USD-301220",
+    "base": "LTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "BCH/USD:USD-260424",
+    "base": "BCH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "AAVE/USD:USD-301220",
+    "base": "AAVE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USD:USD-301220",
+    "base": "AVAX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USD:USD-301220",
+    "base": "LINK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USD:USD-301220",
+    "base": "XRP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LTC/USD:USD-260424",
+    "base": "LTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USD:USD-260424",
+    "base": "AVAX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USD:USD-301220",
+    "base": "DOT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USD:USD-260424",
+    "base": "XRP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USD:USD-301220",
+    "base": "ADA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "NEAR/USD:USD-301220",
+    "base": "NEAR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SUI/USD:USD-301220",
+    "base": "SUI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USD:USD-260424",
+    "base": "DOT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USD:USD-301220",
+    "base": "XLM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USD:USD-301220",
+    "base": "DOGE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ONDO/USD:USD-301220",
+    "base": "ONDO",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USD:USD-260424",
+    "base": "ADA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USD:USD-260424",
+    "base": "LINK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USD:USD-301220",
+    "base": "HBAR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SUI/USD:USD-260424",
+    "base": "SUI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USD:USD-260529",
+    "base": "LINK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USD:USD-260424",
+    "base": "XLM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ENA/USD:USD-301220",
+    "base": "ENA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USD:USD-260424",
+    "base": "DOGE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USD:USD-260424",
+    "base": "HBAR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/USD:USD-301220",
+    "base": "SHIB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/USD:USD-260424",
+    "base": "SHIB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "PEPE/USD:USD-301220",
+    "base": "PEPE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USD:USD-260626",
+    "base": "ADA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USD:USD-260529",
+    "base": "ADA",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USD:USD-260626",
+    "base": "AVAX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USD:USD-260529",
+    "base": "AVAX",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "BCH/USD:USD-260626",
+    "base": "BCH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "BCH/USD:USD-260529",
+    "base": "BCH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "BTC/USD:USD-260626",
+    "base": "BTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "BTC/USD:USD-260529",
+    "base": "BTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDECU/USD:USD-260626",
+    "base": "CDECU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDECU/USD:USD-260827",
+    "base": "CDECU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDECU/USD:USD-260428",
+    "base": "CDECU",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USD:USD-260626",
+    "base": "DOGE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USD:USD-260529",
+    "base": "DOGE",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USD:USD-260626",
+    "base": "DOT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USD:USD-260529",
+    "base": "DOT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USD:USD-260626",
+    "base": "ETH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USD:USD-260529",
+    "base": "ETH",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEGLD/USD:USD-261125",
+    "base": "CDEGLD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEGLD/USD:USD-260527",
+    "base": "CDEGLD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEGLD/USD:USD-260729",
+    "base": "CDEGLD",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USD:USD-260626",
+    "base": "HBAR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USD:USD-260529",
+    "base": "HBAR",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LTC/USD:USD-260626",
+    "base": "LTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LTC/USD:USD-260529",
+    "base": "LTC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USD:USD-260626",
+    "base": "LINK",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEMC/USD:USD-261217",
+    "base": "CDEMC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEMC/USD:USD-260917",
+    "base": "CDEMC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEMC/USD:USD-260618",
+    "base": "CDEMC",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDENGS/USD:USD-260526",
+    "base": "CDENGS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDENGS/USD:USD-260427",
+    "base": "CDENGS",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEOIL/USD:USD-260518",
+    "base": "CDEOIL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEOIL/USD:USD-260619",
+    "base": "CDEOIL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEOIL/USD:USD-260420",
+    "base": "CDEOIL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEPT/USD:USD-260626",
+    "base": "CDEPT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEPT/USD:USD-260928",
+    "base": "CDEPT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDEPT/USD:USD-261229",
+    "base": "CDEPT",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/USD:USD-260626",
+    "base": "SHIB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SHIB/USD:USD-260529",
+    "base": "SHIB",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDESIL/USD:USD-260626",
+    "base": "CDESIL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDESIL/USD:USD-260827",
+    "base": "CDESIL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "CDESIL/USD:USD-260428",
+    "base": "CDESIL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USD:USD-260626",
+    "base": "SOL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USD:USD-260529",
+    "base": "SOL",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SUI/USD:USD-260626",
+    "base": "SUI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SUI/USD:USD-260529",
+    "base": "SUI",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USD:USD-260626",
+    "base": "XLM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USD:USD-260529",
+    "base": "XLM",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USD:USD-260626",
+    "base": "XRP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USD:USD-260529",
+    "base": "XRP",
+    "quote": "USD",
+    "exchange": "coinbase",
+    "type": "future",
+    "active": true
+  },
+  {
+    "symbol": "SOL/USDC:USDC",
+    "base": "SOL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BTC/USDC:USDC",
+    "base": "BTC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ETH/USDC:USDC",
+    "base": "ETH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "XRP/USDC:USDC",
+    "base": "XRP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "DOGE/USDC:USDC",
+    "base": "DOGE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ZEC/USDC:USDC",
+    "base": "ZEC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "1000PEPE/USDC:USDC",
+    "base": "1000PEPE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ADA/USDC:USDC",
+    "base": "ADA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SUI/USDC:USDC",
+    "base": "SUI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ETHFI/USDC:USDC",
+    "base": "ETHFI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "WIF/USDC:USDC",
+    "base": "WIF",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "FARTCOIN/USDC:USDC",
+    "base": "FARTCOIN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TAO/USDC:USDC",
+    "base": "TAO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "HYPE/USDC:USDC",
+    "base": "HYPE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "NEAR/USDC:USDC",
+    "base": "NEAR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ALGO/USDC:USDC",
+    "base": "ALGO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "LINK/USDC:USDC",
+    "base": "LINK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ENA/USDC:USDC",
+    "base": "ENA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "XLM/USDC:USDC",
+    "base": "XLM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "FIL/USDC:USDC",
+    "base": "FIL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ASTER/USDC:USDC",
+    "base": "ASTER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AVAX/USDC:USDC",
+    "base": "AVAX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "EDGEX/USDC:USDC",
+    "base": "EDGEX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "MON/USDC:USDC",
+    "base": "MON",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "CRV/USDC:USDC",
+    "base": "CRV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "RENDER/USDC:USDC",
+    "base": "RENDER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "LTC/USDC:USDC",
+    "base": "LTC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "W/USDC:USDC",
+    "base": "W",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "EURC/USDC:USDC",
+    "base": "EURC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "NIGHT/USDC:USDC",
+    "base": "NIGHT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AAVE/USDC:USDC",
+    "base": "AAVE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "DOT/USDC:USDC",
+    "base": "DOT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "HBAR/USDC:USDC",
+    "base": "HBAR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PUMP/USDC:USDC",
+    "base": "PUMP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "UNI/USDC:USDC",
+    "base": "UNI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BERA/USDC:USDC",
+    "base": "BERA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BCH/USDC:USDC",
+    "base": "BCH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BNB/USDC:USDC",
+    "base": "BNB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TSLA/USDC:USDC",
+    "base": "TSLA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "XPL/USDC:USDC",
+    "base": "XPL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "COIN50/USDC:USDC",
+    "base": "COIN50",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TIA/USDC:USDC",
+    "base": "TIA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "CFX/USDC:USDC",
+    "base": "CFX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "JTO/USDC:USDC",
+    "base": "JTO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ICP/USDC:USDC",
+    "base": "ICP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "META/USDC:USDC",
+    "base": "META",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "GOOGL/USDC:USDC",
+    "base": "GOOGL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "NOM/USDC:USDC",
+    "base": "NOM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "MERL/USDC:USDC",
+    "base": "MERL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "RED/USDC:USDC",
+    "base": "RED",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TRUMP/USDC:USDC",
+    "base": "TRUMP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "WLFI/USDC:USDC",
+    "base": "WLFI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "LIT/USDC:USDC",
+    "base": "LIT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "FET/USDC:USDC",
+    "base": "FET",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "JUP/USDC:USDC",
+    "base": "JUP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "APT/USDC:USDC",
+    "base": "APT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "DYDX/USDC:USDC",
+    "base": "DYDX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "DASH/USDC:USDC",
+    "base": "DASH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ROBO/USDC:USDC",
+    "base": "ROBO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SEI/USDC:USDC",
+    "base": "SEI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TOWNS/USDC:USDC",
+    "base": "TOWNS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ARB/USDC:USDC",
+    "base": "ARB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "2Z/USDC:USDC",
+    "base": "2Z",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "VVV/USDC:USDC",
+    "base": "VVV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PRL/USDC:USDC",
+    "base": "PRL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "MSFT/USDC:USDC",
+    "base": "MSFT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ONDO/USDC:USDC",
+    "base": "ONDO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "RESOLV/USDC:USDC",
+    "base": "RESOLV",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "NVDA/USDC:USDC",
+    "base": "NVDA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "WLD/USDC:USDC",
+    "base": "WLD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ALT/USDC:USDC",
+    "base": "ALT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "OP/USDC:USDC",
+    "base": "OP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SAHARA/USDC:USDC",
+    "base": "SAHARA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BLUR/USDC:USDC",
+    "base": "BLUR",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AMZN/USDC:USDC",
+    "base": "AMZN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AEVO/USDC:USDC",
+    "base": "AEVO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SPY/USDC:USDC",
+    "base": "SPY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PENGU/USDC:USDC",
+    "base": "PENGU",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "POL/USDC:USDC",
+    "base": "POL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PEOPLE/USDC:USDC",
+    "base": "PEOPLE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "NEO/USDC:USDC",
+    "base": "NEO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "KAT/USDC:USDC",
+    "base": "KAT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TURBO/USDC:USDC",
+    "base": "TURBO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "1000SHIB/USDC:USDC",
+    "base": "1000SHIB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PENDLE/USDC:USDC",
+    "base": "PENDLE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "A/USDC:USDC",
+    "base": "A",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "GUN/USDC:USDC",
+    "base": "GUN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ZORA/USDC:USDC",
+    "base": "ZORA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "1000BONK/USDC:USDC",
+    "base": "1000BONK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TRB/USDC:USDC",
+    "base": "TRB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ETC/USDC:USDC",
+    "base": "ETC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SAGA/USDC:USDC",
+    "base": "SAGA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "IP/USDC:USDC",
+    "base": "IP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ATH/USDC:USDC",
+    "base": "ATH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "THETA/USDC:USDC",
+    "base": "THETA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "EIGEN/USDC:USDC",
+    "base": "EIGEN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "KERNEL/USDC:USDC",
+    "base": "KERNEL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "1000MOG/USDC:USDC",
+    "base": "1000MOG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "VIRTUAL/USDC:USDC",
+    "base": "VIRTUAL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "QQQ/USDC:USDC",
+    "base": "QQQ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BRETT/USDC:USDC",
+    "base": "BRETT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "POPCAT/USDC:USDC",
+    "base": "POPCAT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "GMT/USDC:USDC",
+    "base": "GMT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AAPL/USDC:USDC",
+    "base": "AAPL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PYTH/USDC:USDC",
+    "base": "PYTH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BOME/USDC:USDC",
+    "base": "BOME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TRIA/USDC:USDC",
+    "base": "TRIA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "LDO/USDC:USDC",
+    "base": "LDO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "XTZ/USDC:USDC",
+    "base": "XTZ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ORDI/USDC:USDC",
+    "base": "ORDI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "VET/USDC:USDC",
+    "base": "VET",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ZK/USDC:USDC",
+    "base": "ZK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PNUT/USDC:USDC",
+    "base": "PNUT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "TON/USDC:USDC",
+    "base": "TON",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AVNT/USDC:USDC",
+    "base": "AVNT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SKY/USDC:USDC",
+    "base": "SKY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SAND/USDC:USDC",
+    "base": "SAND",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "KAITO/USDC:USDC",
+    "base": "KAITO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "APE/USDC:USDC",
+    "base": "APE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "COMP/USDC:USDC",
+    "base": "COMP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ZRO/USDC:USDC",
+    "base": "ZRO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "MEME/USDC:USDC",
+    "base": "MEME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AIXBT/USDC:USDC",
+    "base": "AIXBT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "KAS/USDC:USDC",
+    "base": "KAS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "RARE/USDC:USDC",
+    "base": "RARE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "INX/USDC:USDC",
+    "base": "INX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ENS/USDC:USDC",
+    "base": "ENS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ZEN/USDC:USDC",
+    "base": "ZEN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "INJ/USDC:USDC",
+    "base": "INJ",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ATOM/USDC:USDC",
+    "base": "ATOM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "RUNE/USDC:USDC",
+    "base": "RUNE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "IMX/USDC:USDC",
+    "base": "IMX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BIGTIME/USDC:USDC",
+    "base": "BIGTIME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BIO/USDC:USDC",
+    "base": "BIO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ANIME/USDC:USDC",
+    "base": "ANIME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "STRK/USDC:USDC",
+    "base": "STRK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "RAY/USDC:USDC",
+    "base": "RAY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BEAM/USDC:USDC",
+    "base": "BEAM",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "OPN/USDC:USDC",
+    "base": "OPN",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SPK/USDC:USDC",
+    "base": "SPK",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "STX/USDC:USDC",
+    "base": "STX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "CAKE/USDC:USDC",
+    "base": "CAKE",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "0G/USDC:USDC",
+    "base": "0G",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SENT/USDC:USDC",
+    "base": "SENT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "JASMY/USDC:USDC",
+    "base": "JASMY",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "S/USDC:USDC",
+    "base": "S",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "NEIRO/USDC:USDC",
+    "base": "NEIRO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "1000FLOKI/USDC:USDC",
+    "base": "1000FLOKI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "KMNO/USDC:USDC",
+    "base": "KMNO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AERO/USDC:USDC",
+    "base": "AERO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ESP/USDC:USDC",
+    "base": "ESP",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "PAXG/USDC:USDC",
+    "base": "PAXG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SOPH/USDC:USDC",
+    "base": "SOPH",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SPX/USDC:USDC",
+    "base": "SPX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "MOODENG/USDC:USDC",
+    "base": "MOODENG",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "INIT/USDC:USDC",
+    "base": "INIT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AXS/USDC:USDC",
+    "base": "AXS",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ME/USDC:USDC",
+    "base": "ME",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BIRB/USDC:USDC",
+    "base": "BIRB",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AKT/USDC:USDC",
+    "base": "AKT",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "EGLD/USDC:USDC",
+    "base": "EGLD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SOMI/USDC:USDC",
+    "base": "SOMI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "ZAMA/USDC:USDC",
+    "base": "ZAMA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "AZTEC/USDC:USDC",
+    "base": "AZTEC",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "MORPHO/USDC:USDC",
+    "base": "MORPHO",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "CLANKER/USDC:USDC",
+    "base": "CLANKER",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "1000TOSHI/USDC:USDC",
+    "base": "1000TOSHI",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "BARD/USDC:USDC",
+    "base": "BARD",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "NIL/USDC:USDC",
+    "base": "NIL",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "SNX/USDC:USDC",
+    "base": "SNX",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  },
+  {
+    "symbol": "UMA/USDC:USDC",
+    "base": "UMA",
+    "quote": "USDC",
+    "exchange": "coinbase",
+    "type": "swap",
+    "active": true
+  }
+]

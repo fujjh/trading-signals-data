@@ -1,0 +1,212 @@
+[
+  {
+    "symbol": "EURUSD",
+    "base": "EUR",
+    "quote": "USD",
+    "type": "major",
+    "yahoo_symbol": "EURUSD=X"
+  },
+  {
+    "symbol": "USDJPY",
+    "base": "USD",
+    "quote": "JPY",
+    "type": "major",
+    "yahoo_symbol": "USDJPY=X"
+  },
+  {
+    "symbol": "GBPUSD",
+    "base": "GBP",
+    "quote": "USD",
+    "type": "major",
+    "yahoo_symbol": "GBPUSD=X"
+  },
+  {
+    "symbol": "USDCHF",
+    "base": "USD",
+    "quote": "CHF",
+    "type": "major",
+    "yahoo_symbol": "USDCHF=X"
+  },
+  {
+    "symbol": "AUDUSD",
+    "base": "AUD",
+    "quote": "USD",
+    "type": "major",
+    "yahoo_symbol": "AUDUSD=X"
+  },
+  {
+    "symbol": "USDCAD",
+    "base": "USD",
+    "quote": "CAD",
+    "type": "major",
+    "yahoo_symbol": "USDCAD=X"
+  },
+  {
+    "symbol": "NZDUSD",
+    "base": "NZD",
+    "quote": "USD",
+    "type": "major",
+    "yahoo_symbol": "NZDUSD=X"
+  },
+  {
+    "symbol": "EURGBP",
+    "base": "EUR",
+    "quote": "GBP",
+    "type": "major",
+    "yahoo_symbol": "EURGBP=X"
+  },
+  {
+    "symbol": "EURJPY",
+    "base": "EUR",
+    "quote": "JPY",
+    "type": "major",
+    "yahoo_symbol": "EURJPY=X"
+  },
+  {
+    "symbol": "GBPJPY",
+    "base": "GBP",
+    "quote": "JPY",
+    "type": "major",
+    "yahoo_symbol": "GBPJPY=X"
+  },
+  {
+    "symbol": "EURCHF",
+    "base": "EUR",
+    "quote": "CHF",
+    "type": "minor",
+    "yahoo_symbol": "EURCHF=X"
+  },
+  {
+    "symbol": "EURCAD",
+    "base": "EUR",
+    "quote": "CAD",
+    "type": "minor",
+    "yahoo_symbol": "EURCAD=X"
+  },
+  {
+    "symbol": "GBPCHF",
+    "base": "GBP",
+    "quote": "CHF",
+    "type": "minor",
+    "yahoo_symbol": "GBPCHF=X"
+  },
+  {
+    "symbol": "GBPAUD",
+    "base": "GBP",
+    "quote": "AUD",
+    "type": "minor",
+    "yahoo_symbol": "GBPAUD=X"
+  },
+  {
+    "symbol": "GBPCAD",
+    "base": "GBP",
+    "quote": "CAD",
+    "type": "minor",
+    "yahoo_symbol": "GBPCAD=X"
+  },
+  {
+    "symbol": "CHFJPY",
+    "base": "CHF",
+    "quote": "JPY",
+    "type": "minor",
+    "yahoo_symbol": "CHFJPY=X"
+  },
+  {
+    "symbol": "AUDJPY",
+    "base": "AUD",
+    "quote": "JPY",
+    "type": "minor",
+    "yahoo_symbol": "AUDJPY=X"
+  },
+  {
+    "symbol": "CADJPY",
+    "base": "CAD",
+    "quote": "JPY",
+    "type": "minor",
+    "yahoo_symbol": "CADJPY=X"
+  },
+  {
+    "symbol": "NZDJPY",
+    "base": "NZD",
+    "quote": "JPY",
+    "type": "minor",
+    "yahoo_symbol": "NZDJPY=X"
+  },
+  {
+    "symbol": "AUDNZD",
+    "base": "AUD",
+    "quote": "NZD",
+    "type": "minor",
+    "yahoo_symbol": "AUDNZD=X"
+  },
+  {
+    "symbol": "USDZAR",
+    "base": "USD",
+    "quote": "ZAR",
+    "type": "exotic",
+    "yahoo_symbol": "USDZAR=X"
+  },
+  {
+    "symbol": "USDTRY",
+    "base": "USD",
+    "quote": "TRY",
+    "type": "exotic",
+    "yahoo_symbol": "USDTRY=X"
+  },
+  {
+    "symbol": "USDMXN",
+    "base": "USD",
+    "quote": "MXN",
+    "type": "exotic",
+    "yahoo_symbol": "USDMXN=X"
+  },
+  {
+    "symbol": "USDSGD",
+    "base": "USD",
+    "quote": "SGD",
+    "type": "exotic",
+    "yahoo_symbol": "USDSGD=X"
+  },
+  {
+    "symbol": "USDHKD",
+    "base": "USD",
+    "quote": "HKD",
+    "type": "exotic",
+    "yahoo_symbol": "USDHKD=X"
+  },
+  {
+    "symbol": "USDNOK",
+    "base": "USD",
+    "quote": "NOK",
+    "type": "exotic",
+    "yahoo_symbol": "USDNOK=X"
+  },
+  {
+    "symbol": "USDSEK",
+    "base": "USD",
+    "quote": "SEK",
+    "type": "exotic",
+    "yahoo_symbol": "USDSEK=X"
+  },
+  {
+    "symbol": "USDDKK",
+    "base": "USD",
+    "quote": "DKK",
+    "type": "exotic",
+    "yahoo_symbol": "USDDKK=X"
+  },
+  {
+    "symbol": "USDPLN",
+    "base": "USD",
+    "quote": "PLN",
+    "type": "exotic",
+    "yahoo_symbol": "USDPLN=X"
+  },
+  {
+    "symbol": "USDHUF",
+    "base": "USD",
+    "quote": "HUF",
+    "type": "exotic",
+    "yahoo_symbol": "USDHUF=X"
+  }
+]
