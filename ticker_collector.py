@@ -217,8 +217,8 @@ class CryptoTickerCollector:
         self.exchanges = ['binance', 'coinbase', 'kraken', 'kucoin', 'bybit']
     
     def fetch_exchange_tickers(self, exchange_id='binance'):
-        """Fetch all trading pairs from a specific exchange"""
-        print(f"Fetching {exchange_id} tickers...")
+        """Fetch USDC and USDT trading pairs from a specific exchange"""
+        print(f"Fetching {exchange_id} USDC/USDT tickers...")
         
         if not CCXT_AVAILABLE:
             print("ccxt not available, skipping crypto collection")
@@ -229,31 +229,41 @@ class CryptoTickerCollector:
             exchange.load_markets()
             
             tickers = []
-            for symbol, market in exchange.markets.items():
-                tickers.append({
-                    'symbol': symbol,
-                    'base': market.get('base'),
-                    'quote': market.get('quote'),
-                    'exchange': exchange_id,
-                    'type': market.get('type', 'spot'),
-                    'active': market.get('active', True)
-                })
+            allowed_quotes = ['USDC', 'USDT']
             
-            print(f"Found {len(tickers)} pairs on {exchange_id}")
+            for symbol, market in exchange.markets.items():
+                quote = market.get('quote', '')
+                base = market.get('base', '')
+                
+                # Only include USDC and USDT pairs
+                if quote in allowed_quotes:
+                    tickers.append({
+                        'symbol': symbol,
+                        'base': base,
+                        'quote': quote,
+                        'exchange': exchange_id,
+                        'type': market.get('type', 'spot'),
+                        'active': market.get('active', True)
+                    })
+            
+            print(f"Found {len(tickers)} USDC/USDT pairs on {exchange_id}")
             return tickers
         except Exception as e:
             print(f"Error fetching {exchange_id}: {e}")
             return []
     
     def get_top_cryptos_via_yfinance(self):
-        """Get top cryptocurrencies via Yahoo Finance"""
-        print("Fetching top cryptos via Yahoo Finance...")
+        """Get top cryptocurrencies with USD pairs via Yahoo Finance"""
+        print("Fetching top cryptos via Yahoo Finance (USD pairs only)...")
         
-        # Major crypto tickers on Yahoo Finance
+        # Major crypto tickers on Yahoo Finance (USD pairs only)
         crypto_symbols = [
             'BTC-USD', 'ETH-USD', 'BNB-USD', 'XRP-USD', 'ADA-USD',
             'SOL-USD', 'DOT-USD', 'AVAX-USD', 'MATIC-USD', 'LINK-USD',
-            'UNI-USD', 'LTC-USD', 'BCH-USD', 'ALGO-USD', 'ATOM-USD'
+            'UNI-USD', 'LTC-USD', 'BCH-USD', 'ALGO-USD', 'ATOM-USD',
+            'ETC-USD', 'VET-USD', 'FIL-USD', 'TRX-USD', 'NEAR-USD',
+            'ICP-USD', 'XLM-USD', 'MANA-USD', 'SAND-USD', 'AXS-USD',
+            'FTM-USD', 'XTZ-USD', 'EGLD-USD', 'THETA-USD', 'GALA-USD'
         ]
         
         tickers = []

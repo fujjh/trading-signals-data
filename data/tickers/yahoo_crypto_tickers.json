@@ -118,5 +118,125 @@
     "exchange": "YAHOO",
     "type": "spot",
     "active": true
+  },
+  {
+    "symbol": "ETC-USD",
+    "base": "ETC",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "VET-USD",
+    "base": "VET",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FIL-USD",
+    "base": "FIL",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "TRX-USD",
+    "base": "TRX",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "NEAR-USD",
+    "base": "NEAR",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "ICP-USD",
+    "base": "ICP",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XLM-USD",
+    "base": "XLM",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "MANA-USD",
+    "base": "MANA",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "SAND-USD",
+    "base": "SAND",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "AXS-USD",
+    "base": "AXS",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "FTM-USD",
+    "base": "FTM",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "XTZ-USD",
+    "base": "XTZ",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "EGLD-USD",
+    "base": "EGLD",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "THETA-USD",
+    "base": "THETA",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
+  },
+  {
+    "symbol": "GALA-USD",
+    "base": "GALA",
+    "quote": "USD",
+    "exchange": "YAHOO",
+    "type": "spot",
+    "active": true
   }
 ]
