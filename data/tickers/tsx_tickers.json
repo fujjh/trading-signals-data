@@ -1,1 +1,202 @@
-[]
+[
+  {
+    "symbol": "RY",
+    "name": "Royal Bank of Canada",
+    "exchange": "TSX",
+    "yahoo_symbol": "RY.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "TD",
+    "name": "Toronto-Dominion Bank",
+    "exchange": "TSX",
+    "yahoo_symbol": "TD.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "ENB",
+    "name": "Enbridge Inc.",
+    "exchange": "TSX",
+    "yahoo_symbol": "ENB.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "SHOP",
+    "name": "Shopify Inc.",
+    "exchange": "TSX",
+    "yahoo_symbol": "SHOP.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "CNR",
+    "name": "Canadian National Railway",
+    "exchange": "TSX",
+    "yahoo_symbol": "CNR.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "TRP",
+    "name": "TC Energy Corporation",
+    "exchange": "TSX",
+    "yahoo_symbol": "TRP.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "BMO",
+    "name": "Bank of Montreal",
+    "exchange": "TSX",
+    "yahoo_symbol": "BMO.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "BNS",
+    "name": "Bank of Nova Scotia",
+    "exchange": "TSX",
+    "yahoo_symbol": "BNS.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "CP",
+    "name": "Canadian Pacific Railway",
+    "exchange": "TSX",
+    "yahoo_symbol": "CP.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "LUN",
+    "name": "Lundin Mining Corporation",
+    "exchange": "TSX",
+    "yahoo_symbol": "LUN.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "CSU",
+    "name": "Constellation Software Inc.",
+    "exchange": "TSX",
+    "yahoo_symbol": "CSU.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "ATD",
+    "name": "Alimentation Couche-Tard Inc.",
+    "exchange": "TSX",
+    "yahoo_symbol": "ATD.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "FNV",
+    "name": "Franco-Nevada Corporation",
+    "exchange": "TSX",
+    "yahoo_symbol": "FNV.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "SU",
+    "name": "Suncor Energy Inc.",
+    "exchange": "TSX",
+    "yahoo_symbol": "SU.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "ABX",
+    "name": "Barrick Gold Corporation",
+    "exchange": "TSX",
+    "yahoo_symbol": "ABX.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "WCN",
+    "name": "Waste Connections Inc.",
+    "exchange": "TSX",
+    "yahoo_symbol": "WCN.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "WPM",
+    "name": "Wheaton Precious Metals Corp.",
+    "exchange": "TSX",
+    "yahoo_symbol": "WPM.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "GIB",
+    "name": "CGI Inc.",
+    "exchange": "TSX",
+    "yahoo_symbol": "GIB.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "CM",
+    "name": "Canadian Imperial Bank of Commerce",
+    "exchange": "TSX",
+    "yahoo_symbol": "CM.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "NGT",
+    "name": "Newmont Corporation",
+    "exchange": "TSX",
+    "yahoo_symbol": "NGT.TO",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "VUL",
+    "name": "Vulcan Energy Resources Limited",
+    "exchange": "TSXV",
+    "yahoo_symbol": "VUL.V",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "NILI",
+    "name": "Nili Minerals Corp.",
+    "exchange": "TSXV",
+    "yahoo_symbol": "NILI.V",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "GLXY",
+    "name": "Galaxy Digital Holdings Ltd.",
+    "exchange": "TSXV",
+    "yahoo_symbol": "GLXY.V",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "HIVE",
+    "name": "HIVE Blockchain Technologies Ltd.",
+    "exchange": "TSXV",
+    "yahoo_symbol": "HIVE.V",
+    "sector": "",
+    "industry": ""
+  },
+  {
+    "symbol": "BITF",
+    "name": "Bitfarms Ltd.",
+    "exchange": "TSXV",
+    "yahoo_symbol": "BITF.V",
+    "sector": "",
+    "industry": ""
+  }
+]

@@ -1,0 +1,41 @@
+symbol,name,exchange,yahoo_symbol,sector,industry
+AAPL,Apple Inc.,NASDAQ,AAPL,Technology,Consumer Electronics
+MSFT,Microsoft Corporation,NASDAQ,MSFT,Technology,Software
+AMZN,Amazon.com Inc.,NASDAQ,AMZN,Consumer Cyclical,Internet Retail
+GOOGL,Alphabet Inc.,NASDAQ,GOOGL,Communication Services,Internet Content
+GOOG,Alphabet Inc.,NASDAQ,GOOG,Communication Services,Internet Content
+TSLA,Tesla Inc.,NASDAQ,TSLA,Consumer Cyclical,Auto Manufacturers
+META,Meta Platforms Inc.,NASDAQ,META,Communication Services,Internet Content
+NVDA,NVIDIA Corporation,NASDAQ,NVDA,Technology,Semiconductors
+PEP,PepsiCo Inc.,NASDAQ,PEP,Consumer Defensive,Beverages
+COST,Costco Wholesale Corporation,NASDAQ,COST,Consumer Defensive,Discount Stores
+AVGO,Broadcom Inc.,NASDAQ,AVGO,Technology,Semiconductors
+CSCO,Cisco Systems Inc.,NASDAQ,CSCO,Technology,Communication Equipment
+TMUS,T-Mobile US Inc.,NASDAQ,TMUS,Communication Services,Telecom Services
+TXN,Texas Instruments Inc.,NASDAQ,TXN,Technology,Semiconductors
+QCOM,Qualcomm Inc.,NASDAQ,QCOM,Technology,Semiconductors
+AMD,Advanced Micro Devices Inc.,NASDAQ,AMD,Technology,Semiconductors
+INTC,Intel Corporation,NASDAQ,INTC,Technology,Semiconductors
+AMAT,Applied Materials Inc.,NASDAQ,AMAT,Technology,Semiconductor Equipment
+GILD,Gilead Sciences Inc.,NASDAQ,GILD,Healthcare,Biotechnology
+MDLZ,Mondelez International Inc.,NASDAQ,MDLZ,Consumer Defensive,Confectioners
+ISRG,Intuitive Surgical Inc.,NASDAQ,ISRG,Healthcare,Medical Instruments
+BKNG,Booking Holdings Inc.,NASDAQ,BKNG,Consumer Cyclical,Travel Services
+ADP,Automatic Data Processing Inc.,NASDAQ,ADP,Industrials,Staffing
+VRTX,Vertex Pharmaceuticals Inc.,NASDAQ,VRTX,Healthcare,Biotechnology
+REGN,Regeneron Pharmaceuticals Inc.,NASDAQ,REGN,Healthcare,Biotechnology
+MU,Micron Technology Inc.,NASDAQ,MU,Technology,Semiconductors
+LRCX,Lam Research Corporation,NASDAQ,LRCX,Technology,Semiconductor Equipment
+SNPS,Synopsys Inc.,NASDAQ,SNPS,Technology,Software
+KDP,Keurig Dr Pepper Inc.,NASDAQ,KDP,Consumer Defensive,Beverages
+PANW,Palo Alto Networks Inc.,NASDAQ,PANW,Technology,Software
+MELI,MercadoLibre Inc.,NASDAQ,MELI,Consumer Cyclical,Internet Retail
+CSX,CSX Corporation,NASDAQ,CSX,Industrials,Railroads
+ASML,ASML Holding N.V.,NASDAQ,ASML,Technology,Semiconductor Equipment
+JD,JD.com Inc.,NASDAQ,JD,Consumer Cyclical,Internet Retail
+PDD,PDD Holdings Inc.,NASDAQ,PDD,Consumer Cyclical,Internet Retail
+ABNB,Airbnb Inc.,NASDAQ,ABNB,Consumer Cyclical,Travel Services
+MRNA,Moderna Inc.,NASDAQ,MRNA,Healthcare,Biotechnology
+COIN,Coinbase Global Inc.,NASDAQ,COIN,Financial,Financial Data
+RIVN,Rivian Automotive Inc.,NASDAQ,RIVN,Consumer Cyclical,Auto Manufacturers
+LCID,Lucid Group Inc.,NASDAQ,LCID,Consumer Cyclical,Auto Manufacturers

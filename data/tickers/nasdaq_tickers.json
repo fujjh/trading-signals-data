@@ -1,1 +1,322 @@
-[]
+[
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "AAPL",
+    "sector": "Technology",
+    "industry": "Consumer Electronics"
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft Corporation",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "MSFT",
+    "sector": "Technology",
+    "industry": "Software"
+  },
+  {
+    "symbol": "AMZN",
+    "name": "Amazon.com Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "AMZN",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  {
+    "symbol": "GOOGL",
+    "name": "Alphabet Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "GOOGL",
+    "sector": "Communication Services",
+    "industry": "Internet Content"
+  },
+  {
+    "symbol": "GOOG",
+    "name": "Alphabet Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "GOOG",
+    "sector": "Communication Services",
+    "industry": "Internet Content"
+  },
+  {
+    "symbol": "TSLA",
+    "name": "Tesla Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "TSLA",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  {
+    "symbol": "META",
+    "name": "Meta Platforms Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "META",
+    "sector": "Communication Services",
+    "industry": "Internet Content"
+  },
+  {
+    "symbol": "NVDA",
+    "name": "NVIDIA Corporation",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "NVDA",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  {
+    "symbol": "PEP",
+    "name": "PepsiCo Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "PEP",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages"
+  },
+  {
+    "symbol": "COST",
+    "name": "Costco Wholesale Corporation",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "COST",
+    "sector": "Consumer Defensive",
+    "industry": "Discount Stores"
+  },
+  {
+    "symbol": "AVGO",
+    "name": "Broadcom Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "AVGO",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  {
+    "symbol": "CSCO",
+    "name": "Cisco Systems Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "CSCO",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  {
+    "symbol": "TMUS",
+    "name": "T-Mobile US Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "TMUS",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  {
+    "symbol": "TXN",
+    "name": "Texas Instruments Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "TXN",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  {
+    "symbol": "QCOM",
+    "name": "Qualcomm Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "QCOM",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  {
+    "symbol": "AMD",
+    "name": "Advanced Micro Devices Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "AMD",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  {
+    "symbol": "INTC",
+    "name": "Intel Corporation",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "INTC",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  {
+    "symbol": "AMAT",
+    "name": "Applied Materials Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "AMAT",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment"
+  },
+  {
+    "symbol": "GILD",
+    "name": "Gilead Sciences Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "GILD",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  {
+    "symbol": "MDLZ",
+    "name": "Mondelez International Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "MDLZ",
+    "sector": "Consumer Defensive",
+    "industry": "Confectioners"
+  },
+  {
+    "symbol": "ISRG",
+    "name": "Intuitive Surgical Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "ISRG",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments"
+  },
+  {
+    "symbol": "BKNG",
+    "name": "Booking Holdings Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "BKNG",
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services"
+  },
+  {
+    "symbol": "ADP",
+    "name": "Automatic Data Processing Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "ADP",
+    "sector": "Industrials",
+    "industry": "Staffing"
+  },
+  {
+    "symbol": "VRTX",
+    "name": "Vertex Pharmaceuticals Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "VRTX",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  {
+    "symbol": "REGN",
+    "name": "Regeneron Pharmaceuticals Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "REGN",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  {
+    "symbol": "MU",
+    "name": "Micron Technology Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "MU",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  {
+    "symbol": "LRCX",
+    "name": "Lam Research Corporation",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "LRCX",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment"
+  },
+  {
+    "symbol": "SNPS",
+    "name": "Synopsys Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "SNPS",
+    "sector": "Technology",
+    "industry": "Software"
+  },
+  {
+    "symbol": "KDP",
+    "name": "Keurig Dr Pepper Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "KDP",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages"
+  },
+  {
+    "symbol": "PANW",
+    "name": "Palo Alto Networks Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "PANW",
+    "sector": "Technology",
+    "industry": "Software"
+  },
+  {
+    "symbol": "MELI",
+    "name": "MercadoLibre Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "MELI",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  {
+    "symbol": "CSX",
+    "name": "CSX Corporation",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "CSX",
+    "sector": "Industrials",
+    "industry": "Railroads"
+  },
+  {
+    "symbol": "ASML",
+    "name": "ASML Holding N.V.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "ASML",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment"
+  },
+  {
+    "symbol": "JD",
+    "name": "JD.com Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "JD",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  {
+    "symbol": "PDD",
+    "name": "PDD Holdings Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "PDD",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  {
+    "symbol": "ABNB",
+    "name": "Airbnb Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "ABNB",
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services"
+  },
+  {
+    "symbol": "MRNA",
+    "name": "Moderna Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "MRNA",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  {
+    "symbol": "COIN",
+    "name": "Coinbase Global Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "COIN",
+    "sector": "Financial",
+    "industry": "Financial Data"
+  },
+  {
+    "symbol": "RIVN",
+    "name": "Rivian Automotive Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "RIVN",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  {
+    "symbol": "LCID",
+    "name": "Lucid Group Inc.",
+    "exchange": "NASDAQ",
+    "yahoo_symbol": "LCID",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  }
+]
