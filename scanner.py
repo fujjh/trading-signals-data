@@ -263,7 +263,11 @@ class SignalScanner:
     
     def load_tickers(self, asset_type: str = "stocks", limit: Optional[int] = None) -> List[Dict]:
         """Load tickers from saved data"""
-        ticker_file = os.path.join(self.data_dir, "tickers", f"all_{asset_type}_tickers.json")
+        # Handle singular/plural naming
+        ticker_filename = f"all_{asset_type}_tickers.json" if asset_type == 'crypto' or asset_type == 'forex' else f"all_{asset_type}_tickers.json"
+        if asset_type == 'stocks':
+            ticker_filename = "all_stock_tickers.json"
+        ticker_file = os.path.join(self.data_dir, "tickers", ticker_filename)
         
         if not os.path.exists(ticker_file):
             print(f"Ticker file not found: {ticker_file}")
@@ -285,11 +289,13 @@ class SignalScanner:
         signals = []
         
         for ticker_data in tickers:
-            symbol = ticker_data.get('symbol')
+            # Use yahoo_symbol if available (for TSX/TSXV), otherwise use symbol
+            symbol = ticker_data.get('yahoo_symbol') or ticker_data.get('symbol')
+            display_symbol = ticker_data.get('symbol', symbol)
             if not symbol:
                 continue
             
-            print(f"  Analyzing {symbol}...", end='\r')
+            print(f"  Analyzing {display_symbol}...", end='\r')
             
             df = self.fetcher.fetch_stock_data(symbol)
             if df is not None:
