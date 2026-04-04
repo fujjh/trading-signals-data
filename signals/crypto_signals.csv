@@ -1,0 +1,29 @@
+ticker,signal,confidence,strength,current_price,sma_20,sma_50,rsi,macd,atr,bb_upper,bb_lower,price_change_1d,price_change_7d,factors,asset_type,exchange
+ETH-BTC,HOLD,50,Weak,0.0305,0.0305,0.0298,55.78,0.0002,0.0005,0.0315,0.0296,-0.47,1.57,['Mixed signals - insufficient conviction'],crypto,binance
+LTC-BTC,SELL,56,Moderate,0.0008,0.0008,0.0008,50.92,0.0,0.0,0.0008,0.0008,-0.04,-1.65,['MACD bearish crossover'],crypto,binance
+BNB-BTC,SELL,56,Moderate,0.0088,0.0091,0.0091,34.2,-0.0001,0.0001,0.0094,0.0088,-0.04,-4.36,['Price below 20 & 50 SMA (downtrend)'],crypto,binance
+NEO-BTC,BUY,56,Moderate,0.0,0.0,0.0,67.59,0.0,0.0,0.0,0.0,-2.09,5.44,['Price above 20 & 50 SMA (uptrend)'],crypto,binance
+QTUM-ETH,HOLD,50,Weak,0.0005,0.0004,0.0004,67.51,0.0,0.0,0.0005,0.0004,-2.56,14.36,"['MACD bullish crossover', 'Price above upper Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+EOS-ETH,BUY,56,Moderate,0.0,0.0,0.0,61.4,-0.0,0.0,0.0,0.0,0.48,6.06,['MACD bullish crossover'],crypto,binance
+SNT-ETH,STRONG_BUY,90,Strong,0.0,0.0,0.0,0.0,-0.0,0.0,0.0,0.0,-5.1,-5.1,"['Price below 20 & 50 SMA (downtrend)', 'RSI oversold (0.0)', 'MACD bullish crossover']",crypto,binance
+BNT-ETH,HOLD,50,Weak,0.0001,0.0001,0.0001,40.21,-0.0,0.0,0.0001,0.0001,-0.32,-0.32,"['Price below 20 & 50 SMA (downtrend)', 'MACD bullish crossover', 'Mixed signals - insufficient conviction']",crypto,binance
+GAS-BTC,HOLD,50,Weak,0.0,0.0,0.0,66.6,0.0,0.0,0.0,0.0,-1.89,15.17,"['Price above 20 & 50 SMA (uptrend)', 'Price above upper Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+BNB-ETH,SELL,56,Moderate,0.2877,0.2966,0.307,36.07,-0.0055,0.0042,0.3121,0.2811,0.45,-5.83,['Price below 20 & 50 SMA (downtrend)'],crypto,binance
+DNT-ETH,BUY,56,Moderate,0.0,0.0,0.0,41.21,0.0,0.0,0.0,0.0,-10.66,-10.66,['MACD bullish crossover'],crypto,binance
+LRC-BTC,HOLD,50,Weak,0.0,0.0,0.0,100.0,-0.0,,0.0,-0.0,inf,inf,"['RSI overbought (100.0)', 'MACD bullish crossover', 'Price above upper Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+LRC-ETH,HOLD,50,Weak,0.0,0.0,0.0,21.96,-0.0,0.0,0.0,0.0,-6.15,-23.21,"['Price below 20 & 50 SMA (downtrend)', 'RSI oversold (22.0)', 'Mixed signals - insufficient conviction']",crypto,binance
+QTUM-BTC,BUY,56,Moderate,0.0,0.0,0.0,63.06,0.0,0.0,0.0,0.0,-6.2,17.26,['MACD bullish crossover'],crypto,binance
+OMG-BTC,HOLD,50,Weak,0.0,0.0,0.0,0.0,-0.0,0.0,0.0,0.0,-20.24,-20.24,"['Price below 20 & 50 SMA (downtrend)', 'RSI oversold (0.0)', 'Price below lower Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+OMG-ETH,HOLD,50,Weak,0.0,0.0,0.0,41.47,-0.0,0.0,0.0,0.0,0.48,-6.7,"['Price below 20 & 50 SMA (downtrend)', 'MACD bullish crossover', 'Mixed signals - insufficient conviction']",crypto,binance
+ZRX-BTC,BUY,56,Moderate,0.0,0.0,0.0,67.76,0.0,0.0,0.0,0.0,-23.79,52.42,['MACD bullish crossover'],crypto,binance
+ZRX-ETH,BUY,56,Moderate,0.0,0.0,0.0001,56.52,-0.0,0.0,0.0001,0.0,-0.15,-0.15,['MACD bullish crossover'],crypto,binance
+FUN-BTC,HOLD,50,Weak,0.0,0.0,0.0,100.0,0.0,,0.0,-0.0,inf,inf,"['Price above 20 & 50 SMA (uptrend)', 'RSI overbought (100.0)', 'Price above upper Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+FUN-ETH,HOLD,50,Weak,0.0,0.0,0.0,0.0,-0.0,0.0,0.0,0.0,-28.89,-28.89,"['Price below 20 & 50 SMA (downtrend)', 'RSI oversold (0.0)', 'Price below lower Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+NEO-ETH,BUY,56,Moderate,0.0013,0.0013,0.0013,63.01,0.0,0.0,0.0014,0.0012,-2.32,4.99,['MACD bullish crossover'],crypto,binance
+IOTA-BTC,HOLD,50,Weak,0.0,0.0,0.0,0.0,-0.0,0.0,0.0,0.0,-8.16,-8.16,"['Price below 20 & 50 SMA (downtrend)', 'RSI oversold (0.0)', 'Price below lower Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+IOTA-ETH,BUY,56,Moderate,0.0,0.0,0.0,54.95,-0.0,0.0,0.0,0.0,-2.97,11.41,['MACD bullish crossover'],crypto,binance
+LINK-BTC,HOLD,50,Weak,0.0001,0.0001,0.0001,54.44,-0.0,0.0,0.0001,0.0001,0.13,1.71,"['Price below 20 & 50 SMA (downtrend)', 'MACD bullish crossover', 'Mixed signals - insufficient conviction']",crypto,binance
+LINK-ETH,HOLD,50,Weak,0.0042,0.0042,0.0044,50.78,-0.0,0.0,0.0043,0.0041,0.35,-0.19,"['Price below 20 & 50 SMA (downtrend)', 'MACD bullish crossover', 'Mixed signals - insufficient conviction']",crypto,binance
+XVG-BTC,HOLD,50,Weak,0.0,0.0,0.0,100.0,0.0,,0.0,-0.0,inf,inf,"['Price above 20 & 50 SMA (uptrend)', 'RSI overbought (100.0)', 'Price above upper Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+XVG-ETH,HOLD,50,Weak,0.0,0.0,0.0,100.0,-0.0,0.0,0.0,0.0,3.86,3.86,"['RSI overbought (100.0)', 'MACD bullish crossover', 'Price above upper Bollinger Band', 'Mixed signals - insufficient conviction']",crypto,binance
+SALT-ETH,STRONG_BUY,90,Strong,0.0,0.0,0.0,0.0,-0.0,0.0,0.0,0.0,-0.27,-0.27,"['Price below 20 & 50 SMA (downtrend)', 'RSI oversold (0.0)', 'MACD bullish crossover', 'Price below lower Bollinger Band']",crypto,binance

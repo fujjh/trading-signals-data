@@ -1,0 +1,31 @@
+ticker,signal,confidence,strength,current_price,sma_20,sma_50,rsi,macd,atr,bb_upper,bb_lower,price_change_1d,price_change_7d,factors,asset_type,pair
+EURUSD,HOLD,50,Weak,1.1522,1.1543,1.1708,56.05,-0.004,0.0094,1.165,1.1435,-0.59,-0.34,"['Price below 20 & 50 SMA (downtrend)', 'MACD bullish crossover', 'Mixed signals - insufficient conviction']",forex,EURUSD
+USDJPY,HOLD,50,Weak,159.632,159.0222,156.7047,50.32,0.6613,1.1997,160.3652,157.6792,0.59,0.16,"['Price above 20 & 50 SMA (uptrend)', 'MACD bearish crossover', 'Mixed signals - insufficient conviction']",forex,USDJPY
+GBPUSD,SELL,56,Moderate,1.3194,1.3326,1.3479,47.42,-0.0057,0.0125,1.3484,1.3167,-0.82,-1.27,['Price below 20 & 50 SMA (downtrend)'],forex,GBPUSD
+USDCHF,BUY,56,Moderate,0.7994,0.7894,0.7797,60.77,0.0049,0.0071,0.803,0.7758,0.69,0.99,['Price above 20 & 50 SMA (uptrend)'],forex,USDCHF
+AUDUSD,SELL,56,Moderate,0.6891,0.6994,0.7023,32.89,-0.0038,0.0076,0.7176,0.6811,-0.29,0.06,['Price below 20 & 50 SMA (downtrend)'],forex,AUDUSD
+USDCAD,HOLD,50,Weak,1.3946,1.3764,1.369,81.35,0.0067,0.0064,1.4004,1.3525,0.21,0.68,"['Price above 20 & 50 SMA (uptrend)', 'RSI overbought (81.4)', 'Mixed signals - insufficient conviction']",forex,USDCAD
+NZDUSD,SELL,56,Moderate,0.5694,0.5811,0.5921,31.79,-0.0054,0.006,0.5952,0.5671,-0.41,-1.17,['Price below 20 & 50 SMA (downtrend)'],forex,NZDUSD
+EURGBP,HOLD,50,Weak,0.8731,0.8661,0.8685,69.51,0.0007,0.0036,0.873,0.8593,0.21,0.92,"['MACD bullish crossover', 'Price above upper Bollinger Band', 'Mixed signals - insufficient conviction']",forex,EURGBP
+EURJPY,BUY,56,Moderate,183.931,183.5339,183.4297,63.96,0.1388,0.9551,184.6695,182.3984,0.02,-0.18,['Price above 20 & 50 SMA (uptrend)'],forex,EURJPY
+GBPJPY,SELL,56,Moderate,210.658,211.8858,211.1774,44.71,-0.0159,1.2504,213.6891,210.0826,-0.18,-1.09,['MACD bearish crossover'],forex,GBPJPY
+EURCHF,SELL,56,Moderate,0.9212,0.9111,0.9127,75.47,0.0026,0.0048,0.9254,0.8969,0.11,0.67,['RSI overbought (75.5)'],forex,EURCHF
+EURCAD,HOLD,50,Weak,1.6061,1.5867,1.6021,76.67,0.002,0.0103,1.6148,1.5586,-0.13,0.59,"['RSI overbought (76.7)', 'MACD bullish crossover', 'Mixed signals - insufficient conviction']",forex,EURCAD
+GBPCHF,BUY,56,Moderate,1.0552,1.0518,1.0507,60.39,0.0021,0.0062,1.0636,1.04,-0.08,-0.23,['Price above 20 & 50 SMA (uptrend)'],forex,GBPCHF
+GBPAUD,BUY,56,Moderate,1.9145,1.9049,1.918,65.65,0.0018,0.0139,1.942,1.8678,0.03,-1.1,['MACD bullish crossover'],forex,GBPAUD
+GBPCAD,BUY,56,Moderate,1.8398,1.8334,1.8438,58.79,0.0009,0.0129,1.855,1.8118,-0.05,-0.37,['MACD bullish crossover'],forex,GBPCAD
+CHFJPY,HOLD,50,Weak,199.55,201.4106,200.9507,37.39,-0.417,1.4526,204.057,198.7641,-0.14,-0.87,['Mixed signals - insufficient conviction'],forex,CHFJPY
+AUDJPY,SELL,56,Moderate,110.025,111.2412,110.0363,33.63,-0.1347,0.9813,113.7049,108.7775,0.16,-0.56,['MACD bearish crossover'],forex,AUDJPY
+CADJPY,SELL,56,Moderate,114.464,115.6568,114.4884,33.6,-0.0624,0.8403,117.3606,113.9529,0.11,-0.79,['MACD bearish crossover'],forex,CADJPY
+NZDJPY,HOLD,50,Weak,90.888,92.4929,92.8115,25.88,-0.4476,0.7214,94.1723,90.8136,-0.35,-1.77,"['Price below 20 & 50 SMA (downtrend)', 'RSI oversold (25.9)', 'Mixed signals - insufficient conviction']",forex,NZDJPY
+AUDNZD,HOLD,50,Weak,1.21,1.2033,1.1864,52.99,0.0046,0.0065,1.2163,1.1904,0.11,1.23,"['Price above 20 & 50 SMA (uptrend)', 'MACD bearish crossover', 'Mixed signals - insufficient conviction']",forex,AUDNZD
+USDZAR,HOLD,50,Weak,16.92,16.8301,16.3614,56.27,0.1686,0.2854,17.3138,16.3463,-0.09,-0.92,"['Price above 20 & 50 SMA (uptrend)', 'MACD bearish crossover', 'Mixed signals - insufficient conviction']",forex,USDZAR
+USDTRY,HOLD,50,Weak,44.5793,44.321,43.954,89.04,0.1719,0.0628,44.6321,44.01,0.05,0.28,"['Price above 20 & 50 SMA (uptrend)', 'RSI overbought (89.0)', 'Mixed signals - insufficient conviction']",forex,USDTRY
+USDMXN,HOLD,50,Weak,17.855,17.824,17.5143,55.71,0.1015,0.2145,18.1089,17.5392,0.04,-0.33,"['Price above 20 & 50 SMA (uptrend)', 'MACD bearish crossover', 'Mixed signals - insufficient conviction']",forex,USDMXN
+USDSGD,BUY,56,Moderate,1.2865,1.2811,1.2734,57.34,0.0034,0.0069,1.2914,1.2707,0.12,0.05,['Price above 20 & 50 SMA (uptrend)'],forex,USDSGD
+USDHKD,BUY,56,Moderate,7.8358,7.8308,7.8207,55.91,0.0046,0.0094,7.8428,7.8188,-0.01,0.13,['Price above 20 & 50 SMA (uptrend)'],forex,USDHKD
+USDNOK,BUY,56,Moderate,9.7586,9.6678,9.6192,55.98,0.0247,0.1131,9.81,9.5257,0.48,0.7,['Price above 20 & 50 SMA (uptrend)'],forex,USDNOK
+USDSEK,BUY,56,Moderate,9.4784,9.3498,9.1327,51.6,0.0884,0.132,9.5626,9.1369,0.78,1.39,['Price above 20 & 50 SMA (uptrend)'],forex,USDSEK
+USDDKK,HOLD,50,Weak,6.486,6.4732,6.3815,44.17,0.0223,0.0532,6.5338,6.4126,0.6,0.37,"['Price above 20 & 50 SMA (uptrend)', 'MACD bearish crossover', 'Mixed signals - insufficient conviction']",forex,USDDKK
+USDPLN,HOLD,50,Weak,3.7125,3.6972,3.6252,51.46,0.021,0.0388,3.7435,3.6509,0.27,0.24,"['Price above 20 & 50 SMA (uptrend)', 'MACD bearish crossover', 'Mixed signals - insufficient conviction']",forex,USDPLN
+USDHUF,SELL,56,Moderate,334.18,335.8001,327.3779,43.86,1.1526,5.9107,342.7375,328.8626,0.71,-0.12,['MACD bearish crossover'],forex,USDHUF
