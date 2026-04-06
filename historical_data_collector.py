@@ -52,52 +52,75 @@ def save_checkpoint(processed: List[str], last_index: int, count: int):
     with open(CHECKPOINT_FILE, 'w') as f:
         json.dump(checkpoint, f)
 
-def fetch_historical_data(symbol: str, max_retries: int = 3) -> Optional[pd.DataFrame]:
+def get_alternative_symbols(symbol: str) -> List[str]:
+    """Generate alternative symbol formats to try"""
+    alternatives = [symbol]  # Original first
+    
+    # Replace dash with dot (for preferred shares, class shares)
+    if '-' in symbol:
+        alternatives.append(symbol.replace('-', '.'))
+    
+    # Try .TO suffix for potential TSX stocks (short tickers without dots)
+    if len(symbol) <= 3 and symbol.isalpha() and not '.' in symbol:
+        alternatives.append(f"{symbol}.TO")
+    
+    return alternatives
+
+def fetch_historical_data(symbol: str, max_retries: int = 2) -> Optional[pd.DataFrame]:
     """Fetch up to 5 years of historical daily OHLCV data"""
     
-    for attempt in range(max_retries):
-        try:
-            time.sleep(DELAY_BETWEEN_CALLS)
-            
-            ticker = yf.Ticker(symbol)
-            
-            # Get 5 years of data (or max available)
-            df = ticker.history(period="5y", interval="1d")
-            
-            if len(df) < 10:  # Need at least 10 days of data
-                return None
-            
-            # Ensure we have the required columns
-            required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
-            for col in required_cols:
-                if col not in df.columns:
-                    return None
-            
-            # Reset index to make Date a column
-            df = df.reset_index()
-            
-            # Select only OHLCV columns
-            df = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
-            
-            # Round prices to 4 decimal places
-            for col in ['Open', 'High', 'Low', 'Close']:
-                df[col] = df[col].round(4)
-            
-            # Convert Volume to integer
-            df['Volume'] = df['Volume'].astype(int)
-            
-            # Format date as string
-            df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
-            
-            return df
-            
-        except Exception as e:
-            if "Rate limited" in str(e) or "Too Many Requests" in str(e):
-                wait_time = 60 * (attempt + 1)
-                print(f"    Rate limited! Waiting {wait_time}s...")
-                time.sleep(wait_time)
-            else:
-                return None
+    # Try alternative symbol formats
+    alternatives = get_alternative_symbols(symbol)
+    
+    for alt_symbol in alternatives:
+        for attempt in range(max_retries):
+            try:
+                time.sleep(DELAY_BETWEEN_CALLS)
+                
+                ticker = yf.Ticker(alt_symbol)
+                
+                # Try to get maximum available historical data
+                # First try 'max', then fall back to '10y', '5y', etc.
+                df = None
+                for period in ['max', '10y', '5y', '2y', '1y']:
+                    try:
+                        df = ticker.history(period=period, interval="1d")
+                        if len(df) >= 10:
+                            break
+                    except:
+                        continue
+                
+                if df is not None and len(df) >= 10:
+                    # Ensure we have the required columns
+                    required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
+                    for col in required_cols:
+                        if col not in df.columns:
+                            return None
+                    
+                    # Reset index to make Date a column
+                    df = df.reset_index()
+                    
+                    # Select only OHLCV columns
+                    df = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']]
+                    
+                    # Round prices to 4 decimal places
+                    for col in ['Open', 'High', 'Low', 'Close']:
+                        df[col] = df[col].round(4)
+                    
+                    # Convert Volume to integer
+                    df['Volume'] = df['Volume'].astype(int)
+                    
+                    # Format date as string
+                    df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+                    
+                    return df
+                        
+            except Exception as e:
+                if "Rate limited" in str(e) or "Too Many Requests" in str(e):
+                    wait_time = 60 * (attempt + 1)
+                    print(f"    Rate limited! Waiting {wait_time}s...")
+                    time.sleep(wait_time)
+                continue
     
     return None
 
