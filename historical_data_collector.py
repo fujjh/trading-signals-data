@@ -2,31 +2,40 @@
 """
 Historical Stock Data Collector
 Pulls 5 years of daily OHLCV data for all tickers from stock_ticker_base.csv
+Uses batch approach: 500 tickers/batch, 0.8s delays, checkpointing
 Saves each ticker as individual CSV in data/historical_stock_data/
 """
 
 import os
 import sys
+import json
 import time
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Optional, List
 import yfinance as yf
 
-# Configuration
-BATCH_SIZE = 100
-DELAY_BETWEEN_CALLS = 0.5  # seconds - faster since just price data
+# Configuration - Same as comprehensive data collection
+BATCH_SIZE = 500
+DELAY_BETWEEN_CALLS = 0.8  # seconds
+DELAY_BETWEEN_BATCHES = 60  # seconds
 DATA_DIR = "data/historical_stock_data"
-CHECKPOINT_FILE = f"{DATA_DIR}/.collection_checkpoint.json"
+CHECKPOINT_FILE = f"{DATA_DIR}/collection_checkpoint.json"
 
 def load_ticker_list() -> List[str]:
     """Load the comprehensive stock ticker list"""
     df = pd.read_csv("data/tickers/stock_ticker_base.csv")
     return df['symbol'].tolist()
 
+def save_historical_csv(symbol: str, df: pd.DataFrame):
+    """Save historical data as CSV for a single ticker"""
+    os.makedirs(DATA_DIR, exist_ok=True)
+    
+    file_path = f"{DATA_DIR}/{symbol}.csv"
+    df.to_csv(file_path, index=False)
+
 def load_checkpoint() -> dict:
     """Load checkpoint if exists"""
-    import json
     if os.path.exists(CHECKPOINT_FILE):
         with open(CHECKPOINT_FILE, 'r') as f:
             return json.load(f)
@@ -34,10 +43,8 @@ def load_checkpoint() -> dict:
 
 def save_checkpoint(processed: List[str], last_index: int, count: int):
     """Save collection checkpoint"""
-    import json
-    os.makedirs(DATA_DIR, exist_ok=True)
     checkpoint = {
-        'processed': processed[-100:],
+        'processed': processed[-100:],  # Keep last 100 for memory
         'last_index': last_index,
         'count': count,
         'last_update': datetime.now().isoformat()
@@ -54,7 +61,7 @@ def fetch_historical_data(symbol: str, max_retries: int = 3) -> Optional[pd.Data
             
             ticker = yf.Ticker(symbol)
             
-            # Try to get 5 years of data
+            # Get 5 years of data (or max available)
             df = ticker.history(period="5y", interval="1d")
             
             if len(df) < 10:  # Need at least 10 days of data
@@ -90,27 +97,19 @@ def fetch_historical_data(symbol: str, max_retries: int = 3) -> Optional[pd.Data
                 print(f"    Rate limited! Waiting {wait_time}s...")
                 time.sleep(wait_time)
             else:
-                # Some tickers may not have historical data
                 return None
     
     return None
-
-def save_ticker_csv(symbol: str, df: pd.DataFrame) -> str:
-    """Save ticker data as CSV"""
-    os.makedirs(DATA_DIR, exist_ok=True)
-    
-    file_path = f"{DATA_DIR}/{symbol}.csv"
-    df.to_csv(file_path, index=False)
-    
-    return file_path
 
 def main():
     print("=" * 80)
     print("HISTORICAL STOCK DATA COLLECTOR")
     print("=" * 80)
     print(f"Target: Up to 5 years of daily OHLCV data")
-    print(f"Output: Individual CSV files in {DATA_DIR}/")
-    print(f"Columns: Date, Open, High, Low, Close, Volume")
+    print(f"Batch Size: {BATCH_SIZE}")
+    print(f"Delay Between Calls: {DELAY_BETWEEN_CALLS}s")
+    print(f"Delay Between Batches: {DELAY_BETWEEN_BATCHES}s")
+    print(f"Output: {DATA_DIR}/{{TICKER}}.csv")
     print("=" * 80)
     
     tickers = load_ticker_list()
@@ -121,87 +120,82 @@ def main():
     processed = checkpoint.get('processed', [])
     total_collected = checkpoint.get('count', 0)
     
-    print(f"Resuming from index {start_index} ({len(processed)} already processed, {total_collected} with data)")
+    print(f"Resuming from index {start_index}")
+    print(f"Already processed: {len(processed)} tickers")
+    print(f"With historical data: {total_collected} tickers")
+    print("=" * 80)
     
+    api_calls = 0
     batch_count = 0
-    errors = 0
     
     for i in range(start_index, len(tickers), BATCH_SIZE):
         batch_count += 1
         batch = tickers[i:i + BATCH_SIZE]
-        batch_collected = 0
+        batch_collected = []
         
         print(f"\n{'='*80}")
-        print(f"Batch {batch_count}: Processing {len(batch)} tickers ({i+1} to {min(i+BATCH_SIZE, len(tickers))})")
+        print(f"BATCH {batch_count}: Processing {len(batch)} tickers ({i+1} to {min(i+BATCH_SIZE, len(tickers))})")
         print(f"{'='*80}")
         
-        for idx, symbol in enumerate(batch):
-            current_idx = i + idx
-            
-            # Check if already exists
-            expected_file = f"{DATA_DIR}/{symbol}.csv"
-            if os.path.exists(expected_file):
-                print(f"  [{current_idx+1}/{len(tickers)}] {symbol}... Already exists ✓")
-                processed.append(symbol)
-                total_collected += 1
-                continue
-            
-            print(f"  [{current_idx+1}/{len(tickers)}] {symbol}... Fetching...", end=" ")
+        for symbol in batch:
+            print(f"  Fetching {symbol}...", end=" ")
             
             try:
                 df = fetch_historical_data(symbol)
                 
                 if df is not None and len(df) > 0:
-                    file_path = save_ticker_csv(symbol, df)
+                    save_historical_csv(symbol, df)
+                    batch_collected.append(symbol)
                     processed.append(symbol)
                     total_collected += 1
-                    batch_collected += 1
                     
                     days = len(df)
                     start_date = df['Date'].iloc[0]
                     end_date = df['Date'].iloc[-1]
                     
-                    print(f"✓ Saved {days} days ({start_date} to {end_date})")
+                    print(f"✓ {days} days ({start_date} to {end_date})")
                 else:
                     print(f"✗ No data")
+                    processed.append(symbol)  # Still mark as processed
                     
             except Exception as e:
-                errors += 1
-                print(f"✗ Error: {str(e)[:50]}")
+                print(f"✗ Error: {str(e)[:40]}")
+                processed.append(symbol)  # Still mark as processed
             
-            # Save checkpoint every 25 tickers
-            if (current_idx + 1) % 25 == 0:
-                save_checkpoint(processed, current_idx, total_collected)
+            api_calls += 1
+            
+            # Save checkpoint every 50 tickers
+            if len(processed) % 50 == 0:
+                save_checkpoint(processed, i + batch.index(symbol) if symbol in batch else i, total_collected)
         
         # Save checkpoint after each batch
         save_checkpoint(processed, min(i + BATCH_SIZE, len(tickers)) - 1, total_collected)
         
-        print(f"\n  Batch {batch_count} complete: {batch_collected} tickers with data")
-        print(f"  Running total: {total_collected}/{len(processed)} tickers with historical data")
+        print(f"\n  Batch {batch_count} complete: {len(batch_collected)} tickers with data")
+        print(f"  Running total: {total_collected} tickers with historical data")
         
-        # Brief pause between batches
+        # Wait between batches (except last)
         if i + BATCH_SIZE < len(tickers):
-            print(f"\n  Pausing briefly before next batch...")
-            time.sleep(2)
+            print(f"\n  Waiting {DELAY_BETWEEN_BATCHES}s before next batch...")
+            time.sleep(DELAY_BETWEEN_BATCHES)
+            api_calls = 0
     
     # Final summary
     print("\n" + "=" * 80)
     print("COLLECTION COMPLETE")
     print("=" * 80)
-    print(f"Total tickers processed: {len(processed)}")
+    print(f"Total processed: {len(processed)}")
     print(f"Tickers with historical data: {total_collected}")
-    print(f"Errors encountered: {errors}")
-    print(f"\nData saved to: {DATA_DIR}/")
-    print(f"Files: {total_collected} CSV files")
+    print(f"Data saved to: {DATA_DIR}/")
     
     # Show sample of files
     import glob
-    files = glob.glob(f"{DATA_DIR}/*.csv")
+    files = sorted(glob.glob(f"{DATA_DIR}/*.csv"))
     if files:
-        print(f"\nSample files:")
-        for f in sorted(files)[:5]:
+        print(f"\nSample files ({len(files)} total):")
+        for f in files[:10]:
             size = os.path.getsize(f) / 1024  # KB
-            print(f"  - {os.path.basename(f)} ({size:.1f} KB)")
+            print(f"  {os.path.basename(f)} ({size:.1f} KB)")
 
 if __name__ == "__main__":
     main()
