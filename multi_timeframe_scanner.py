@@ -114,6 +114,358 @@ def calculate_obv(df):
     obv = (np.sign(df['Close'].diff()) * df['Volume']).cumsum()
     return obv
 
+
+# ============================================================================
+# CANDLESTICK PATTERN DETECTION FUNCTIONS
+# ============================================================================
+
+def get_candle_body(open_price, close_price):
+    """Calculate candle body size (absolute value)"""
+    return abs(close_price - open_price)
+
+def get_candle_range(high, low):
+    """Calculate total candle range (high - low)"""
+    return high - low
+
+def get_upper_shadow(open_price, close_price, high):
+    """Calculate upper shadow/wick size"""
+    body_top = max(open_price, close_price)
+    return high - body_top
+
+def get_lower_shadow(open_price, close_price, low):
+    """Calculate lower shadow/wick size"""
+    body_bottom = min(open_price, close_price)
+    return body_bottom - low
+
+def is_bullish(open_price, close_price):
+    """Check if candle is bullish (close > open)"""
+    return close_price > open_price
+
+def is_bearish(open_price, close_price):
+    """Check if candle is bearish (close < open)"""
+    return close_price < open_price
+
+
+def detect_doji(open_price, close_price, high, low, doji_threshold=0.1):
+    """
+    Detect Doji pattern - open and close are very close (within threshold % of range)
+    Returns: True if Doji detected
+    """
+    body = get_candle_body(open_price, close_price)
+    candle_range = get_candle_range(high, low)
+    
+    if candle_range == 0:
+        return False
+    
+    # Doji: body is very small relative to total range
+    return (body / candle_range) < doji_threshold
+
+
+def detect_hammer(open_price, close_price, high, low, body_ratio=0.3, shadow_ratio=2.0):
+    """
+    Detect Hammer pattern - bullish reversal
+    Small body at top, long lower shadow, little/no upper shadow
+    Returns: True if Hammer detected
+    """
+    body = get_candle_body(open_price, close_price)
+    candle_range = get_candle_range(high, low)
+    lower_shadow = get_lower_shadow(open_price, close_price, low)
+    upper_shadow = get_upper_shadow(open_price, close_price, high)
+    
+    if candle_range == 0 or body == 0:
+        return False
+    
+    # Hammer criteria:
+    # 1. Body is small (less than body_ratio of range)
+    # 2. Lower shadow is long (at least shadow_ratio times body)
+    # 3. Upper shadow is very small or non-existent
+    body_small = body < (candle_range * body_ratio)
+    long_lower = lower_shadow > (body * shadow_ratio)
+    small_upper = upper_shadow < (body * 0.5)
+    
+    return body_small and long_lower and small_upper
+
+
+def detect_hanging_man(open_price, close_price, high, low, body_ratio=0.3, shadow_ratio=2.0):
+    """
+    Detect Hanging Man pattern - bearish reversal (looks like hammer but at top of uptrend)
+    Same structure as hammer but context matters (needs to be in uptrend)
+    Returns: True if Hanging Man structure detected (call only near resistance)
+    """
+    # Same structure as hammer
+    return detect_hammer(open_price, close_price, high, low, body_ratio, shadow_ratio)
+
+
+def detect_shooting_star(open_price, close_price, high, low, body_ratio=0.3, shadow_ratio=2.0):
+    """
+    Detect Shooting Star pattern - bearish reversal
+    Small body at bottom, long upper shadow, little/no lower shadow
+    Returns: True if Shooting Star detected
+    """
+    body = get_candle_body(open_price, close_price)
+    candle_range = get_candle_range(high, low)
+    upper_shadow = get_upper_shadow(open_price, close_price, high)
+    lower_shadow = get_lower_shadow(open_price, close_price, low)
+    
+    if candle_range == 0 or body == 0:
+        return False
+    
+    # Shooting Star criteria:
+    # 1. Body is small
+    # 2. Upper shadow is long (at least shadow_ratio times body)
+    # 3. Lower shadow is very small or non-existent
+    body_small = body < (candle_range * body_ratio)
+    long_upper = upper_shadow > (body * shadow_ratio)
+    small_lower = lower_shadow < (body * 0.5)
+    
+    return body_small and long_upper and small_lower
+
+
+def detect_inverted_hammer(open_price, close_price, high, low, body_ratio=0.3, shadow_ratio=2.0):
+    """
+    Detect Inverted Hammer pattern - bullish reversal (at bottom)
+    Same structure as shooting star but at bottom of downtrend
+    Returns: True if Inverted Hammer detected
+    """
+    # Same structure as shooting star
+    return detect_shooting_star(open_price, close_price, high, low, body_ratio, shadow_ratio)
+
+
+def detect_bullish_engulfing(prev_open, prev_close, curr_open, curr_close):
+    """
+    Detect Bullish Engulfing pattern - bullish reversal
+    First candle bearish, second candle bullish with body completely engulfing first
+    Returns: True if Bullish Engulfing detected
+    """
+    # First candle must be bearish
+    if not is_bearish(prev_open, prev_close):
+        return False
+    
+    # Second candle must be bullish
+    if not is_bullish(curr_open, curr_close):
+        return False
+    
+    # Second candle body must engulf first candle body
+    curr_body_top = curr_close
+    curr_body_bottom = curr_open
+    prev_body_top = prev_open
+    prev_body_bottom = prev_close
+    
+    return (curr_body_top >= prev_body_top) and (curr_body_bottom <= prev_body_bottom)
+
+
+def detect_bearish_engulfing(prev_open, prev_close, curr_open, curr_close):
+    """
+    Detect Bearish Engulfing pattern - bearish reversal
+    First candle bullish, second candle bearish with body completely engulfing first
+    Returns: True if Bearish Engulfing detected
+    """
+    # First candle must be bullish
+    if not is_bullish(prev_open, prev_close):
+        return False
+    
+    # Second candle must be bearish
+    if not is_bearish(curr_open, curr_close):
+        return False
+    
+    # Second candle body must engulf first candle body
+    curr_body_top = curr_open
+    curr_body_bottom = curr_close
+    prev_body_top = prev_close
+    prev_body_bottom = prev_open
+    
+    return (curr_body_top >= prev_body_top) and (curr_body_bottom <= prev_body_bottom)
+
+
+def detect_bullish_harami(prev_open, prev_close, curr_open, curr_close, harami_threshold=0.6):
+    """
+    Detect Bullish Harami pattern - bullish reversal
+    First candle large bearish, second candle small bullish contained within first
+    Returns: True if Bullish Harami detected
+    """
+    # First candle must be bearish
+    if not is_bearish(prev_open, prev_close):
+        return False
+    
+    # Second candle must be bullish
+    if not is_bullish(curr_open, curr_close):
+        return False
+    
+    prev_body = get_candle_body(prev_open, prev_close)
+    curr_body = get_candle_body(curr_open, curr_close)
+    
+    # Current body must be small relative to previous
+    if curr_body >= prev_body * harami_threshold:
+        return False
+    
+    # Current body must be contained within previous body
+    prev_body_high = max(prev_open, prev_close)
+    prev_body_low = min(prev_open, prev_close)
+    curr_body_high = curr_close
+    curr_body_low = curr_open
+    
+    return (curr_body_high <= prev_body_high) and (curr_body_low >= prev_body_low)
+
+
+def detect_bearish_harami(prev_open, prev_close, curr_open, curr_close, harami_threshold=0.6):
+    """
+    Detect Bearish Harami pattern - bearish reversal
+    First candle large bullish, second candle small bearish contained within first
+    Returns: True if Bearish Harami detected
+    """
+    # First candle must be bullish
+    if not is_bullish(prev_open, prev_close):
+        return False
+    
+    # Second candle must be bearish
+    if not is_bearish(curr_open, curr_close):
+        return False
+    
+    prev_body = get_candle_body(prev_open, prev_close)
+    curr_body = get_candle_body(curr_open, curr_close)
+    
+    # Current body must be small relative to previous
+    if curr_body >= prev_body * harami_threshold:
+        return False
+    
+    # Current body must be contained within previous body
+    prev_body_high = max(prev_open, prev_close)
+    prev_body_low = min(prev_open, prev_close)
+    curr_body_high = curr_open
+    curr_body_low = curr_close
+    
+    return (curr_body_high <= prev_body_high) and (curr_body_low >= prev_body_low)
+
+
+def detect_morning_star(c1_open, c1_close, c2_open, c2_close, c2_low, c3_open, c3_close, 
+                         star_threshold=0.3, gap_threshold=0.001):
+    """
+    Detect Morning Star pattern - bullish reversal
+    First candle large bearish, second small body (doji/spinning top), third bullish closing into first
+    Returns: True if Morning Star detected
+    """
+    # First candle must be bearish
+    if not is_bearish(c1_open, c1_close):
+        return False
+    
+    # Third candle must be bullish
+    if not is_bullish(c3_open, c3_close):
+        return False
+    
+    c1_body = get_candle_body(c1_open, c1_close)
+    c2_body = get_candle_body(c2_open, c2_close)
+    c3_body = get_candle_body(c3_open, c3_close)
+    
+    if c1_body == 0 or c3_body == 0:
+        return False
+    
+    # Second candle body must be small
+    if c2_body > c1_body * star_threshold:
+        return False
+    
+    # Third candle should close well into first candle's body
+    c1_mid = (c1_open + c1_close) / 2
+    c3_close_into = c3_close >= c1_mid
+    
+    return c3_close_into
+
+
+def detect_evening_star(c1_open, c1_close, c2_open, c2_close, c2_high, c3_open, c3_close,
+                        star_threshold=0.3, gap_threshold=0.001):
+    """
+    Detect Evening Star pattern - bearish reversal
+    First candle large bullish, second small body, third bearish closing into first
+    Returns: True if Evening Star detected
+    """
+    # First candle must be bullish
+    if not is_bullish(c1_open, c1_close):
+        return False
+    
+    # Third candle must be bearish
+    if not is_bearish(c3_open, c3_close):
+        return False
+    
+    c1_body = get_candle_body(c1_open, c1_close)
+    c2_body = get_candle_body(c2_open, c2_close)
+    c3_body = get_candle_body(c3_open, c3_close)
+    
+    if c1_body == 0 or c3_body == 0:
+        return False
+    
+    # Second candle body must be small
+    if c2_body > c1_body * star_threshold:
+        return False
+    
+    # Third candle should close well into first candle's body
+    c1_mid = (c1_open + c1_close) / 2
+    c3_close_into = c3_close <= c1_mid
+    
+    return c3_close_into
+
+
+def detect_three_white_soldiers(c1_open, c1_close, c2_open, c2_close, c3_open, c3_close,
+                                min_body_ratio=0.5):
+    """
+    Detect Three White Soldiers pattern - strong bullish continuation
+    Three consecutive bullish candles with higher closes, each opening within previous body
+    Returns: True if Three White Soldiers detected
+    """
+    # All three must be bullish
+    if not (is_bullish(c1_open, c1_close) and is_bullish(c2_open, c2_close) and is_bullish(c3_open, c3_close)):
+        return False
+    
+    # Each close must be higher than previous
+    if not (c3_close > c2_close > c1_close):
+        return False
+    
+    # Each open should be within previous candle's body
+    c1_body_low = min(c1_open, c1_close)
+    c1_body_high = max(c1_open, c1_close)
+    c2_body_low = min(c2_open, c2_close)
+    c2_body_high = max(c2_open, c2_close)
+    
+    c2_open_in_c1 = c1_body_low <= c2_open <= c1_body_high
+    c3_open_in_c2 = c2_body_low <= c3_open <= c2_body_high
+    
+    # Each body should be substantial
+    avg_body = (get_candle_body(c1_open, c1_close) + get_candle_body(c2_open, c2_close) + 
+                get_candle_body(c3_open, c3_close)) / 3
+    
+    return c2_open_in_c1 and c3_open_in_c2
+
+
+def detect_three_black_crows(c1_open, c1_close, c2_open, c2_close, c3_open, c3_close,
+                             min_body_ratio=0.5):
+    """
+    Detect Three Black Crows pattern - strong bearish reversal
+    Three consecutive bearish candles with lower closes, each opening within previous body
+    Returns: True if Three Black Crows detected
+    """
+    # All three must be bearish
+    if not (is_bearish(c1_open, c1_close) and is_bearish(c2_open, c2_close) and is_bearish(c3_open, c3_close)):
+        return False
+    
+    # Each close must be lower than previous
+    if not (c3_close < c2_close < c1_close):
+        return False
+    
+    # Each open should be within previous candle's body
+    c1_body_low = min(c1_open, c1_close)
+    c1_body_high = max(c1_open, c1_close)
+    c2_body_low = min(c2_open, c2_close)
+    c2_body_high = max(c2_open, c2_close)
+    
+    c2_open_in_c1 = c1_body_low <= c2_open <= c1_body_high
+    c3_open_in_c2 = c2_body_low <= c3_open <= c2_body_high
+    
+    return c2_open_in_c1 and c3_open_in_c2
+
+
+# ============================================================================
+# END CANDLESTICK PATTERN DETECTION FUNCTIONS
+# ============================================================================
+
+
 def find_pivot_highs(df, window=5):
     """Find local pivot highs"""
     highs = df['High']
@@ -265,6 +617,65 @@ def generate_signal(df, ticker, interval):
     pivot_highs = find_pivot_highs(df)
     pivot_lows = find_pivot_lows(df)
     
+    # NEW: Detect candlestick patterns (need at least 3 candles)
+    candlestick_patterns = []
+    if len(df) >= 3:
+        # Get last 3 candles for pattern detection
+        c1 = df.iloc[-3]  # 3rd most recent
+        c2 = df.iloc[-2]  # 2nd most recent
+        c3 = df.iloc[-1]  # Most recent
+        
+        # Single candle patterns (on most recent candle)
+        if detect_doji(c3['Open'], c3['Close'], c3['High'], c3['Low']):
+            candlestick_patterns.append('DOJI')
+        
+        if detect_hammer(c3['Open'], c3['Close'], c3['High'], c3['Low']):
+            candlestick_patterns.append('HAMMER')
+        
+        if detect_shooting_star(c3['Open'], c3['Close'], c3['High'], c3['Low']):
+            candlestick_patterns.append('SHOOTING_STAR')
+        
+        if detect_inverted_hammer(c3['Open'], c3['Close'], c3['High'], c3['Low']):
+            candlestick_patterns.append('INVERTED_HAMMER')
+        
+        # Two candle patterns
+        if detect_bullish_engulfing(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+            candlestick_patterns.append('BULLISH_ENGULFING')
+            buy_score += 2
+        
+        if detect_bearish_engulfing(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+            candlestick_patterns.append('BEARISH_ENGULFING')
+            sell_score += 2
+        
+        if detect_bullish_harami(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+            candlestick_patterns.append('BULLISH_HARAMI')
+            buy_score += 1
+        
+        if detect_bearish_harami(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+            candlestick_patterns.append('BEARISH_HARAMI')
+            sell_score += 1
+        
+        # Three candle patterns
+        if detect_morning_star(c1['Open'], c1['Close'], c2['Open'], c2['Close'], 
+                               c2['Low'], c3['Open'], c3['Close']):
+            candlestick_patterns.append('MORNING_STAR')
+            buy_score += 3
+        
+        if detect_evening_star(c1['Open'], c1['Close'], c2['Open'], c2['Close'],
+                               c2['High'], c3['Open'], c3['Close']):
+            candlestick_patterns.append('EVENING_STAR')
+            sell_score += 3
+        
+        if detect_three_white_soldiers(c1['Open'], c1['Close'], c2['Open'], c2['Close'],
+                                       c3['Open'], c3['Close']):
+            candlestick_patterns.append('THREE_WHITE_SOLDIERS')
+            buy_score += 3
+        
+        if detect_three_black_crows(c1['Open'], c1['Close'], c2['Open'], c2['Close'],
+                                     c3['Open'], c3['Close']):
+            candlestick_patterns.append('THREE_BLACK_CROWS')
+            sell_score += 3
+    
     # Calculate scores
     buy_score = 0
     sell_score = 0
@@ -377,6 +788,7 @@ def generate_signal(df, ticker, interval):
         'recent_low': sr_levels['recent_low'],
         'peaks': json.dumps([p['price'] for p in pivot_highs[-5:]]),
         'troughs': json.dumps([p['price'] for p in pivot_lows[-5:]]),
+        'candlestick_patterns': ','.join(candlestick_patterns) if candlestick_patterns else None,
         'stop_loss': round(stop_loss, 2),
         'take_profit': round(take_profit, 2)
     }
