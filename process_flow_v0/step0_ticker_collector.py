@@ -335,12 +335,49 @@ class IndexCollector:
     
     def get_russell2000_sample(self) -> List[str]:
         """
-        Russell 2000 sample.
+        Russell 2000 constituents via iShares IWM ETF holdings.
         
-        Note: Full Russell 2000 (2,000 stocks) collected via iShares IWM.
-        See revalidate_v3.py for full collection script.
+        Returns ~1,800-2,000 small-cap stocks that represent the Russell 2000 index.
         """
-        self.logger.info("Russell 2000 requires ETF data download (see revalidate_v3.py)")
+        self.logger.info("Collecting Russell 2000 constituents via iShares IWM...")
+        try:
+            # Download IWM holdings from iShares
+            url = "https://www.ishares.com/us/products/239714/ishares-russell-2000-etf/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund"
+            df = pd.read_csv(url, skiprows=9)  # Skip header rows
+            if 'Ticker' in df.columns:
+                symbols = df['Ticker'].dropna().tolist()
+                self.logger.info(f"  ✓ Collected {len(symbols)} Russell 2000 tickers from IWM")
+                return symbols
+        except Exception as e:
+            self.logger.error(f"Failed to collect Russell 2000 from IWM: {e}")
+            # Fallback: Try alternative source via stockanalysis.com
+            try:
+                self.logger.info("Trying alternative Russell 2000 source...")
+                url = "https://stockanalysis.com/etf/iwm/holdings/"
+                tables = pd.read_html(url)
+                for table in tables:
+                    if 'Symbol' in table.columns:
+                        symbols = table['Symbol'].dropna().tolist()
+                        self.logger.info(f"  ✓ Collected {len(symbols)} Russell 2000 tickers (alt source)")
+                        return symbols
+            except Exception as e2:
+                self.logger.error(f"Alternative source also failed: {e2}")
+        return []
+    
+    def get_nasdaq100(self) -> List[str]:
+        """NASDAQ 100 constituents via Wikipedia."""
+        try:
+            self.logger.info("Collecting NASDAQ 100 constituents...")
+            url = "https://en.wikipedia.org/wiki/NASDAQ-100"
+            tables = pd.read_html(url)
+            for table in tables:
+                if 'Ticker' in table.columns or 'Symbol' in table.columns:
+                    col = 'Ticker' if 'Ticker' in table.columns else 'Symbol'
+                    symbols = table[col].dropna().tolist()
+                    self.logger.info(f"  ✓ Collected {len(symbols)} NASDAQ 100 tickers")
+                    return symbols
+        except Exception as e:
+            self.logger.error(f"Failed to collect NASDAQ 100: {e}")
         return []
     
     def get_index_constituents(self) -> pd.DataFrame:
@@ -348,18 +385,38 @@ class IndexCollector:
         self.logger.info("=== Phase 1b: Index Constituents ===")
         
         sp500 = self.get_sp500()
+        russell2000 = self.get_russell2000_sample()
+        nasdaq100 = self.get_nasdaq100()
         
-        # Combine
-        all_symbols = list(set(sp500))  # Deduplicate
+        # Combine all index constituents
+        all_symbols = list(set(sp500 + russell2000 + nasdaq100))  # Deduplicate
+        
+        # Track source for each symbol
+        symbol_sources = {}
+        for s in sp500:
+            symbol_sources[s] = 'sp500'
+        for s in russell2000:
+            if s in symbol_sources:
+                symbol_sources[s] = 'multi'
+            else:
+                symbol_sources[s] = 'russell2000'
+        for s in nasdaq100:
+            if s in symbol_sources:
+                symbol_sources[s] = 'multi'
+            else:
+                symbol_sources[s] = 'nasdaq100'
         
         df = pd.DataFrame({
             'symbol': all_symbols,
             'name': all_symbols,
             'exchange': 'INDEX',
-            'source': 'sp500'
+            'source': [symbol_sources.get(s, 'index') for s in all_symbols]
         })
         
-        self.logger.info(f"✓ Total index constituents: {len(df)}")
+        self.logger.info(f"  S&P 500: {len(sp500)} tickers")
+        self.logger.info(f"  Russell 2000: {len(russell2000)} tickers")
+        self.logger.info(f"  NASDAQ 100: {len(nasdaq100)} tickers")
+        self.logger.info(f"✓ Total unique index constituents: {len(df)}")
         return df
 
 
