@@ -3,10 +3,197 @@
 ================================================================================
 STEP 7: Walk-Forward Analyzer
 ================================================================================
-Simulates day-by-day trading with current algorithm rules
-- Tests on out-of-sample data
-- Rolling window analysis
-- Provides realistic performance expectations
+
+A robust simulation framework that tests the SignalsAlpha algorithm in a
+rolling window fashion, simulating real-world day-by-day trading conditions
+with portfolio constraints and realistic execution assumptions.
+
+Author: SignalsAlpha
+Version: 1.0
+Date: 2026-04-18
+
+================================================================================
+PURPOSE
+================================================================================
+
+This module provides the most realistic performance simulation:
+
+1. Simulates actual trading day-by-day (not just signal-by-signal)
+2. Applies portfolio constraints (capital, position limits)
+3. Implements risk management rules
+4. Tests on out-of-sample data (future data not used)
+5. Provides realistic expectations vs over-optimized backtests
+6. Validates algorithm robustness across different market conditions
+
+================================================================================
+WALK-FORWARD METHODOLOGY
+================================================================================
+
+Training Window:
+    - Uses past N days of data to optimize parameters
+    - Updates parameters daily based on recent performance
+    - Adapts to changing market conditions
+
+Validation Window:
+    - Tests optimized parameters on next-day data
+    - Simulates real trading execution
+    - Records actual performance
+
+Rolling Window:
+    - Shifts forward one day at a time
+    - Repeats training/validation cycle
+    - Captures regime changes and market cycles
+
+================================================================================
+TRADING SIMULATION
+================================================================================
+
+Starting Conditions:
+    - Initial capital: $100,000 USD
+    - Max positions: 10 (diversification limit)
+    - Risk per trade: 2% of capital
+    - No leverage (1:1)
+
+Entry Rules:
+    - Each day, check for new BUY/STRONG_BUY signals
+    - Only enter if portfolio has capacity (max 10 positions)
+    - Position size = $10,000 (10% of capital per trade)
+    - Entry at next day open + slippage
+
+Exit Rules:
+    - Stop loss: -5% from entry
+    - Take profit: +10% from entry
+    - Max hold: 10 days (time stop)
+    - Signal reversal (exit when SELL appears)
+
+Risk Management:
+    - Never risk more than 2% per trade
+    - Reduce size during drawdown >10%
+    - Pause new entries if portfolio down >15%
+
+================================================================================
+WORKFLOW
+================================================================================
+
+1. INITIALIZE PORTFOLIO
+   - Set starting capital
+   - Create empty position tracking
+   - Initialize performance tracking
+
+2. DAILY SIMULATION LOOP
+   For each trading day:
+   
+   a. MARKET OPEN
+      - Calculate daily signals using only prior day data
+      - Identify entry candidates
+      - Check portfolio capacity
+      - Enter new positions
+   
+   b. MARKET CLOSE
+      - Update all position prices
+      - Check exit conditions
+      - Close positions if triggered
+      - Calculate daily P&L
+   
+   c. EOD PROCESSING
+      - Record equity value
+      - Update statistics
+      - Check risk limits
+
+3. GENERATE RESULTS
+   - Calculate overall performance
+   - Analyze by market condition
+   - Create equity curve
+   - Generate trade log
+
+================================================================================
+PERFORMANCE METRICS
+================================================================================
+
+Portfolio-Level:
+    - Total Return: Final / Initial - 1
+    - CAGR: Compound Annual Growth Rate
+    - Volatility: Standard deviation of returns
+    - Sharpe Ratio: Risk-adjusted return
+    - Sortino Ratio: Downside risk-adjusted return
+    - Calmar Ratio: Return / Max Drawdown
+    - Ulcer Index: Depth and duration of drawdowns
+
+Trade-Level:
+    - Win Rate: % profitable trades
+    - Profit Factor: Gross Profit / Gross Loss
+    - Average Win/Loss
+    - Average Holding Period
+    - Max Consecutive Wins/Losses
+    - Largest Winner/Loser
+
+Risk Metrics:
+    - Max Drawdown: Worst peak-to-trough
+    - Time to Recovery: Days to new high
+    - Value at Risk (VaR): 95% confidence
+    - Expected Shortfall: Average of worst 5%
+
+================================================================================
+OUTPUT FORMAT
+================================================================================
+
+Walk-Forward Results (JSON):
+    {
+        "simulation_period": "2024-01-01 to 2026-04-18",
+        "trading_days": 562,
+        "final_equity": 156750.25,
+        "total_return_pct": 56.75,
+        "cagr_pct": 23.4,
+        "max_drawdown_pct": -12.8,
+        "sharpe_ratio": 1.62,
+        "win_rate_pct": 54.2,
+        "profit_factor": 1.68,
+        "total_trades": 487,
+        "avg_holding_days": 4.3,
+        "largest_winner_pct": 18.4,
+        "largest_loser_pct": -5.2
+    }
+
+Daily Equity (CSV):
+    date,equity,cash,positions_value,drawdown_pct,num_positions
+    2024-01-02,100000.00,100000.00,0.00,0.00,0
+    2024-01-03,100245.50,90245.50,10000.00,0.00,1
+
+Trade Log (CSV):
+    entry_date,exit_date,ticker,entry_price,exit_price,pnl_pct,
+    holding_days,exit_reason,signal_at_entry
+
+================================================================================
+CONFIGURATION
+================================================================================
+
+Portfolio Settings:
+    INITIAL_CAPITAL = 100000
+    MAX_POSITIONS = 10
+    POSITION_SIZE_PCT = 10.0  # 10% per trade
+    RISK_PER_TRADE_PCT = 2.0   # Max loss per trade
+
+Exit Parameters:
+    STOP_LOSS_PCT = 5.0
+    TAKE_PROFIT_PCT = 10.0
+    MAX_HOLD_DAYS = 10
+
+Risk Management:
+    PAUSE_THRESHOLD_PCT = -15.0  # Pause if down 15%
+    REDUCE_SIZE_THRESHOLD_PCT = -10.0
+
+Walk-Forward Window:
+    TRAINING_WINDOW_DAYS = 60
+    VALIDATION_WINDOW_DAYS = 1
+
+================================================================================
+USAGE
+================================================================================
+
+    python step7_walk_forward.py
+
+Requires historical data from previous steps.
+
 ================================================================================
 """
 

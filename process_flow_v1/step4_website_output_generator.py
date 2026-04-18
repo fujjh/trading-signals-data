@@ -3,10 +3,110 @@
 ================================================================================
 STEP 4: Website Output Generator
 ================================================================================
-Generates JSON output files for the SignalsAlpha website
-- Aggregates signals from all timeframes
-- Creates summary files for frontend consumption
-- Generates ranked signal lists
+
+Transforms raw signal data into optimized JSON files for the SignalsAlpha
+website frontend. Aggregates signals, creates summaries, and generates ranked
+lists for user consumption.
+
+Author: SignalsAlpha
+Version: 1.0
+Date: 2026-04-18
+
+================================================================================
+PURPOSE
+================================================================================
+
+This module serves as the bridge between the data pipeline and the website:
+
+1. Reads signal files from Step 2 (Multi-Timeframe Scanner)
+2. Aggregates signals across all timeframes per ticker
+3. Calculates strength scores and rankings
+4. Generates optimized JSON for frontend consumption
+5. Creates summary statistics for dashboards
+6. Filters and sorts signals by confidence and strength
+
+================================================================================
+OUTPUT FILES GENERATED
+================================================================================
+
+1. signals/signals_summary.json
+   - Top signals across all timeframes
+   - Ranked by strength score
+   - Limited to highest-confidence signals
+
+2. signals/signals_by_ticker.json
+   - All signals organized by ticker symbol
+   - Includes timeframe breakdown
+   - Used for individual stock pages
+
+3. signals/signals_by_timeframe.json
+   - Signals grouped by interval (1d, 1wk, 1mo)
+   - For timeframe-specific views
+
+4. signals/signals_today.json
+   - Only signals generated today
+   - For "Today's Signals" page
+
+5. signals/signals_strong.json
+   - STRONG_BUY and STRONG_SELL only
+   - Highest confidence signals
+
+================================================================================
+SIGNAL AGGREGATION LOGIC
+================================================================================
+
+Strength Score Calculation:
+    - Weighted sum of scores across timeframes
+    - Daily signals: 1.0x weight
+    - Weekly signals: 1.5x weight
+    - Monthly signals: 2.0x weight
+
+Ranking:
+    1. Sort by signal type (STRONG_BUY > BUY > WEAK_BUY)
+    2. Then by confidence score (higher first)
+    3. Then by strength score (higher first)
+
+Filtering:
+    - Minimum confidence: 70%
+    - Maximum signals per ticker: 3 (one per timeframe)
+    - Exclude delisted/invalid tickers
+
+================================================================================
+WORKFLOW
+================================================================================
+
+1. LOAD SIGNALS
+   - Scan data/signals_timeframe/ directory
+   - Read all CSV files
+   - Parse into structured format
+
+2. AGGREGATE
+   - Group signals by ticker
+   - Calculate multi-timeframe strength
+   - Determine overall signal direction
+
+3. RANK
+   - Sort by confidence and strength
+   - Apply filters
+   - Select top N signals
+
+4. GENERATE OUTPUT
+   - Create JSON files
+   - Pretty-print for readability
+   - Validate JSON structure
+
+5. SAVE
+   - Write to data/signals/ directory
+   - Create subdirectories as needed
+
+================================================================================
+USAGE
+================================================================================
+
+    python step4_website_output_generator.py
+
+No arguments required - reads from data/signals_timeframe/ automatically.
+
 ================================================================================
 """
 

@@ -3,7 +3,130 @@
 ================================================================================
 STEP 3: Data Validator
 ================================================================================
-Validates data integrity across all pipeline outputs before website generation
+
+A quality assurance module that validates data integrity across all pipeline
+outputs before they are used for signal generation and website output.
+
+Author: SignalsAlpha
+Version: 1.0
+Date: 2026-04-18
+
+================================================================================
+PURPOSE
+================================================================================
+
+This module ensures data quality and consistency by:
+
+1. Validating CSV files exist and contain required columns
+2. Checking for data completeness (no missing values in critical fields)
+3. Verifying data types (numeric columns contain numbers)
+4. Detecting outliers and anomalies in price/volume data
+5. Ensuring date ranges are valid and consecutive
+6. Validating that all tickers have complete interval coverage
+
+================================================================================
+VALIDATION CHECKS PERFORMED
+================================================================================
+
+File-Level Checks:
+    - File exists and is readable
+    - File size is reasonable (not empty, not corrupted)
+    - CSV parses successfully
+
+Schema Validation:
+    - Required columns present (ticker, interval, date, open, high, low, close, volume)
+    - Column data types correct
+    - No duplicate column names
+
+Data Quality:
+    - No null values in critical columns
+    - Price values are positive and reasonable
+    - Volume is non-negative
+    - High >= Low (basic OHLC sanity)
+    - Close is between Low and High
+
+Date Validation:
+    - Dates are in valid format
+    - No future dates
+    - Data is current (last date within reasonable range)
+
+Coverage Checks:
+    - All expected intervals present for each ticker
+    - Sufficient rows for technical analysis (min 50 for indicators)
+
+================================================================================
+WORKFLOW
+================================================================================
+
+1. SCAN DIRECTORIES
+   - Walk through data/time_series/ directory
+   - Identify all ticker subdirectories
+   - List all interval CSV files
+
+2. PER-FILE VALIDATION
+   For each CSV file:
+   a. Check file exists and is readable
+   b. Parse CSV into DataFrame
+   c. Validate schema (required columns)
+   d. Check for null values
+   e. Validate numeric ranges
+   f. Check date validity
+
+3. AGGREGATE RESULTS
+   - Collect validation results per ticker
+   - Identify common issues
+   - Calculate statistics (pass rate, error types)
+
+4. REPORT GENERATION
+   - Write detailed validation report to data/validation_report.json
+   - Print summary to console
+   - Return exit code (0 = all valid, 1 = errors found)
+
+================================================================================
+OUTPUT
+================================================================================
+
+Validation Report (JSON):
+    {
+        "timestamp": "2026-04-18T23:30:00",
+        "summary": {
+            "total_tickers": 3598,
+            "total_files": 35980,
+            "files_valid": 35970,
+            "files_invalid": 10,
+            "pass_rate": 99.97
+        },
+        "tickers": {
+            "AAPL": {
+                "status": "valid",
+                "files_checked": 10,
+                "files_valid": 10
+            },
+            "BADTKR": {
+                "status": "invalid",
+                "errors": [
+                    "File 1d.csv: Null values in close column",
+                    "File 1wk.csv: File size 0 bytes"
+                ]
+            }
+        }
+    }
+
+Console Output:
+    - Progress indicator (ticker count)
+    - Summary statistics
+    - List of failed tickers with reasons
+
+================================================================================
+USAGE
+================================================================================
+
+    python step3_data_validator.py
+
+Exit Codes:
+    0 - All validations passed
+    1 - One or more validations failed
+
 ================================================================================
 """
 

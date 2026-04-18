@@ -3,10 +3,120 @@
 ================================================================================
 STEP 5: Signal History Tracker
 ================================================================================
-Tracks signal history over time to analyze performance
-- Saves daily signals to historical database
-- Tracks signal changes (BUY -> SELL, etc.)
-- Calculates holding periods
+
+Maintains a historical database of signals to track performance over time,
+analyze signal persistence, and detect changes in signal direction.
+
+Author: SignalsAlpha
+Version: 1.0
+Date: 2026-04-18
+
+================================================================================
+PURPOSE
+================================================================================
+
+This module provides historical tracking capabilities:
+
+1. Saves daily snapshot of all active signals
+2. Tracks signal changes (e.g., BUY -> SELL transitions)
+3. Calculates holding periods for signals
+4. Maintains signal lineage across days
+5. Provides data for backtesting and performance analysis
+6. Enables signal decay analysis (how long signals remain valid)
+
+================================================================================
+TRACKED DATA
+================================================================================
+
+Daily Snapshots:
+    - All active signals from Step 2
+    - Signal type, confidence, price levels
+    - Technical indicator values at time of signal
+    - Market conditions (VIX, sector performance)
+
+Signal Changes:
+    - NEW: First occurrence of a signal
+    - CONTINUED: Same signal as yesterday
+    - STRENGTHENED: Buy score increased
+    - WEAKENED: Buy score decreased
+    - CLOSED: Signal no longer active
+    - FLIPPED: BUY -> SELL or SELL -> BUY
+
+Holding Periods:
+    - Days held for each signal
+    - Entry and exit prices
+    - Maximum favorable/unfavorable excursion
+
+================================================================================
+WORKFLOW
+================================================================================
+
+1. LOAD CURRENT SIGNALS
+   - Read from data/signals_timeframe/
+   - Aggregate across timeframes
+   - Identify unique signals per ticker
+
+2. LOAD PREVIOUS DAY
+   - Read yesterday's snapshot from signal_history/
+   - Parse into comparable format
+
+3. COMPARE AND CLASSIFY
+   - Match current signals with previous
+   - Classify each signal's status change
+   - Calculate holding periods
+
+4. SAVE SNAPSHOT
+   - Write today's signals to signals_YYYY-MM-DD.csv
+   - Write changes to changes_YYYY-MM-DD.json
+   - Update holding period database
+
+5. GENERATE SUMMARY
+   - Calculate statistics (new signals, closed signals, avg holding period)
+   - Write summary_YYYY-MM-DD.json
+   - Print report to console
+
+================================================================================
+OUTPUT FORMAT
+================================================================================
+
+Signal Snapshot (CSV):
+    ticker,signal_type,confidence,entry_price,current_price,score,holding_days
+    AAPL,BUY,85,150.25,152.30,12,3
+    TSLA,STRONG_SELL,92,245.50,238.10,18,1
+
+Change Log (JSON):
+    {
+        "date": "2026-04-18",
+        "new_signals": [{"ticker": "NVDA", "signal": "BUY", ...}],
+        "closed_signals": [{"ticker": "META", "signal": "SELL", ...}],
+        "continued_signals": [...],
+        "flipped_signals": [...]
+    }
+
+Summary (JSON):
+    {
+        "date": "2026-04-18",
+        "total_signals": 2054,
+        "new_signals": 45,
+        "closed_signals": 38,
+        "avg_holding_period": 4.2,
+        "signal_distribution": {
+            "STRONG_BUY": 48,
+            "BUY": 396,
+            "WEAK_BUY": 116,
+            "SELL": 181,
+            "STRONG_SELL": 28
+        }
+    }
+
+================================================================================
+USAGE
+================================================================================
+
+    python step5_signal_history_tracker.py
+
+Should be run daily after Step 4 to maintain complete history.
+
 ================================================================================
 """
 
