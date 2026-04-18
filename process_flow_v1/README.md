@@ -89,6 +89,91 @@ STEP 7 (Periodic): Walk-Forward Analyzer
 └──────────────────────────┘──► Outputs: data/walkforward/walkforward_{timestamp}.json
 ```
 
+```
+
+## Quick Start - Execution Sequence
+
+Run these steps in order. **⚠️ Note:** Steps marked with 🔄 **require batch restart wrapper** to prevent OCI memory/timeouts.
+
+### Weekly Workflow (Sunday)
+
+| Step | Script | Command | Time | 🔄 Batch? |
+|------|--------|---------|------|-----------|
+| 0 | step0_ticker_collector.py | `python3 step0_ticker_collector.py` | ~75 min | No |
+
+### Daily Workflow (After Market Close)
+
+| Step | Script | Command | Time | 🔄 Batch? |
+|------|--------|---------|------|-----------|
+| 1 | step1_time_series_collector.py | `bash run_timeseries_batch.sh` | ~10 hrs | **YES** |
+| 2 | step2_multi_timeframe_scanner.py | `bash run_batch_restarter.sh` | ~2 hrs | **YES** |
+| 3 | step3_data_validator.py | `python3 step3_data_validator.py` | ~2 min | No |
+| 4 | step4_website_output_generator.py | `python3 step4_website_output_generator.py` | ~5 min | No |
+| 5 | step5_signal_history_tracker.py | `python3 step5_signal_history_tracker.py` | ~1 min | No |
+
+### Periodic Analysis (Weekly/Monthly)
+
+| Step | Script | Command | Time | 🔄 Batch? |
+|------|--------|---------|------|-----------|
+| 6 | step6_backtester.py | `python3 step6_backtester.py` | ~15 min | No |
+| 7 | step7_walk_forward.py | `python3 step7_walk_forward.py` | ~10 min | No |
+
+### Why Batch Processing is Required
+
+**OCI Free Tier Limitations:**
+- **RAM:** 1 GB (easily exhausted)
+- **CPU:** Shared (unpredictable performance)
+- **Process timeouts:** Long-running processes may be killed
+
+**Steps 1 & 2 process thousands of tickers.** Without batch restart:
+- Memory grows unbounded
+- Process gets killed (SIGKILL)
+- Partial data, must restart from beginning
+
+**Batch restart solution:**
+- Processes 10-20 tickers per batch
+- Exits completely between batches (frees all memory)
+- Shell wrapper automatically restarts script
+- Continues from where it left off
+
+### Complete Daily Command Sequence
+
+```bash
+# Navigate to process_flow_v1
+cd /home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1
+
+# Activate virtual environment
+source ../../venv/bin/activate
+
+# Step 1: Time Series (with batch restart) - ~10 hours
+echo "Starting Step 1: Time Series Collection..."
+bash run_timeseries_batch.sh
+
+# Step 2: Scanner (with batch restart) - ~2 hours
+echo "Starting Step 2: Multi-Timeframe Scanner..."
+bash run_batch_restarter.sh
+
+# Steps 3-5: Quick validation and output - ~10 minutes total
+echo "Starting Steps 3-5..."
+python3 step3_data_validator.py
+python3 step4_website_output_generator.py
+python3 step5_signal_history_tracker.py
+
+echo "Daily pipeline complete!"
+```
+
+### Automated Scheduling (Cron)
+
+Add to crontab (`crontab -e`):
+
+```bash
+# Weekly ticker collection - Sundays at 4 AM UTC
+0 4 * * 0 cd /home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1 && bash run_timeseries_batch.sh >> logs/step1_weekly.log 2>&1
+
+# Daily pipeline - Monday-Saturday at 6 PM UTC
+0 18 * * 1-6 cd /home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1 && bash run_batch_restarter.sh >> logs/step2_daily.log 2>&1 && python3 step3_data_validator.py && python3 step4_website_output_generator.py && python3 step5_signal_history_tracker.py
+```
+
 ## File Structure
 
 ```
