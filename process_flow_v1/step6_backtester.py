@@ -1,12 +1,155 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-STEP 6: Backtester
+STEP 6: Historical Backtester
 ================================================================================
-Tests signal algorithm on historical data to calculate win rate and performance
-- Simulates trading based on historical signals
-- Calculates returns, win rate, profit factor
-- Generates performance report
+
+Simulates trading performance of the SignalsAlpha algorithm on historical
+data to calculate key performance metrics including win rate, profit factor,
+and risk-adjusted returns.
+
+Author: SignalsAlpha
+Version: 1.0
+Date: 2026-04-18
+
+================================================================================
+PURPOSE
+================================================================================
+
+This module validates signal algorithm effectiveness by:
+
+1. Loading historical signals and price data
+2. Simulating trades based on signal rules
+3. Calculating performance metrics
+4. Generating risk statistics
+5. Creating equity curves for visualization
+6. Providing evidence-based algorithm validation
+
+================================================================================
+BACKTEST METHODOLOGY
+================================================================================
+
+Entry Rules:
+    - Enter LONG on BUY/STRONG_BUY signal
+    - Enter SHORT on SELL/STRONG_SELL signal
+    - Entry at next day's open price (simulates execution delay)
+
+Exit Rules:
+    - Stop Loss: -5% from entry (configurable)
+    - Take Profit: +10% from entry (configurable)
+    - Maximum Hold: 5 days (prevents stale signals)
+    - Signal reversal (exit when signal flips)
+
+Position Sizing:
+    - Fixed percentage of portfolio per trade
+    - Default: Equal weight per signal
+    - Accounts for slippage (0.1% per trade)
+
+================================================================================
+PERFORMANCE METRICS
+================================================================================
+
+Return Metrics:
+    - Total Return: Cumulative profit/loss
+    - Annualized Return: Normalized yearly return
+    - Win Rate: % of profitable trades
+    - Average Win: Average profit on winning trades
+    - Average Loss: Average loss on losing trades
+
+Risk Metrics:
+    - Max Drawdown: Largest peak-to-trough decline
+    - Sharpe Ratio: Risk-adjusted return measure
+    - Profit Factor: Gross profit / Gross loss
+    - Recovery Factor: Total return / Max drawdown
+
+Trade Statistics:
+    - Total trades executed
+    - Profitable vs losing trades
+    - Average holding period
+    - Largest single win/loss
+
+================================================================================
+WORKFLOW
+================================================================================
+
+1. LOAD DATA
+   - Read historical signals from signal_history/
+   - Load corresponding price data from time_series/
+   - Align timestamps
+
+2. SIMULATE TRADES
+   For each signal:
+   a. Calculate entry price (next day open)
+   b. Monitor for exit conditions daily
+   c. Record outcome (win/loss, P&L)
+
+3. CALCULATE METRICS
+   - Aggregate trade results
+   - Calculate equity curve
+   - Compute risk statistics
+   - Benchmark vs buy-and-hold
+
+4. GENERATE REPORT
+   - Write performance_report.json
+   - Create equity curve CSV
+   - Print summary statistics
+
+================================================================================
+OUTPUT FORMAT
+================================================================================
+
+Performance Report (JSON):
+    {
+        "backtest_period": "2024-01-01 to 2026-04-18",
+        "total_trades": 1250,
+        "winning_trades": 687,
+        "losing_trades": 563,
+        "win_rate": 54.96,
+        "total_return_pct": 127.5,
+        "annualized_return_pct": 42.3,
+        "max_drawdown_pct": -18.2,
+        "sharpe_ratio": 1.85,
+        "profit_factor": 1.72,
+        "average_win_pct": 8.4,
+        "average_loss_pct": -4.2,
+        "largest_win_pct": 25.3,
+        "largest_loss_pct": -12.8,
+        "avg_holding_days": 3.2
+    }
+
+Equity Curve (CSV):
+    date,equity,drawdown_pct
+    2024-01-02,100000.00,0.00
+    2024-01-03,100150.25,0.00
+    2024-01-04,99875.50,-0.28
+
+Trade Log (CSV):
+    entry_date,exit_date,ticker,signal,entry_price,exit_price,pnl_pct,exit_reason
+    2024-01-15,2024-01-18,AAPL,BUY,150.25,158.40,5.42,TAKE_PROFIT
+
+================================================================================
+CONFIGURATION
+================================================================================
+
+Backtest Parameters:
+    STOP_LOSS_PCT = 5.0      # Stop loss percentage
+    TAKE_PROFIT_PCT = 10.0   # Take profit percentage
+    MAX_HOLD_DAYS = 5        # Maximum holding period
+    INITIAL_CAPITAL = 100000 # Starting capital
+    SLIPPAGE_PCT = 0.1       # Transaction cost
+
+Signal Filters:
+    MIN_CONFIDENCE = 70      # Minimum signal confidence
+    SIGNAL_TYPES = ['STRONG_BUY', 'BUY']  # Which signals to trade
+
+================================================================================
+USAGE
+================================================================================
+
+    python step6_backtester.py
+
+Optional: Edit CONFIGURATION section to test different parameters.
+
 ================================================================================
 """
 
