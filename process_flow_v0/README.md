@@ -15,8 +15,9 @@ STEP 0 (Weekly): Ticker Collection
     │
     ▼
 ┌─────────────────┐
-│ TickerCollector │──► Downloads official exchange lists (NASDAQ, NYSE, AMEX)
-│      v2.0       │──► Validates against Yahoo Finance
+│ TickerCollector │──► Downloads official exchange lists (NASDAQ, NYSE, AMEX, TSX)
+│      v2.0       │──► Collects index constituents (S&P 500, Russell 2000, NASDAQ 100)
+│                 │──► Validates against Yahoo Finance
 └─────────────────┘──► Outputs: data/stock_ticker_base.csv
     │
     ▼
@@ -90,31 +91,30 @@ process_flow_v0/
 
 ### STEP 0: Ticker Collection (Weekly)
 
-**Purpose:** Maintain the universe of tradeable stocks
+**Purpose:** Maintain the universe of tradeable stocks (~3,500-4,000 after validation)
 
 **Frequency:** Weekly (recommended: Sunday)
 
-**Inputs:**
-- NASDAQ official ticker list
-- NYSE official ticker list
-- AMEX official ticker list
+**Data Sources:**
+| Source | Method | Expected Count |
+|--------|--------|----------------|
+| NASDAQ | DataHub.io CSV | ~3,000 |
+| NYSE | DataHub.io CSV | ~3,000 |
+| TSX | Curated list | ~250 |
+| **Russell 2000** | **iShares IWM ETF** | **~2,000** |
+| **NASDAQ 100** | **Wikipedia** | **~100** |
+| S&P 500 | Wikipedia | 500 |
+| **Total Unique** | After deduplication | **~3,500-4,000** |
 
 **Process:**
 1. Downloads official ticker lists from exchanges
-2. Validates each ticker exists on Yahoo Finance
-3. Filters for active, non-ETF, non-warrant stocks
-4. Deduplicates across exchanges
+2. Collects Russell 2000 via iShares IWM ETF holdings
+3. Collects NASDAQ 100 and S&P 500 constituents
+4. Validates each ticker exists on Yahoo Finance
+5. Filters for active, non-ETF, non-warrant stocks
+6. Deduplicates across all sources
 
-**Outputs:**
-- `data/stock_ticker_base.csv` - Master ticker list
-- `data/ticker_stats.json` - Collection statistics
-
-**Command:**
-```bash
-./run_master.sh step0
-# or
-./run_master.sh weekly  # Runs all steps including ticker collection
-```
+**Rate Limiting:** 1.5 seconds between Yahoo Finance requests (~75 min for 3,000 tickers)
 
 ---
 
