@@ -115,6 +115,93 @@ def calculate_obv(df):
     return obv
 
 
+def calculate_stochastic(df, k_period=14, d_period=3, slowing=3, stoch_type='slow'):
+    """
+    Calculate Stochastic Oscillator (Full, Slow, and Fast)
+    
+    Parameters:
+    - k_period: Lookback period for %K calculation
+    - d_period: Period for %D smoothing
+    - slowing: Slowing factor
+    - stoch_type: 'fast', 'slow', or 'full'
+    
+    Returns:
+    - k: %K line
+    - d: %D line (signal line)
+    """
+    # Calculate %K
+    lowest_low = df['Low'].rolling(window=k_period).min()
+    highest_high = df['High'].rolling(window=k_period).max()
+    
+    k_fast = 100 * ((df['Close'] - lowest_low) / (highest_high - lowest_low))
+    
+    if stoch_type == 'fast':
+        # Fast Stochastic: simple moving average
+        k = k_fast.rolling(window=slowing).mean()
+        d = k.rolling(window=d_period).mean()
+    elif stoch_type == 'slow':
+        # Slow Stochastic: apply slowing to %K first
+        k = k_fast.rolling(window=slowing).mean()
+        d = k.rolling(window=d_period).mean()
+    else:  # full
+        # Full Stochastic: full smoothing
+        k = k_fast.rolling(window=slowing).mean()
+        d = k.rolling(window=d_period).mean()
+    
+    return k, d
+
+
+def calculate_mfi(df, period=14):
+    """
+    Calculate Money Flow Index (MFI)
+    
+    MFI combines price and volume data to measure buying and selling pressure.
+    Values above 80 indicate overbought, below 20 indicate oversold.
+    """
+    # Calculate typical price
+    typical_price = (df['High'] + df['Low'] + df['Close']) / 3
+    
+    # Calculate raw money flow
+    raw_money_flow = typical_price * df['Volume']
+    
+    # Calculate money flow direction
+    money_flow = raw_money_flow.copy()
+    money_flow[typical_price < typical_price.shift(1)] = -money_flow
+    
+    # Calculate positive and negative money flow
+    positive_flow = money_flow.where(money_flow > 0, 0).rolling(window=period).sum()
+    negative_flow = abs(money_flow.where(money_flow < 0, 0).rolling(window=period).sum()
+    
+    # Calculate money flow ratio and MFI
+    money_flow_ratio = positive_flow / negative_flow
+    mfi = 100 - (100 / (1 + money_flow_ratio))
+    
+    return mfi
+
+
+def calculate_trix(data, period=15):
+    """
+    Calculate TRIX (Triple Exponential Moving Average)
+    
+    TRIX is a momentum oscillator that shows the rate of change of a triple
+    exponentially smoothed moving average. Good for filtering out noise.
+    
+    Values above 0 indicate bullish momentum, below 0 indicate bearish momentum.
+    """
+    # Triple exponential smoothing
+    single_ema = calculate_ema(data, period)
+    double_ema = calculate_ema(single_ema, period)
+    triple_ema = calculate_ema(double_ema, period)
+    
+    # Calculate TRIX as percentage rate of change
+    trix = 100 * (triple_ema - triple_ema.shift(1)) / triple_ema.shift(1)
+    
+    # Signal line (9-period EMA of TRIX)
+    trix_signal = calculate_ema(trix, 9)
+    
+    return trix, trix_signal
+
+
 # ============================================================================
 # CANDLESTICK PATTERN DETECTION FUNCTIONS
 # ============================================================================
@@ -676,6 +763,24 @@ def generate_signal(df, ticker, interval):
             candlestick_patterns.append('THREE_BLACK_CROWS')
             sell_score += 3
     
+    # NEW: Calculate Stochastic Oscillator (Slow and Fast)
+    stoch_k_slow, stoch_d_slow = calculate_stochastic(df, k_period=14, d_period=3, slowing=3, stoch_type='slow')
+    stoch_k_fast, stoch_d_fast = calculate_stochastic(df, k_period=14, d_period=3, slowing=1, stoch_type='fast')
+    
+    latest_stoch_k_slow = stoch_k_slow.iloc[-1] if not pd.isna(stoch_k_slow.iloc[-1]) else 50
+    latest_stoch_d_slow = stoch_d_slow.iloc[-1] if not pd.isna(stoch_d_slow.iloc[-1]) else 50
+    latest_stoch_k_fast = stoch_k_fast.iloc[-1] if not pd.isna(stoch_k_fast.iloc[-1]) else 50
+    latest_stoch_d_fast = stoch_d_fast.iloc[-1] if not pd.isna(stoch_d_fast.iloc[-1]) else 50
+    
+    # NEW: Calculate Money Flow Index (MFI)
+    mfi = calculate_mfi(df, period=14)
+    latest_mfi = mfi.iloc[-1] if not pd.isna(mfi.iloc[-1]) else 50
+    
+    # NEW: Calculate TRIX
+    trix, trix_signal = calculate_trix(df['Close'], period=15)
+    latest_trix = trix.iloc[-1] if not pd.isna(trix.iloc[-1]) else 0
+    latest_trix_signal = trix_signal.iloc[-1] if not pd.isna(trix_signal.iloc[-1]) else 0
+    
     # Calculate scores
     buy_score = 0
     sell_score = 0
@@ -718,6 +823,42 @@ def generate_signal(df, ticker, interval):
         buy_score += 1  # Price below lower band
     elif close > latest_upper:
         sell_score += 1  # Price above upper band
+    
+    # NEW: Stochastic Oscillator (Slow) analysis
+    if latest_stoch_k_slow < 20 and latest_stoch_d_slow < 20:
+        buy_score += 2  # Both lines oversold
+    elif latest_stoch_k_slow > 80 and latest_stoch_d_slow > 80:
+        sell_score += 2  # Both lines overbought
+    elif latest_stoch_k_slow > latest_stoch_d_slow:
+        buy_score += 1  # Bullish crossover
+    elif latest_stoch_k_slow < latest_stoch_d_slow:
+        sell_score += 1  # Bearish crossover
+    
+    # NEW: Stochastic Fast (for quick signals)
+    if latest_stoch_k_fast < 20:
+        buy_score += 1
+    elif latest_stoch_k_fast > 80:
+        sell_score += 1
+    
+    # NEW: Money Flow Index analysis
+    if latest_mfi < 20:
+        buy_score += 2  # Strong oversold with volume confirmation
+    elif latest_mfi > 80:
+        sell_score += 2  # Strong overbought with volume confirmation
+    elif latest_mfi < 30:
+        buy_score += 1
+    elif latest_mfi > 70:
+        sell_score += 1
+    
+    # NEW: TRIX analysis
+    if latest_trix > 0 and latest_trix_signal > 0:
+        buy_score += 1  # Both TRIX and signal above zero (bullish momentum)
+    elif latest_trix < 0 and latest_trix_signal < 0:
+        sell_score += 1  # Both below zero (bearish momentum)
+    elif latest_trix > latest_trix_signal and latest_trix_signal < 0:
+        buy_score += 2  # Bullish crossover from below zero
+    elif latest_trix < latest_trix_signal and latest_trix_signal > 0:
+        sell_score += 2  # Bearish crossover from above zero
     
     # Volume analysis (if available)
     volume_avg = df['Volume'].rolling(20).mean().iloc[-1]
@@ -789,6 +930,13 @@ def generate_signal(df, ticker, interval):
         'peaks': json.dumps([p['price'] for p in pivot_highs[-5:]]),
         'troughs': json.dumps([p['price'] for p in pivot_lows[-5:]]),
         'candlestick_patterns': ','.join(candlestick_patterns) if candlestick_patterns else None,
+        'stoch_k_slow': round(latest_stoch_k_slow, 2) if not pd.isna(latest_stoch_k_slow) else None,
+        'stoch_d_slow': round(latest_stoch_d_slow, 2) if not pd.isna(latest_stoch_d_slow) else None,
+        'stoch_k_fast': round(latest_stoch_k_fast, 2) if not pd.isna(latest_stoch_k_fast) else None,
+        'stoch_d_fast': round(latest_stoch_d_fast, 2) if not pd.isna(latest_stoch_d_fast) else None,
+        'mfi': round(latest_mfi, 2) if not pd.isna(latest_mfi) else None,
+        'trix': round(latest_trix, 4) if not pd.isna(latest_trix) else None,
+        'trix_signal': round(latest_trix_signal, 4) if not pd.isna(latest_trix_signal) else None,
         'stop_loss': round(stop_loss, 2),
         'take_profit': round(take_profit, 2)
     }
