@@ -1,8 +1,166 @@
 #!/usr/bin/env python3
 """
-Time Series Data Collector
-Fetches OHLCV data for multiple intervals using yfinance
-Saves each interval as separate CSV per ticker
+================================================================================
+STEP 1: Time Series Data Collector
+================================================================================
+
+An incremental data collection system that fetches OHLCV (Open, High, Low, 
+Close, Volume) data from Yahoo Finance for 3,500+ tickers across multiple 
+timeframes. Implements intelligent caching to only fetch new data since the 
+last collection.
+
+Author: SignalsAlpha
+Version: 2.0 (with incremental collection)
+Date: 2026-04-18
+
+================================================================================
+PURPOSE
+================================================================================
+
+This module serves as the data foundation for the SignalsAlpha trading system.
+It:
+
+1. Fetches historical and real-time price data from Yahoo Finance API
+2. Collects data across 10 timeframes (1m to 1mo) for comprehensive analysis
+3. Implements incremental updates - only fetches new data since last run
+4. Validates data coverage to ensure sufficient historical depth
+5. Organizes data hierarchically for efficient downstream processing
+
+================================================================================
+DATA INTERVALS COLLECTED
+================================================================================
+
+Intraday Intervals (for short-term analysis):
+    - 1m: 1-minute bars (last 7 days)
+    - 2m: 2-minute bars (last 60 days)
+    - 5m: 5-minute bars (last 60 days)
+    - 15m: 15-minute bars (last 60 days)
+    - 30m: 30-minute bars (last 60 days)
+    - 60m: 60-minute bars (last 730 days / 2 years)
+
+Daily/Weekly/Monthly (for trend analysis):
+    - 1h: 1-hour bars (last 730 days)
+    - 1d: Daily bars (full available history, max ~20 years)
+    - 1wk: Weekly bars (full available history)
+    - 1mo: Monthly bars (full available history)
+
+================================================================================
+INCREMENTAL COLLECTION FEATURES
+================================================================================
+
+Smart Updates:
+    - Checks existing CSV files for last recorded date
+    - Calculates days since last update
+    - Fetches only the gap period (not full history)
+    - Merges new data with existing records
+    - Removes duplicates automatically
+
+Fetch Period Optimization:
+    - 0-5 days missing: Fetches 5 days
+    - 6-30 days missing: Fetches 1 month
+    - 31-90 days missing: Fetches 3 months
+    - 90+ days missing: Fetches full history
+
+Validation:
+    - Ensures minimum historical coverage (365 days for daily data)
+    - Re-fetches if data is incomplete or corrupted
+    - Handles delisted tickers gracefully
+
+================================================================================
+WORKFLOW
+================================================================================
+
+1. INITIALIZATION
+   - Load ticker list from Step 0 (stock_ticker_base.csv)
+   - Create output directory structure: data/time_series/{TICKER}/
+
+2. PER-TICKER PROCESSING
+   For each ticker:
+   a. Check existing files for each interval
+   b. Determine last recorded date
+   c. Calculate days since update
+   d. Fetch only missing data (or full history if new)
+   e. Merge with existing data
+   f. Save updated CSV
+
+3. RATE LIMITING
+   - Configurable delay between API calls (default: 1.0s)
+   - Prevents Yahoo Finance rate limiting
+   - Respects API terms of service
+
+4. ERROR HANDLING
+   - Retries on temporary failures
+   - Skips delisted/unavailable tickers
+   - Logs errors for manual review
+
+================================================================================
+OUTPUT FORMAT
+================================================================================
+
+Directory Structure:
+    data/
+    └── time_series/
+        └── {TICKER}/
+            ├── {TICKER}_1m.csv
+            ├── {TICKER}_2m.csv
+            ├── {TICKER}_5m.csv
+            ├── {TICKER}_15m.csv
+            ├── {TICKER}_30m.csv
+            ├── {TICKER}_60m.csv
+            ├── {TICKER}_1h.csv
+            ├── {TICKER}_1d.csv
+            ├── {TICKER}_1wk.csv
+            └── {TICKER}_1mo.csv
+
+CSV Schema (all intervals):
+    date: Timestamp (ISO 8601 format)
+    open: Opening price
+    high: Highest price
+    low: Lowest price
+    close: Closing price
+    volume: Trading volume
+    dividends: Dividend payments (if any)
+    stock_splits: Split ratios (if any)
+
+================================================================================
+USAGE
+================================================================================
+
+Full Collection (all tickers):
+    python step1_time_series_collector.py
+
+With Batch Restart (recommended for OCI):
+    bash run_timeseries_batch.sh
+
+Test Single Ticker:
+    python step1_time_series_collector.py --test AAPL
+
+================================================================================
+CONFIGURATION
+================================================================================
+
+Rate Limiting:
+    MIN_DELAY = 1.0  # Seconds between API calls
+
+Retry Logic:
+    MAX_RETRIES = 3    # Attempts per ticker
+    INITIAL_BACKOFF = 2.0  # Seconds
+
+Batch Processing:
+    TICKERS_PER_BATCH = 10  # Process before restart
+
+================================================================================
+DEPENDENCIES
+================================================================================
+
+- yfinance: Yahoo Finance data access
+- pandas: Data manipulation and CSV handling
+- numpy: Numerical operations
+- datetime: Date/time calculations
+- time: Rate limiting
+- typing: Type hints
+
+================================================================================
 """
 
 import os
