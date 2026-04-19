@@ -81,14 +81,39 @@ OUTPUT FORMAT
 
 Signal Snapshot (CSV):
     ticker,signal_type,confidence,entry_price,current_price,score,holding_days
-    AAPL,BUY,85,150.25,152.30,12,3
-    TSLA,STRONG_SELL,92,245.50,238.10,18,1
+    
+    # Technical Analysis Data:
+    rsi,rsi_condition,macd,macd_signal,macd_cross_type,macd_cross_strength,stoch_k,stoch_d,stoch_cross_type,stoch_cross_strength
+    
+    # Crossover Rationale:
+    trix,trix_signal,trix_cross_type,ema_12,ema_26,ema_trend,sma_20,sma_50,sma_trend
+    
+    # Price Levels & Targets:
+    vwap,bb_upper,bb_lower,atr,stop_loss,take_profit,support_level_1,resistance_level_1
+    
+    # Signal Components (JSON):
+    buy_score_breakdown,sell_score_breakdown
+    
+    Example:
+    AAPL,BUY,85,150.25,152.30,12,3,45.2,oversold,0.45,0.38,crossover,8,18.5,22.3,crossover,9
 
 Change Log (JSON):
     {
         "date": "2026-04-18",
-        "new_signals": [{"ticker": "NVDA", "signal": "BUY", ...}],
-        "closed_signals": [{"ticker": "META", "signal": "SELL", ...}],
+        "new_signals": [{
+            "ticker": "NVDA",
+            "signal": "BUY",
+            "confidence": 85,
+            "factors": {
+                "primary": "MACD_crossover_from_deeply_oversold",
+                "secondary": ["Stochastic_oversold_cross", "RSI_45"],
+                "trend": "SMA_above",
+                "momentum": "TRIX_positive_cross"
+            },
+            "price_target": 165.30,
+            "stop_loss": 142.50
+        }],
+        "closed_signals": [...],
         "continued_signals": [...],
         "flipped_signals": [...]
     }
@@ -106,6 +131,12 @@ Summary (JSON):
             "WEAK_BUY": 116,
             "SELL": 181,
             "STRONG_SELL": 28
+        },
+        "crossover_analysis": {
+            "macd_crossovers": 156,
+            "stoch_crossovers": 203,
+            "trix_crossovers": 89,
+            "avg_cross_strength": 6.8
         }
     }
 
@@ -139,9 +170,87 @@ def ensure_dirs():
     HISTORY_DIR.mkdir(parents=True, exist_ok=True)
 
 
+def extract_signal_rationale(row):
+    """
+    Extract the primary rationale and contributing factors for a signal
+    
+    Returns a dictionary with:
+    - primary_factor: The main reason for the signal
+    - contributing_factors: List of secondary factors
+    - price_targets: Dict with stop_loss and take_profit
+    - technical_context: Summary of technical conditions
+    """
+    rationale = {
+        'primary_factor': None,
+        'contributing_factors': [],
+        'technical_context': {},
+        'price_targets': {}
+    }
+    
+    # Determine primary factor based on crossover data
+    if row.get('macd_cross_type') == 'crossover' and row.get('macd_cross_strength', 0) >= 6:
+        rationale['primary_factor'] = 'MACD_strong_bullish_crossover'
+        rationale['contributing_factors'].append(f"MACD_cross_from_{row.get('macd_cross_location', 'unknown')}")
+    elif row.get('macd_cross_type') == 'crossunder' and row.get('macd_cross_strength', 0) >= 6:
+        rationale['primary_factor'] = 'MACD_strong_bearish_crossunder'
+        rationale['contributing_factors'].append(f"MACD_cross_from_{row.get('macd_cross_location', 'unknown')}")
+    elif row.get('stoch_slow_cross') == 'crossover' and row.get('stoch_slow_strength', 0) >= 7:
+        rationale['primary_factor'] = 'Stochastic_deeply_oversold_crossover'
+        rationale['contributing_factors'].append(f"Stoch_context_{row.get('stoch_slow_context', 'unknown')}")
+    elif row.get('stoch_slow_cross') == 'crossunder' and row.get('stoch_slow_strength', 0) >= 7:
+        rationale['primary_factor'] = 'Stochastic_deeply_overbought_crossunder'
+        rationale['contributing_factors'].append(f"Stoch_context_{row.get('stoch_slow_context', 'unknown')}")
+    elif row.get('trix_cross_type') == 'crossover' and row.get('trix_cross_strength', 0) >= 6:
+        rationale['primary_factor'] = 'TRIX_bullish_crossover'
+    elif row.get('trix_cross_type') == 'crossunder' and row.get('trix_cross_strength', 0) >= 6:
+        rationale['primary_factor'] = 'TRIX_bearish_crossunder'
+    
+    # Add trend analysis
+    if pd.notna(row.get('sma_20')) and pd.notna(row.get('sma_50')) and pd.notna(row.get('close')):
+        if row['close'] > row['sma_20'] > row['sma_50']:
+            rationale['technical_context']['trend'] = 'strong_uptrend'
+            rationale['contributing_factors'].append('SMA_bullish_alignment')
+        elif row['close'] < row['sma_20'] < row['sma_50']:
+            rationale['technical_context']['trend'] = 'strong_downtrend'
+            rationale['contributing_factors'].append('SMA_bearish_alignment')
+    
+    # Add RSI context
+    if pd.notna(row.get('rsi')):
+        if row['rsi'] < 30:
+            rationale['technical_context']['rsi'] = 'oversold'
+            if not rationale['primary_factor']:
+                rationale['primary_factor'] = 'RSI_oversold'
+            rationale['contributing_factors'].append(f"RSI_{row['rsi']:.1f}")
+        elif row['rsi'] > 70:
+            rationale['technical_context']['rsi'] = 'overbought'
+            if not rationale['primary_factor']:
+                rationale['primary_factor'] = 'RSI_overbought'
+            rationale['contributing_factors'].append(f"RSI_{row['rsi']:.1f}")
+    
+    # Add price targets if available
+    if pd.notna(row.get('stop_loss')):
+        rationale['price_targets']['stop_loss'] = row['stop_loss']
+    if pd.notna(row.get('take_profit')):
+        rationale['price_targets']['take_profit'] = row['take_profit']
+    if pd.notna(row.get('close')):
+        rationale['price_targets']['entry_price'] = row['close']
+    
+    # Calculate risk/reward ratio
+    if rationale['price_targets'].get('stop_loss') and rationale['price_targets'].get('take_profit') and rationale['price_targets'].get('entry_price'):
+        entry = rationale['price_targets']['entry_price']
+        stop = rationale['price_targets']['stop_loss']
+        target = rationale['price_targets']['take_profit']
+        risk = abs(entry - stop)
+        reward = abs(target - entry)
+        if risk > 0:
+            rationale['price_targets']['risk_reward_ratio'] = reward / risk
+    
+    return rationale
+
+
 def load_current_signals():
-    """Load all current signals from signals_timeframe"""
-    print("Loading current signals...")
+    """Load all current signals from signals_timeframe with enhanced rationale tracking"""
+    print("Loading current signals with rationale...")
     
     all_signals = []
     
@@ -162,6 +271,17 @@ def load_current_signals():
                 # Add metadata
                 df['collection_date'] = datetime.now().strftime('%Y-%m-%d')
                 df['collection_timestamp'] = datetime.now().isoformat()
+                
+                # Extract rationale for each signal
+                rationales = []
+                for _, row in df.iterrows():
+                    rationale = extract_signal_rationale(row)
+                    rationales.append(rationale)
+                
+                df['rationale_json'] = [json.dumps(r) for r in rationales]
+                df['primary_factor'] = [r['primary_factor'] for r in rationales]
+                df['contributing_factors'] = [', '.join(r['contributing_factors']) for r in rationales]
+                
                 all_signals.append(df)
             except Exception as e:
                 print(f"  Warning: Could not read {ticker}: {e}")
@@ -169,6 +289,7 @@ def load_current_signals():
     if all_signals:
         combined = pd.concat(all_signals, ignore_index=True)
         print(f"  Loaded {len(combined)} signals from {len(all_signals)} tickers")
+        print(f"  With crossover/rationale data")
         return combined
     
     return pd.DataFrame()
@@ -236,6 +357,21 @@ def detect_signal_changes():
             
             print(f"    New BUY signals: {len(new_buys)}")
             print(f"    New SELL signals: {len(new_sells)}")
+            
+            # Print rationale for new signals
+            if len(new_buys) > 0 and 'primary_factor' in new_buys.columns:
+                print("\n    Top BUY rationales:")
+                for _, row in new_buys.head(5).iterrows():
+                    factor = row.get('primary_factor', 'N/A')
+                    contrib = row.get('contributing_factors', 'N/A')
+                    print(f"      {row['ticker']}: {factor} [{contrib}]")
+            
+            if len(new_sells) > 0 and 'primary_factor' in new_sells.columns:
+                print("\n    Top SELL rationales:")
+                for _, row in new_sells.head(5).iterrows():
+                    factor = row.get('primary_factor', 'N/A')
+                    contrib = row.get('contributing_factors', 'N/A')
+                    print(f"      {row['ticker']}: {factor} [{contrib}]")
             
             # Save changes
             changes_file = HISTORY_DIR / f"changes_{today.strftime('%Y-%m-%d')}.csv"
@@ -334,18 +470,82 @@ def generate_history_summary():
     # Calculate holding periods
     holding_stats = calculate_holding_periods()
     
+    # Calculate crossover statistics
+    crossover_stats = calculate_crossover_stats()
+    
     # Save summary
     summary_file = HISTORY_DIR / f"summary_{datetime.now().strftime('%Y-%m-%d')}.json"
     summary = {
         'generated_at': datetime.now().isoformat(),
         'total_snapshots': len(snapshots),
-        'holding_stats': holding_stats
+        'holding_stats': holding_stats,
+        'crossover_stats': crossover_stats
     }
     
     with open(summary_file, 'w') as f:
         json.dump(summary, f, indent=2, default=str)
     
     print(f"\n✓ Summary saved: {summary_file}")
+
+
+def calculate_crossover_stats():
+    """Calculate crossover statistics from latest signals"""
+    print("\nCalculating crossover statistics...")
+    
+    today = datetime.now().strftime('%Y-%m-%d')
+    today_file = HISTORY_DIR / f"signals_{today}.csv"
+    
+    if not today_file.exists():
+        return {}
+    
+    try:
+        df = pd.read_csv(today_file)
+        daily_df = df[df['interval'] == '1d']
+        
+        stats = {
+            'total_signals': len(daily_df),
+            'macd_crossovers': 0,
+            'macd_crossunders': 0,
+            'stoch_crossovers': 0,
+            'stoch_crossunders': 0,
+            'trix_crossovers': 0,
+            'trix_crossunders': 0,
+            'avg_macd_cross_strength': 0,
+            'avg_stoch_cross_strength': 0,
+            'avg_trix_cross_strength': 0
+        }
+        
+        # Count crossovers
+        if 'macd_cross_type' in daily_df.columns:
+            stats['macd_crossovers'] = len(daily_df[daily_df['macd_cross_type'] == 'crossover'])
+            stats['macd_crossunders'] = len(daily_df[daily_df['macd_cross_type'] == 'crossunder'])
+            macd_strength = daily_df[daily_df['macd_cross_type'].notna()]['macd_cross_strength']
+            if len(macd_strength) > 0:
+                stats['avg_macd_cross_strength'] = macd_strength.mean()
+        
+        if 'stoch_slow_cross' in daily_df.columns:
+            stats['stoch_crossovers'] = len(daily_df[daily_df['stoch_slow_cross'] == 'crossover'])
+            stats['stoch_crossunders'] = len(daily_df[daily_df['stoch_slow_cross'] == 'crossunder'])
+            stoch_strength = daily_df[daily_df['stoch_slow_cross'].notna()]['stoch_slow_strength']
+            if len(stoch_strength) > 0:
+                stats['avg_stoch_cross_strength'] = stoch_strength.mean()
+        
+        if 'trix_cross_type' in daily_df.columns:
+            stats['trix_crossovers'] = len(daily_df[daily_df['trix_cross_type'] == 'crossover'])
+            stats['trix_crossunders'] = len(daily_df[daily_df['trix_cross_type'] == 'crossunder'])
+            trix_strength = daily_df[daily_df['trix_cross_type'].notna()]['trix_cross_strength']
+            if len(trix_strength) > 0:
+                stats['avg_trix_cross_strength'] = trix_strength.mean()
+        
+        print(f"  MACD crossovers: {stats['macd_crossovers']}")
+        print(f"  Stochastic crossovers: {stats['stoch_crossovers']}")
+        print(f"  TRIX crossovers: {stats['trix_crossovers']}")
+        
+        return stats
+        
+    except Exception as e:
+        print(f"  Warning: Could not calculate crossover stats: {e}")
+        return {}
 
 
 def main():
