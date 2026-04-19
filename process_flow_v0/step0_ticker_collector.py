@@ -87,6 +87,7 @@ import requests
 import time
 import json
 import os
+from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional, Set
 
@@ -120,8 +121,15 @@ class Config:
         'GEFB': 'GEF-B', 'GEFA': 'GEF-A',
         'HEIA': 'HEI-A',
         'MKCV': 'MKC-V',
-        'NWSA': 'NWS-A', 'FOXA': 'FOX-A',
+        # Note: FOXA and NWSA are already correct Yahoo Finance tickers
+        # Do not correct: 'FOXA': 'FOX-A' - FOXA is valid
+        # Do not correct: 'NWSA': 'NWS-A' - NWSA is valid
     }
+    
+    @classmethod
+    def ensure_dirs(cls):
+        """Create output directory if it doesn't exist."""
+        Path(cls.OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
     
     # Major TSX Composite constituents
     TSX_CONSTITUENTS = [
@@ -207,7 +215,7 @@ class ExchangeCollector:
         """Collect NASDAQ listed securities."""
         df = self.download_csv(Config.DATAHUB_NASDAQ, "NASDAQ")
         if not df.empty and 'Symbol' in df.columns:
-            df = df.rename(columns={'Symbol': 'symbol', 'Company Name': 'name'})
+            df = df.rename(columns={'Symbol': 'symbol', 'Security Name': 'name'})
             df['exchange'] = 'NASDAQ'
             df['source'] = 'nasdaq'
             return df[['symbol', 'name', 'exchange', 'source']]
@@ -452,6 +460,8 @@ class YahooValidator:
         """
         Validate a single ticker against Yahoo Finance.
         
+        First tries the symbol as-is. If that fails, tries the corrected version.
+        
         Args:
             symbol: Stock symbol
             exchange: Exchange code (for suffix handling)
@@ -459,36 +469,48 @@ class YahooValidator:
         Returns:
             Dict with validated data or None if failed
         """
-        # Apply symbol corrections
-        yf_symbol = self.correct_symbol(symbol)
+        # Build list of symbols to try: original first, then corrected
+        symbols_to_try = [symbol]
+        
+        # Get corrected version
+        corrected = self.correct_symbol(symbol)
+        if corrected != symbol:
+            symbols_to_try.append(corrected)
         
         # Add exchange suffix for TSX
-        if exchange == 'TSX' and not yf_symbol.endswith('.TO'):
-            yf_symbol = f"{yf_symbol}.TO"
+        if exchange == 'TSX':
+            symbols_to_try = [
+                s if s.endswith('.TO') else f"{s}.TO" 
+                for s in symbols_to_try
+            ]
         
-        try:
-            ticker = yf.Ticker(yf_symbol)
-            info = ticker.fast_info
-            
-            price = getattr(info, 'last_price', 0)
-            
-            if price and price > 0:
-                return {
-                    'symbol': symbol,  # Original symbol
-                    'yahoo_symbol': yf_symbol,
-                    'name': getattr(info, 'name', symbol),
-                    'yf_price': price,
-                    'yf_market_cap': getattr(info, 'market_cap', 0),
-                    'yf_sector': getattr(info, 'sector', ''),
-                    'yf_industry': getattr(info, 'industry', ''),
-                    'yf_currency': getattr(info, 'currency', 'USD'),
-                    'yf_valid': True,
-                    'exchange': exchange,
-                    'validated_at': datetime.now().isoformat()
-                }
-        except Exception:
-            pass
+        # Try each symbol variant
+        for yf_symbol in symbols_to_try:
+            try:
+                ticker = yf.Ticker(yf_symbol)
+                info = ticker.fast_info
+                
+                price = getattr(info, 'last_price', 0)
+                
+                if price and price > 0:
+                    return {
+                        'symbol': symbol,  # Original symbol
+                        'yahoo_symbol': yf_symbol,  # Working symbol
+                        'symbol_corrected': (yf_symbol != symbol and yf_symbol != f"{symbol}.TO"),
+                        'name': getattr(info, 'name', symbol),
+                        'yf_price': price,
+                        'yf_market_cap': getattr(info, 'market_cap', 0),
+                        'yf_sector': getattr(info, 'sector', ''),
+                        'yf_industry': getattr(info, 'industry', ''),
+                        'yf_currency': getattr(info, 'currency', 'USD'),
+                        'yf_valid': True,
+                        'exchange': exchange,
+                        'validated_at': datetime.now().isoformat()
+                    }
+            except Exception:
+                pass  # Try next variant
         
+        # All variants failed
         return None
     
     def validate_batch(self, tickers_df: pd.DataFrame) -> pd.DataFrame:
@@ -603,8 +625,9 @@ def main():
     1. Collect from exchanges
     2. Collect index constituents  
     3. Merge and deduplicate
-    4. Validate against Yahoo Finance
-    5. Generate outputs
+    4. Save raw tickers to file
+    5. Validate against Yahoo Finance (in batches)
+    6. Generate outputs
     """
     start_time = time.time()
     logger = Logger()
@@ -613,38 +636,86 @@ def main():
     logger.info("TickerCollector v2.0 - Starting Collection")
     logger.info("=" * 80)
     
-    # Phase 1: Data Collection
-    exchange_collector = ExchangeCollector()
-    index_collector = IndexCollector()
+    # Ensure output directory exists
+    Config.ensure_dirs()
     
-    exchange_tickers = exchange_collector.collect_all()
-    index_tickers = index_collector.get_index_constituents()
+    raw_tickers_file = Path(Config.OUTPUT_DIR) / "raw_tickers.csv"
     
-    # Merge all sources
-    all_tickers = []
-    if not exchange_tickers.empty:
-        all_tickers.append(exchange_tickers)
-    if not index_tickers.empty:
-        all_tickers.append(index_tickers)
+    # Phase 1: Data Collection (or load from existing raw file)
+    if raw_tickers_file.exists():
+        logger.info(f"\nLoading raw tickers from {raw_tickers_file}")
+        combined = pd.read_csv(raw_tickers_file)
+        logger.info(f"Loaded {len(combined)} raw tickers")
+    else:
+        logger.info("\nPhase 1: Collecting tickers from all sources...")
+        
+        exchange_collector = ExchangeCollector()
+        index_collector = IndexCollector()
+        
+        exchange_tickers = exchange_collector.collect_all()
+        index_tickers = index_collector.get_index_constituents()
+        
+        # Merge all sources
+        all_tickers = []
+        if not exchange_tickers.empty:
+            all_tickers.append(exchange_tickers)
+        if not index_tickers.empty:
+            all_tickers.append(index_tickers)
+        
+        if not all_tickers:
+            logger.error("No tickers collected!")
+            return
+        
+        combined = pd.concat(all_tickers, ignore_index=True)
+        combined = combined.drop_duplicates(subset=['symbol'], keep='first')
+        
+        logger.info(f"\nTotal unique tickers before validation: {len(combined)}")
+        
+        # Save raw tickers to file immediately
+        combined.to_csv(raw_tickers_file, index=False)
+        logger.info(f"Raw tickers saved to {raw_tickers_file}")
     
-    if not all_tickers:
-        logger.error("No tickers collected!")
-        return
-    
-    combined = pd.concat(all_tickers, ignore_index=True)
-    combined = combined.drop_duplicates(subset=['symbol'], keep='first')
-    
-    logger.info(f"\nTotal unique tickers before validation: {len(combined)}")
-    
-    # Phase 2: Validation
+    # Phase 2: Validation (process in batches to save memory)
+    logger.info("\nPhase 2: Validating tickers against Yahoo Finance...")
     validator = YahooValidator()
-    validated = validator.validate_batch(combined)
+    
+    # Process in batches to avoid memory issues
+    batch_size = 100
+    total = len(combined)
+    all_validated = []
+    all_failed = []
+    
+    for i in range(0, total, batch_size):
+        batch = combined.iloc[i:i+batch_size]
+        logger.info(f"\nProcessing batch {i//batch_size + 1}/{(total + batch_size - 1)//batch_size} ({len(batch)} tickers)")
+        
+        validated_batch = validator.validate_batch(batch)
+        all_validated.append(validated_batch)
+        all_failed.extend(validator.failed_tickers)
+        
+        # Clear memory
+        validator.valid_tickers = []
+        validator.failed_tickers = []
+        
+        logger.progress(i + len(batch), total, "Validated")
+    
+    # Combine all validated results
+    if all_validated:
+        validated = pd.concat(all_validated, ignore_index=True)
+    else:
+        validated = pd.DataFrame()
     
     # Phase 3: Output
+    logger.info(f"\nPhase 3: Generating outputs...")
     output = OutputGenerator()
     output.save_validated(validated)
-    output.save_failed(validator.failed_tickers)
-    summary = output.generate_summary(validated, validator.failed_tickers)
+    output.save_failed(all_failed)
+    summary = output.generate_summary(validated, all_failed)
+    
+    # Clean up raw tickers file after successful validation
+    if raw_tickers_file.exists():
+        raw_tickers_file.unlink()
+        logger.info(f"Cleaned up {raw_tickers_file}")
     
     # Final stats
     elapsed = time.time() - start_time
@@ -653,7 +724,7 @@ def main():
     logger.info("=" * 80)
     logger.info(f"Total time: {elapsed / 60:.1f} minutes")
     logger.info(f"Valid tickers: {len(validated)}")
-    logger.info(f"Failed tickers: {len(validator.failed_tickers)}")
+    logger.info(f"Failed tickers: {len(all_failed)}")
     logger.info(f"Success rate: {len(validated) / len(combined) * 100:.1f}%")
     
     return validated
