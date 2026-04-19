@@ -30,19 +30,14 @@ It:
 DATA INTERVALS COLLECTED
 ================================================================================
 
-Intraday Intervals (for short-term analysis):
-    - 1m: 1-minute bars (last 7 days)
-    - 2m: 2-minute bars (last 60 days)
-    - 5m: 5-minute bars (last 60 days)
-    - 15m: 15-minute bars (last 60 days)
-    - 30m: 30-minute bars (last 60 days)
-    - 60m: 60-minute bars (last 730 days / 2 years)
-
-Daily/Weekly/Monthly (for trend analysis):
-    - 1h: 1-hour bars (last 730 days)
+Daily/Weekly/Monthly (for swing trading analysis):
     - 1d: Daily bars (full available history, max ~20 years)
     - 1wk: Weekly bars (full available history)
     - 1mo: Monthly bars (full available history)
+
+Note: Intraday intervals (1m, 5m, 1h, etc.) are not collected as they are
+not needed for swing trading signals which focus on multi-day to multi-week
+holding periods.
 
 ================================================================================
 INCREMENTAL COLLECTION FEATURES
@@ -175,15 +170,8 @@ from typing import Dict, List, Optional, Tuple
 OUTPUT_BASE_DIR = "data/time_series"
 os.makedirs(OUTPUT_BASE_DIR, exist_ok=True)
 
-# Intervals to collect with their max periods
+# Intervals to collect - only daily, weekly, monthly for swing trading signals
 INTERVALS = {
-    '1m': {'period': '7d', 'max_days': 7},      # 1 minute - 7 days max
-    '2m': {'period': '60d', 'max_days': 60},     # 2 minutes - 60 days
-    '5m': {'period': '60d', 'max_days': 60},     # 5 minutes - 60 days
-    '15m': {'period': '60d', 'max_days': 60},    # 15 minutes - 60 days
-    '30m': {'period': '60d', 'max_days': 60},    # 30 minutes - 60 days
-    '60m': {'period': '730d', 'max_days': 730},  # 60 minutes - 730 days (2 years)
-    '1h': {'period': '730d', 'max_days': 730},    # 1 hour - same as 60m
     '1d': {'period': 'max', 'max_days': None},    # 1 day - max available
     '1wk': {'period': 'max', 'max_days': None},   # 1 week - max available
     '1mo': {'period': 'max', 'max_days': None},  # 1 month - max available
@@ -522,11 +510,18 @@ def test_single_stock(ticker: str = 'AAPL') -> Dict:
     return results
 
 
-def process_all_stocks(symbols: List[str], batch_size: int = 20):
-    """Process all stocks in batches"""
+def process_all_stocks(symbols: List[str], batch_size: int = 50):
+    """
+    Process all stocks in batches with automatic restart capability.
+    
+    Args:
+        symbols: List of stock symbols to process
+        batch_size: Number of stocks to process before saving progress and exiting
+                   (allows shell script to restart with fresh memory)
+    """
     
     print("=" * 80)
-    print("TIME SERIES COLLECTOR - FULL RUN")
+    print("TIME SERIES COLLECTOR - BATCHED RUN")
     print("=" * 80)
     print(f"Total stocks: {len(symbols)}")
     print(f"Batch size: {batch_size}")
@@ -540,7 +535,7 @@ def process_all_stocks(symbols: List[str], batch_size: int = 20):
         if os.path.exists(ticker_dir):
             # Check if all intervals exist
             existing = [f for f in os.listdir(ticker_dir) if f.endswith('.csv')]
-            if len(existing) >= len(INTERVALS) // 2:  # At least half done
+            if len(existing) >= len(INTERVALS):
                 processed.append(symbol)
     
     if processed:
@@ -548,11 +543,24 @@ def process_all_stocks(symbols: List[str], batch_size: int = 20):
         symbols = [s for s in symbols if s not in processed]
         print(f"Remaining: {len(symbols)}")
     
+    if not symbols:
+        print("\n✓ All stocks already processed!")
+        return
+    
+    # Process only up to batch_size stocks, then exit
+    # Shell script will restart to clear memory
+    symbols_to_process = symbols[:batch_size]
+    remaining_after_batch = symbols[batch_size:]
+    
+    print(f"\nProcessing batch of {len(symbols_to_process)} stocks...")
+    if remaining_after_batch:
+        print(f"{len(remaining_after_batch)} stocks will be processed in next run")
+    
     start_time = time.time()
     total_processed = len(processed)
     
-    for i, symbol in enumerate(symbols):
-        print(f"\n[{i+1}/{len(symbols)}] Processing {symbol}...")
+    for i, symbol in enumerate(symbols_to_process):
+        print(f"\n[{i+1}/{len(symbols_to_process)}] Processing {symbol}...")
         
         try:
             results = process_ticker(symbol)
@@ -562,20 +570,33 @@ def process_all_stocks(symbols: List[str], batch_size: int = 20):
             if (i + 1) % 10 == 0:
                 elapsed = time.time() - start_time
                 rate = (i + 1) / elapsed if elapsed > 0 else 0
-                remaining = (len(symbols) - i - 1) / rate if rate > 0 else 0
-                print(f"\nProgress: {total_processed}/{len(symbols) + len(processed)} "
-                      f"| Rate: {rate:.2f} stocks/sec | ETA: {remaining/60:.1f}m")
+                print(f"\nBatch progress: {i+1}/{len(symbols_to_process)} "
+                      f"| Rate: {rate:.2f} stocks/sec")
             
         except Exception as e:
             print(f"  Failed to process {symbol}: {e}")
     
     # Summary
+    elapsed = time.time() - start_time
     print("\n" + "=" * 80)
-    print("COLLECTION COMPLETE")
+    print("BATCH COMPLETE")
     print("=" * 80)
-    print(f"Total processed: {total_processed}")
-    print(f"Output directory: {OUTPUT_BASE_DIR}")
+    print(f"Processed this batch: {len(symbols_to_process)}")
+    print(f"Total complete: {total_processed}")
+    print(f"Remaining: {len(remaining_after_batch)}")
+    print(f"Batch time: {elapsed/60:.1f} minutes")
     print("=" * 80)
+    
+    # Save progress indicator for external monitoring
+    progress_file = os.path.join(OUTPUT_BASE_DIR, ".progress")
+    with open(progress_file, 'w') as f:
+        f.write(f"{total_processed}/{len(symbols) + len(processed)}")
+    
+    # Exit with special code if more work remains
+    # Shell script can check this and restart
+    if remaining_after_batch:
+        print(f"\n⚠ {len(remaining_after_batch)} stocks remaining - restart to continue")
+        sys.exit(99)  # Special exit code for "more work needed"
 
 
 if __name__ == "__main__":
@@ -587,8 +608,8 @@ if __name__ == "__main__":
         test_single_stock(ticker)
     else:
         # Full run - all stocks
-        # Load from ticker base (Step 0 output)
-        ticker_file = '../../data/tickers/stock_ticker_base.csv'
+        # Load from ticker base (Step 0 output) - updated path
+        ticker_file = '../process_flow_v0/data/tickers/stock_ticker_base.csv'
         
         if not os.path.exists(ticker_file):
             print(f"Error: Ticker file not found: {ticker_file}")
@@ -597,13 +618,25 @@ if __name__ == "__main__":
         
         df = pd.read_csv(ticker_file)
         
-        if 'symbol' in df.columns:
+        # Prioritize yahoo_symbol (corrected format) over symbol (original)
+        if 'yahoo_symbol' in df.columns:
+            symbols = df['yahoo_symbol'].tolist()
+            print(f"  Using yahoo_symbol column (corrected format)")
+        elif 'symbol' in df.columns:
             symbols = df['symbol'].tolist()
+            print(f"  Using symbol column (original format)")
         elif 'ticker' in df.columns:
             symbols = df['ticker'].tolist()
+            print(f"  Using ticker column")
         else:
             print("Error: No symbol/ticker column found in ticker file")
             sys.exit(1)
         
         print(f"Loaded {len(symbols)} tickers from {ticker_file}")
+        
+        # Filter out invalid symbols (NaN, floats, empty strings)
+        symbols = [str(s).strip() for s in symbols if pd.notna(s) and str(s).strip()]
+        symbols = [s for s in symbols if s and s.lower() != 'nan']
+        
+        print(f"After filtering: {len(symbols)} valid tickers")
         process_all_stocks(symbols)

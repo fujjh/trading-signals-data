@@ -187,7 +187,7 @@ def load_time_series(ticker, interval):
     file_path = TIME_SERIES_DIR / ticker / f"{ticker}_{interval}.csv"
     if not file_path.exists():
         return None
-    
+
     try:
         df = pd.read_csv(file_path)
         # Handle different column names
@@ -197,12 +197,12 @@ def load_time_series(ticker, interval):
             date_col = 'Datetime'
         else:
             date_col = df.columns[0]
-        
+
         # Parse datetime with utc=True to handle mixed timezones
         df[date_col] = pd.to_datetime(df[date_col], utc=True)
         df.set_index(date_col, inplace=True)
         df.index = df.index.tz_localize(None)  # Remove timezone
-        
+
         # Rename columns to standard format
         col_map = {}
         for c in df.columns:
@@ -210,7 +210,7 @@ def load_time_series(ticker, interval):
             if lower_c in ['open', 'high', 'low', 'close', 'volume']:
                 col_map[c] = c.capitalize()
         df.rename(columns=col_map, inplace=True)
-        
+
         df.sort_index(inplace=True)
         return df
     except Exception as e:
@@ -276,13 +276,13 @@ def calculate_obv(df):
 def calculate_stochastic(df, k_period=14, d_period=3, slowing=3, stoch_type='slow'):
     """
     Calculate Stochastic Oscillator (Full, Slow, and Fast)
-    
+
     Parameters:
     - k_period: Lookback period for %K calculation
     - d_period: Period for %D smoothing
     - slowing: Slowing factor
     - stoch_type: 'fast', 'slow', or 'full'
-    
+
     Returns:
     - k: %K line
     - d: %D line (signal line)
@@ -290,9 +290,9 @@ def calculate_stochastic(df, k_period=14, d_period=3, slowing=3, stoch_type='slo
     # Calculate %K
     lowest_low = df['Low'].rolling(window=k_period).min()
     highest_high = df['High'].rolling(window=k_period).max()
-    
+
     k_fast = 100 * ((df['Close'] - lowest_low) / (highest_high - lowest_low))
-    
+
     if stoch_type == 'fast':
         # Fast Stochastic: simple moving average
         k = k_fast.rolling(window=slowing).mean()
@@ -305,70 +305,70 @@ def calculate_stochastic(df, k_period=14, d_period=3, slowing=3, stoch_type='slo
         # Full Stochastic: full smoothing
         k = k_fast.rolling(window=slowing).mean()
         d = k.rolling(window=d_period).mean()
-    
+
     return k, d
 
 
 def calculate_mfi(df, period=14):
     """
     Calculate Money Flow Index (MFI)
-    
+
     MFI combines price and volume data to measure buying and selling pressure.
     Values above 80 indicate overbought, below 20 indicate oversold.
     """
     # Calculate typical price
     typical_price = (df['High'] + df['Low'] + df['Close']) / 3
-    
+
     # Calculate raw money flow
     raw_money_flow = typical_price * df['Volume']
-    
+
     # Calculate money flow direction
     money_flow = raw_money_flow.copy()
     money_flow[typical_price < typical_price.shift(1)] = -money_flow
-    
+
     # Calculate positive and negative money flow
     positive_flow = money_flow.where(money_flow > 0, 0).rolling(window=period).sum()
-    negative_flow = abs(money_flow.where(money_flow < 0, 0).rolling(window=period).sum()
-    
+    negative_flow = abs(money_flow.where(money_flow < 0, 0)).rolling(window=period).sum()
+
     # Calculate money flow ratio and MFI
     money_flow_ratio = positive_flow / negative_flow
     mfi = 100 - (100 / (1 + money_flow_ratio))
-    
+
     return mfi
 
 
 def calculate_trix(data, period=15):
     """
     Calculate TRIX (Triple Exponential Moving Average)
-    
+
     TRIX is a momentum oscillator that shows the rate of change of a triple
     exponentially smoothed moving average. Good for filtering out noise.
-    
+
     Values above 0 indicate bullish momentum, below 0 indicate bearish momentum.
     """
     # Triple exponential smoothing
     single_ema = calculate_ema(data, period)
     double_ema = calculate_ema(single_ema, period)
     triple_ema = calculate_ema(double_ema, period)
-    
+
     # Calculate TRIX as percentage rate of change
     trix = 100 * (triple_ema - triple_ema.shift(1)) / triple_ema.shift(1)
-    
+
     # Signal line (9-period EMA of TRIX)
     trix_signal = calculate_ema(trix, 9)
-    
+
     return trix, trix_signal
 
 
 def detect_crossover(line1, line2, lookback=3):
     """
     Detect if a crossover or crossunder occurred in the last 'lookback' periods
-    
+
     Parameters:
     - line1: Primary line (e.g., MACD, Stoch %K)
     - line2: Signal line (e.g., MACD Signal, Stoch %D)
     - lookback: Number of periods to check for cross
-    
+
     Returns:
     - cross_type: 'crossover' (bullish), 'crossunder' (bearish), or None
     - cross_strength: 0-10 scale based on where cross occurred
@@ -376,24 +376,24 @@ def detect_crossover(line1, line2, lookback=3):
     """
     if len(line1) < lookback + 1 or len(line2) < lookback + 1:
         return None, 0, 'insufficient_data'
-    
+
     # Get recent values
     recent1 = line1.iloc[-lookback-1:]
     recent2 = line2.iloc[-lookback-1:]
-    
+
     # Check if we have valid data
     if recent1.isna().any() or recent2.isna().any():
         return None, 0, 'invalid_data'
-    
+
     # Check for crossover (line1 crossing above line2)
     # Previous: line1 < line2, Current: line1 > line2
     prev_diff = recent1.iloc[-2] - recent2.iloc[-2]
     curr_diff = recent1.iloc[-1] - recent2.iloc[-1]
-    
+
     cross_type = None
     cross_strength = 0
     cross_location = 'neutral'
-    
+
     if prev_diff < 0 and curr_diff > 0:
         cross_type = 'crossover'
         # Calculate strength based on how deeply negative it was
@@ -411,7 +411,7 @@ def detect_crossover(line1, line2, lookback=3):
         else:
             cross_strength = 2
             cross_location = 'near_zero'
-            
+
     elif prev_diff > 0 and curr_diff < 0:
         cross_type = 'crossunder'
         # Calculate strength based on how high it was
@@ -428,14 +428,14 @@ def detect_crossover(line1, line2, lookback=3):
         else:
             cross_strength = 2
             cross_location = 'near_zero'
-    
+
     return cross_type, cross_strength, cross_location
 
 
 def detect_stochastic_crossover(k_line, d_line, lookback=2):
     """
     Detect Stochastic %K/%D crossover with oversold/overbought context
-    
+
     Returns:
     - cross_type: 'crossover', 'crossunder', or None
     - cross_strength: 0-10 scale
@@ -443,20 +443,20 @@ def detect_stochastic_crossover(k_line, d_line, lookback=2):
     """
     if len(k_line) < lookback + 1 or len(d_line) < lookback + 1:
         return None, 0, 'insufficient_data'
-    
+
     recent_k = k_line.iloc[-lookback-1:]
     recent_d = d_line.iloc[-lookback-1:]
-    
+
     if recent_k.isna().any() or recent_d.isna().any():
         return None, 0, 'invalid_data'
-    
+
     prev_k, curr_k = recent_k.iloc[-2], recent_k.iloc[-1]
     prev_d, curr_d = recent_d.iloc[-2], recent_d.iloc[-1]
-    
+
     cross_type = None
     cross_strength = 0
     context = 'neutral'
-    
+
     # Check for crossover (K crossing above D)
     if prev_k < prev_d and curr_k > curr_d:
         cross_type = 'crossover'
@@ -473,7 +473,7 @@ def detect_stochastic_crossover(k_line, d_line, lookback=2):
         else:
             cross_strength = 2
             context = 'above_midpoint'
-            
+
     # Check for crossunder (K crossing below D)
     elif prev_k > prev_d and curr_k < curr_d:
         cross_type = 'crossunder'
@@ -490,7 +490,7 @@ def detect_stochastic_crossover(k_line, d_line, lookback=2):
         else:
             cross_strength = 2
             context = 'below_midpoint'
-    
+
     return cross_type, cross_strength, context
 
 
@@ -532,10 +532,10 @@ def detect_doji(open_price, close_price, high, low, doji_threshold=0.1):
     """
     body = get_candle_body(open_price, close_price)
     candle_range = get_candle_range(high, low)
-    
+
     if candle_range == 0:
         return False
-    
+
     # Doji: body is very small relative to total range
     return (body / candle_range) < doji_threshold
 
@@ -550,10 +550,10 @@ def detect_hammer(open_price, close_price, high, low, body_ratio=0.3, shadow_rat
     candle_range = get_candle_range(high, low)
     lower_shadow = get_lower_shadow(open_price, close_price, low)
     upper_shadow = get_upper_shadow(open_price, close_price, high)
-    
+
     if candle_range == 0 or body == 0:
         return False
-    
+
     # Hammer criteria:
     # 1. Body is small (less than body_ratio of range)
     # 2. Lower shadow is long (at least shadow_ratio times body)
@@ -561,7 +561,7 @@ def detect_hammer(open_price, close_price, high, low, body_ratio=0.3, shadow_rat
     body_small = body < (candle_range * body_ratio)
     long_lower = lower_shadow > (body * shadow_ratio)
     small_upper = upper_shadow < (body * 0.5)
-    
+
     return body_small and long_lower and small_upper
 
 
@@ -585,10 +585,10 @@ def detect_shooting_star(open_price, close_price, high, low, body_ratio=0.3, sha
     candle_range = get_candle_range(high, low)
     upper_shadow = get_upper_shadow(open_price, close_price, high)
     lower_shadow = get_lower_shadow(open_price, close_price, low)
-    
+
     if candle_range == 0 or body == 0:
         return False
-    
+
     # Shooting Star criteria:
     # 1. Body is small
     # 2. Upper shadow is long (at least shadow_ratio times body)
@@ -596,7 +596,7 @@ def detect_shooting_star(open_price, close_price, high, low, body_ratio=0.3, sha
     body_small = body < (candle_range * body_ratio)
     long_upper = upper_shadow > (body * shadow_ratio)
     small_lower = lower_shadow < (body * 0.5)
-    
+
     return body_small and long_upper and small_lower
 
 
@@ -619,17 +619,17 @@ def detect_bullish_engulfing(prev_open, prev_close, curr_open, curr_close):
     # First candle must be bearish
     if not is_bearish(prev_open, prev_close):
         return False
-    
+
     # Second candle must be bullish
     if not is_bullish(curr_open, curr_close):
         return False
-    
+
     # Second candle body must engulf first candle body
     curr_body_top = curr_close
     curr_body_bottom = curr_open
     prev_body_top = prev_open
     prev_body_bottom = prev_close
-    
+
     return (curr_body_top >= prev_body_top) and (curr_body_bottom <= prev_body_bottom)
 
 
@@ -642,17 +642,17 @@ def detect_bearish_engulfing(prev_open, prev_close, curr_open, curr_close):
     # First candle must be bullish
     if not is_bullish(prev_open, prev_close):
         return False
-    
+
     # Second candle must be bearish
     if not is_bearish(curr_open, curr_close):
         return False
-    
+
     # Second candle body must engulf first candle body
     curr_body_top = curr_open
     curr_body_bottom = curr_close
     prev_body_top = prev_close
     prev_body_bottom = prev_open
-    
+
     return (curr_body_top >= prev_body_top) and (curr_body_bottom <= prev_body_bottom)
 
 
@@ -665,24 +665,24 @@ def detect_bullish_harami(prev_open, prev_close, curr_open, curr_close, harami_t
     # First candle must be bearish
     if not is_bearish(prev_open, prev_close):
         return False
-    
+
     # Second candle must be bullish
     if not is_bullish(curr_open, curr_close):
         return False
-    
+
     prev_body = get_candle_body(prev_open, prev_close)
     curr_body = get_candle_body(curr_open, curr_close)
-    
+
     # Current body must be small relative to previous
     if curr_body >= prev_body * harami_threshold:
         return False
-    
+
     # Current body must be contained within previous body
     prev_body_high = max(prev_open, prev_close)
     prev_body_low = min(prev_open, prev_close)
     curr_body_high = curr_close
     curr_body_low = curr_open
-    
+
     return (curr_body_high <= prev_body_high) and (curr_body_low >= prev_body_low)
 
 
@@ -695,28 +695,28 @@ def detect_bearish_harami(prev_open, prev_close, curr_open, curr_close, harami_t
     # First candle must be bullish
     if not is_bullish(prev_open, prev_close):
         return False
-    
+
     # Second candle must be bearish
     if not is_bearish(curr_open, curr_close):
         return False
-    
+
     prev_body = get_candle_body(prev_open, prev_close)
     curr_body = get_candle_body(curr_open, curr_close)
-    
+
     # Current body must be small relative to previous
     if curr_body >= prev_body * harami_threshold:
         return False
-    
+
     # Current body must be contained within previous body
     prev_body_high = max(prev_open, prev_close)
     prev_body_low = min(prev_open, prev_close)
     curr_body_high = curr_open
     curr_body_low = curr_close
-    
+
     return (curr_body_high <= prev_body_high) and (curr_body_low >= prev_body_low)
 
 
-def detect_morning_star(c1_open, c1_close, c2_open, c2_close, c2_low, c3_open, c3_close, 
+def detect_morning_star(c1_open, c1_close, c2_open, c2_close, c2_low, c3_open, c3_close,
                          star_threshold=0.3, gap_threshold=0.001):
     """
     Detect Morning Star pattern - bullish reversal
@@ -726,26 +726,26 @@ def detect_morning_star(c1_open, c1_close, c2_open, c2_close, c2_low, c3_open, c
     # First candle must be bearish
     if not is_bearish(c1_open, c1_close):
         return False
-    
+
     # Third candle must be bullish
     if not is_bullish(c3_open, c3_close):
         return False
-    
+
     c1_body = get_candle_body(c1_open, c1_close)
     c2_body = get_candle_body(c2_open, c2_close)
     c3_body = get_candle_body(c3_open, c3_close)
-    
+
     if c1_body == 0 or c3_body == 0:
         return False
-    
+
     # Second candle body must be small
     if c2_body > c1_body * star_threshold:
         return False
-    
+
     # Third candle should close well into first candle's body
     c1_mid = (c1_open + c1_close) / 2
     c3_close_into = c3_close >= c1_mid
-    
+
     return c3_close_into
 
 
@@ -759,26 +759,26 @@ def detect_evening_star(c1_open, c1_close, c2_open, c2_close, c2_high, c3_open, 
     # First candle must be bullish
     if not is_bullish(c1_open, c1_close):
         return False
-    
+
     # Third candle must be bearish
     if not is_bearish(c3_open, c3_close):
         return False
-    
+
     c1_body = get_candle_body(c1_open, c1_close)
     c2_body = get_candle_body(c2_open, c2_close)
     c3_body = get_candle_body(c3_open, c3_close)
-    
+
     if c1_body == 0 or c3_body == 0:
         return False
-    
+
     # Second candle body must be small
     if c2_body > c1_body * star_threshold:
         return False
-    
+
     # Third candle should close well into first candle's body
     c1_mid = (c1_open + c1_close) / 2
     c3_close_into = c3_close <= c1_mid
-    
+
     return c3_close_into
 
 
@@ -792,24 +792,24 @@ def detect_three_white_soldiers(c1_open, c1_close, c2_open, c2_close, c3_open, c
     # All three must be bullish
     if not (is_bullish(c1_open, c1_close) and is_bullish(c2_open, c2_close) and is_bullish(c3_open, c3_close)):
         return False
-    
+
     # Each close must be higher than previous
     if not (c3_close > c2_close > c1_close):
         return False
-    
+
     # Each open should be within previous candle's body
     c1_body_low = min(c1_open, c1_close)
     c1_body_high = max(c1_open, c1_close)
     c2_body_low = min(c2_open, c2_close)
     c2_body_high = max(c2_open, c2_close)
-    
+
     c2_open_in_c1 = c1_body_low <= c2_open <= c1_body_high
     c3_open_in_c2 = c2_body_low <= c3_open <= c2_body_high
-    
+
     # Each body should be substantial
-    avg_body = (get_candle_body(c1_open, c1_close) + get_candle_body(c2_open, c2_close) + 
+    avg_body = (get_candle_body(c1_open, c1_close) + get_candle_body(c2_open, c2_close) +
                 get_candle_body(c3_open, c3_close)) / 3
-    
+
     return c2_open_in_c1 and c3_open_in_c2
 
 
@@ -823,20 +823,20 @@ def detect_three_black_crows(c1_open, c1_close, c2_open, c2_close, c3_open, c3_c
     # All three must be bearish
     if not (is_bearish(c1_open, c1_close) and is_bearish(c2_open, c2_close) and is_bearish(c3_open, c3_close)):
         return False
-    
+
     # Each close must be lower than previous
     if not (c3_close < c2_close < c1_close):
         return False
-    
+
     # Each open should be within previous candle's body
     c1_body_low = min(c1_open, c1_close)
     c1_body_high = max(c1_open, c1_close)
     c2_body_low = min(c2_open, c2_close)
     c2_body_high = max(c2_open, c2_close)
-    
+
     c2_open_in_c1 = c1_body_low <= c2_open <= c1_body_high
     c3_open_in_c2 = c2_body_low <= c3_open <= c2_body_high
-    
+
     return c2_open_in_c1 and c3_open_in_c2
 
 
@@ -849,28 +849,28 @@ def find_pivot_highs(df, window=5):
     """Find local pivot highs"""
     highs = df['High']
     pivot_highs = []
-    
+
     for i in range(window, len(highs) - window):
         if highs.iloc[i] == highs.iloc[i-window:i+window+1].max():
             pivot_highs.append({
                 'index': df.index[i],
                 'price': round(highs.iloc[i], 2)
             })
-    
+
     return pivot_highs
 
 def find_pivot_lows(df, window=5):
     """Find local pivot lows"""
     lows = df['Low']
     pivot_lows = []
-    
+
     for i in range(window, len(lows) - window):
         if lows.iloc[i] == lows.iloc[i-window:i+window+1].min():
             pivot_lows.append({
                 'index': df.index[i],
                 'price': round(lows.iloc[i], 2)
             })
-    
+
     return pivot_lows
 
 def calculate_fibonacci_retracement(high, low):
@@ -891,15 +891,15 @@ def find_support_resistance(df, window=5, cluster_tolerance=0.02):
     """Find support and resistance levels using pivot analysis"""
     pivot_highs = find_pivot_highs(df, window)
     pivot_lows = find_pivot_lows(df, window)
-    
+
     current_price = df['Close'].iloc[-1]
-    
+
     # Cluster resistance levels (pivot highs)
     resistance_levels = []
     if pivot_highs:
         prices = [ph['price'] for ph in pivot_highs[-20:]]  # Last 20 pivots
         prices.sort()
-        
+
         clustered = []
         for price in prices:
             if price > current_price:  # Only above current price
@@ -912,16 +912,16 @@ def find_support_resistance(df, window=5, cluster_tolerance=0.02):
                         break
                 if not found_cluster:
                     clustered.append({'price': round(price, 2), 'count': 1})
-        
-        resistance_levels = sorted([c for c in clustered if c['price'] > current_price], 
+
+        resistance_levels = sorted([c for c in clustered if c['price'] > current_price],
                                    key=lambda x: x['price'])[:5]
-    
+
     # Cluster support levels (pivot lows)
     support_levels = []
     if pivot_lows:
         prices = [pl['price'] for pl in pivot_lows[-20:]]  # Last 20 pivots
         prices.sort()
-        
+
         clustered = []
         for price in prices:
             if price < current_price:  # Only below current price
@@ -934,15 +934,15 @@ def find_support_resistance(df, window=5, cluster_tolerance=0.02):
                         break
                 if not found_cluster:
                     clustered.append({'price': round(price, 2), 'count': 1})
-        
-        support_levels = sorted([c for c in clustered if c['price'] < current_price], 
+
+        support_levels = sorted([c for c in clustered if c['price'] < current_price],
                                 key=lambda x: x['price'], reverse=True)[:5]
-    
+
     # Get swing high/low for Fibonacci
     swing_high = df['High'].max() if len(df) > 0 else current_price
     swing_low = df['Low'].min() if len(df) > 0 else current_price
     fib_levels = calculate_fibonacci_retracement(swing_high, swing_low)
-    
+
     return {
         'resistance': resistance_levels,
         'support': support_levels,
@@ -955,11 +955,11 @@ def generate_signal(df, ticker, interval):
     """Generate trading signal based on technical indicators"""
     if df is None or len(df) < 50:
         return None
-    
+
     # Get latest data
     close = df['Close'].iloc[-1]
     prev_close = df['Close'].iloc[-2]
-    
+
     # Calculate indicators
     sma_20 = calculate_sma(df['Close'], 20)
     sma_50 = calculate_sma(df['Close'], 50)
@@ -969,7 +969,7 @@ def generate_signal(df, ticker, interval):
     macd_line, signal_line, histogram = calculate_macd(df['Close'])
     upper_band, middle_band, lower_band = calculate_bollinger_bands(df['Close'])
     atr = calculate_atr(df)
-    
+
     # Get latest values
     latest_sma_20 = sma_20.iloc[-1]
     latest_sma_50 = sma_50.iloc[-1]
@@ -982,20 +982,24 @@ def generate_signal(df, ticker, interval):
     latest_upper = upper_band.iloc[-1]
     latest_lower = lower_band.iloc[-1]
     latest_atr = atr.iloc[-1] if not pd.isna(atr.iloc[-1]) else 0
-    
+
     # NEW: Calculate VWAP and OBV
     vwap = calculate_vwap(df)
     obv = calculate_obv(df)
     latest_vwap = vwap.iloc[-1] if not pd.isna(vwap.iloc[-1]) else close
     latest_obv = obv.iloc[-1] if not pd.isna(obv.iloc[-1]) else 0
-    
+
     # NEW: Find Support/Resistance levels
     sr_levels = find_support_resistance(df)
-    
+
     # NEW: Find recent peaks and troughs
     pivot_highs = find_pivot_highs(df)
     pivot_lows = find_pivot_lows(df)
-    
+
+    # Initialize scoring variables before use
+    buy_score = 0
+    sell_score = 0
+
     # NEW: Detect candlestick patterns (need at least 3 candles)
     candlestick_patterns = []
     if len(df) >= 3:
@@ -1003,97 +1007,93 @@ def generate_signal(df, ticker, interval):
         c1 = df.iloc[-3]  # 3rd most recent
         c2 = df.iloc[-2]  # 2nd most recent
         c3 = df.iloc[-1]  # Most recent
-        
+
         # Single candle patterns (on most recent candle)
         if detect_doji(c3['Open'], c3['Close'], c3['High'], c3['Low']):
             candlestick_patterns.append('DOJI')
-        
+
         if detect_hammer(c3['Open'], c3['Close'], c3['High'], c3['Low']):
             candlestick_patterns.append('HAMMER')
-        
+
         if detect_shooting_star(c3['Open'], c3['Close'], c3['High'], c3['Low']):
             candlestick_patterns.append('SHOOTING_STAR')
-        
+
         if detect_inverted_hammer(c3['Open'], c3['Close'], c3['High'], c3['Low']):
             candlestick_patterns.append('INVERTED_HAMMER')
-        
+
         # Two candle patterns
         if detect_bullish_engulfing(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
             candlestick_patterns.append('BULLISH_ENGULFING')
             buy_score += 2
-        
+
         if detect_bearish_engulfing(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
             candlestick_patterns.append('BEARISH_ENGULFING')
             sell_score += 2
-        
+
         if detect_bullish_harami(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
             candlestick_patterns.append('BULLISH_HARAMI')
             buy_score += 1
-        
+
         if detect_bearish_harami(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
             candlestick_patterns.append('BEARISH_HARAMI')
             sell_score += 1
-        
+
         # Three candle patterns
-        if detect_morning_star(c1['Open'], c1['Close'], c2['Open'], c2['Close'], 
+        if detect_morning_star(c1['Open'], c1['Close'], c2['Open'], c2['Close'],
                                c2['Low'], c3['Open'], c3['Close']):
             candlestick_patterns.append('MORNING_STAR')
             buy_score += 3
-        
+
         if detect_evening_star(c1['Open'], c1['Close'], c2['Open'], c2['Close'],
                                c2['High'], c3['Open'], c3['Close']):
             candlestick_patterns.append('EVENING_STAR')
             sell_score += 3
-        
+
         if detect_three_white_soldiers(c1['Open'], c1['Close'], c2['Open'], c2['Close'],
                                        c3['Open'], c3['Close']):
             candlestick_patterns.append('THREE_WHITE_SOLDIERS')
             buy_score += 3
-        
+
         if detect_three_black_crows(c1['Open'], c1['Close'], c2['Open'], c2['Close'],
                                      c3['Open'], c3['Close']):
             candlestick_patterns.append('THREE_BLACK_CROWS')
             sell_score += 3
-    
+
     # NEW: Calculate Stochastic Oscillator (Slow and Fast)
     stoch_k_slow, stoch_d_slow = calculate_stochastic(df, k_period=14, d_period=3, slowing=3, stoch_type='slow')
     stoch_k_fast, stoch_d_fast = calculate_stochastic(df, k_period=14, d_period=3, slowing=1, stoch_type='fast')
-    
+
     latest_stoch_k_slow = stoch_k_slow.iloc[-1] if not pd.isna(stoch_k_slow.iloc[-1]) else 50
     latest_stoch_d_slow = stoch_d_slow.iloc[-1] if not pd.isna(stoch_d_slow.iloc[-1]) else 50
     latest_stoch_k_fast = stoch_k_fast.iloc[-1] if not pd.isna(stoch_k_fast.iloc[-1]) else 50
     latest_stoch_d_fast = stoch_d_fast.iloc[-1] if not pd.isna(stoch_d_fast.iloc[-1]) else 50
-    
+
     # NEW: Calculate Money Flow Index (MFI)
     mfi = calculate_mfi(df, period=14)
     latest_mfi = mfi.iloc[-1] if not pd.isna(mfi.iloc[-1]) else 50
-    
+
     # NEW: Calculate TRIX
     trix, trix_signal = calculate_trix(df['Close'], period=15)
     latest_trix = trix.iloc[-1] if not pd.isna(trix.iloc[-1]) else 0
     latest_trix_signal = trix_signal.iloc[-1] if not pd.isna(trix_signal.iloc[-1]) else 0
-    
-    # Calculate scores
-    buy_score = 0
-    sell_score = 0
-    
+
     # VWAP analysis
     if close > latest_vwap:
         buy_score += 1
     elif close < latest_vwap:
         sell_score += 1
-    
+
     # Trend analysis
     if close > latest_sma_20 > latest_sma_50:
         buy_score += 2
     elif close < latest_sma_20 < latest_sma_50:
         sell_score += 2
-    
+
     if latest_ema_12 > latest_ema_26:
         buy_score += 1
     elif latest_ema_12 < latest_ema_26:
         sell_score += 1
-    
+
     # RSI analysis
     if latest_rsi < 30:
         buy_score += 2  # Oversold
@@ -1103,12 +1103,12 @@ def generate_signal(df, ticker, interval):
         buy_score += 1
     else:
         sell_score += 1
-    
+
     # MACD analysis with crossover detection
     macd_cross_type, macd_cross_strength, macd_cross_location = detect_crossover(
         macd_line, signal_line, lookback=2
     )
-    
+
     if macd_cross_type == 'crossover':
         # Bullish crossover - add base score + strength bonus
         buy_score += 2 + (macd_cross_strength // 4)  # +2 to +4 based on strength
@@ -1120,18 +1120,18 @@ def generate_signal(df, ticker, interval):
         buy_score += 1
     elif latest_macd < latest_signal and latest_histogram < 0:
         sell_score += 1
-    
+
     # Bollinger Bands
     if close < latest_lower:
         buy_score += 1  # Price below lower band
     elif close > latest_upper:
         sell_score += 1  # Price above upper band
-    
+
     # Stochastic Oscillator (Slow) with crossover detection
     stoch_slow_cross, stoch_slow_strength, stoch_slow_context = detect_stochastic_crossover(
         stoch_k_slow, stoch_d_slow, lookback=2
     )
-    
+
     if stoch_slow_cross == 'crossover':
         # Bullish %K crossing above %D
         buy_score += 2 + (stoch_slow_strength // 3)  # +2 to +5 based on oversold level
@@ -1143,17 +1143,17 @@ def generate_signal(df, ticker, interval):
         buy_score += 1
     elif latest_stoch_k_slow > 80 and latest_stoch_d_slow > 80:
         sell_score += 1
-    
+
     # Stochastic Fast crossover
     stoch_fast_cross, stoch_fast_strength, stoch_fast_context = detect_stochastic_crossover(
         stoch_k_fast, stoch_d_fast, lookback=2
     )
-    
+
     if stoch_fast_cross == 'crossover':
         buy_score += 1 + (stoch_fast_strength // 5)  # +1 to +3
     elif stoch_fast_cross == 'crossunder':
         sell_score += 1 + (stoch_fast_strength // 5)
-    
+
     # NEW: Money Flow Index analysis
     if latest_mfi < 20:
         buy_score += 2  # Strong oversold with volume confirmation
@@ -1163,12 +1163,12 @@ def generate_signal(df, ticker, interval):
         buy_score += 1
     elif latest_mfi > 70:
         sell_score += 1
-    
+
     # NEW: TRIX analysis with crossover detection
     trix_cross_type, trix_cross_strength, trix_cross_location = detect_crossover(
         trix, trix_signal, lookback=2
     )
-    
+
     if trix_cross_type == 'crossover':
         # Bullish TRIX crossing above signal
         buy_score += 2 + (trix_cross_strength // 4)  # +2 to +4
@@ -1178,7 +1178,7 @@ def generate_signal(df, ticker, interval):
         buy_score += 1  # TRIX above signal and positive
     elif latest_trix < latest_trix_signal and latest_trix < 0:
         sell_score += 1  # TRIX below signal and negative
-    
+
     # Volume analysis (if available)
     volume_avg = df['Volume'].rolling(20).mean().iloc[-1]
     latest_volume = df['Volume'].iloc[-1]
@@ -1189,11 +1189,11 @@ def generate_signal(df, ticker, interval):
                 buy_score += 1
             elif sell_score > buy_score:
                 sell_score += 1
-    
+
     # Determine signal
     signal = "HOLD"
     confidence = 50
-    
+
     if buy_score >= 7:
         signal = "STRONG_BUY"
         confidence = 50 + (buy_score * 7)
@@ -1212,13 +1212,13 @@ def generate_signal(df, ticker, interval):
     elif sell_score >= 2:
         signal = "WEAK_SELL"
         confidence = 50 + (sell_score * 8)
-    
+
     confidence = min(95, max(50, confidence))
-    
+
     # Calculate price levels
     stop_loss = close - (latest_atr * 2) if latest_atr > 0 else close * 0.95
     take_profit = close + (latest_atr * 3) if latest_atr > 0 else close * 1.05
-    
+
     return {
         'ticker': ticker,
         'interval': interval,
@@ -1289,12 +1289,12 @@ def save_signals(signals, ticker):
     """Save signals to CSV file"""
     if not signals:
         return
-    
+
     ticker_dir = OUTPUT_DIR / ticker
     ensure_dir(ticker_dir)
-    
+
     output_file = ticker_dir / f"{ticker}_signals.csv"
-    
+
     df = pd.DataFrame(signals)
     df.to_csv(output_file, index=False)
     print(f"Saved {len(signals)} signals to {output_file}")
@@ -1302,29 +1302,29 @@ def save_signals(signals, ticker):
 def main():
     """Main execution"""
     ensure_dir(OUTPUT_DIR)
-    
+
     # Get list of tickers
     tickers = [d.name for d in TIME_SERIES_DIR.iterdir() if d.is_dir()]
     tickers.sort()
-    
+
     print(f"Found {len(tickers)} tickers with time series data")
     print(f"Scanning intervals: {', '.join(INTERVALS)}")
     print(f"Output directory: {OUTPUT_DIR}")
     print("-" * 60)
-    
+
     total_signals = 0
     processed = 0
-    
+
     for ticker in tickers:
         signals = scan_ticker(ticker)
         if signals:
             save_signals(signals, ticker)
             total_signals += len(signals)
             processed += 1
-            
+
             if processed % 50 == 0:
                 print(f"Progress: {processed}/{len(tickers)} tickers processed, {total_signals} signals generated")
-    
+
     print("-" * 60)
     print(f"Complete! Processed {processed} tickers, generated {total_signals} signals")
     print(f"Signals saved to: {OUTPUT_DIR}")
