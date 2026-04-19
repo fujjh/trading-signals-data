@@ -360,6 +360,140 @@ def calculate_trix(data, period=15):
     return trix, trix_signal
 
 
+def detect_crossover(line1, line2, lookback=3):
+    """
+    Detect if a crossover or crossunder occurred in the last 'lookback' periods
+    
+    Parameters:
+    - line1: Primary line (e.g., MACD, Stoch %K)
+    - line2: Signal line (e.g., MACD Signal, Stoch %D)
+    - lookback: Number of periods to check for cross
+    
+    Returns:
+    - cross_type: 'crossover' (bullish), 'crossunder' (bearish), or None
+    - cross_strength: 0-10 scale based on where cross occurred
+    - cross_location: Description of cross location
+    """
+    if len(line1) < lookback + 1 or len(line2) < lookback + 1:
+        return None, 0, 'insufficient_data'
+    
+    # Get recent values
+    recent1 = line1.iloc[-lookback-1:]
+    recent2 = line2.iloc[-lookback-1:]
+    
+    # Check if we have valid data
+    if recent1.isna().any() or recent2.isna().any():
+        return None, 0, 'invalid_data'
+    
+    # Check for crossover (line1 crossing above line2)
+    # Previous: line1 < line2, Current: line1 > line2
+    prev_diff = recent1.iloc[-2] - recent2.iloc[-2]
+    curr_diff = recent1.iloc[-1] - recent2.iloc[-1]
+    
+    cross_type = None
+    cross_strength = 0
+    cross_location = 'neutral'
+    
+    if prev_diff < 0 and curr_diff > 0:
+        cross_type = 'crossover'
+        # Calculate strength based on how deeply negative it was
+        # Deeper negative = stronger signal (momentum building)
+        avg_line1_before = recent1.iloc[:-1].mean()
+        if avg_line1_before < -0.5:
+            cross_strength = 8
+            cross_location = 'deeply_oversold'
+        elif avg_line1_before < -0.2:
+            cross_strength = 6
+            cross_location = 'oversold'
+        elif avg_line1_before < 0:
+            cross_strength = 4
+            cross_location = 'below_zero'
+        else:
+            cross_strength = 2
+            cross_location = 'near_zero'
+            
+    elif prev_diff > 0 and curr_diff < 0:
+        cross_type = 'crossunder'
+        # Calculate strength based on how high it was
+        avg_line1_before = recent1.iloc[:-1].mean()
+        if avg_line1_before > 0.5:
+            cross_strength = 8
+            cross_location = 'deeply_overbought'
+        elif avg_line1_before > 0.2:
+            cross_strength = 6
+            cross_location = 'overbought'
+        elif avg_line1_before > 0:
+            cross_strength = 4
+            cross_location = 'above_zero'
+        else:
+            cross_strength = 2
+            cross_location = 'near_zero'
+    
+    return cross_type, cross_strength, cross_location
+
+
+def detect_stochastic_crossover(k_line, d_line, lookback=2):
+    """
+    Detect Stochastic %K/%D crossover with oversold/overbought context
+    
+    Returns:
+    - cross_type: 'crossover', 'crossunder', or None
+    - cross_strength: 0-10 scale
+    - context: 'oversold', 'neutral', or 'overbought'
+    """
+    if len(k_line) < lookback + 1 or len(d_line) < lookback + 1:
+        return None, 0, 'insufficient_data'
+    
+    recent_k = k_line.iloc[-lookback-1:]
+    recent_d = d_line.iloc[-lookback-1:]
+    
+    if recent_k.isna().any() or recent_d.isna().any():
+        return None, 0, 'invalid_data'
+    
+    prev_k, curr_k = recent_k.iloc[-2], recent_k.iloc[-1]
+    prev_d, curr_d = recent_d.iloc[-2], recent_d.iloc[-1]
+    
+    cross_type = None
+    cross_strength = 0
+    context = 'neutral'
+    
+    # Check for crossover (K crossing above D)
+    if prev_k < prev_d and curr_k > curr_d:
+        cross_type = 'crossover'
+        # Strength based on oversold level
+        if prev_k < 20 and prev_d < 20:
+            cross_strength = 10
+            context = 'deeply_oversold'
+        elif prev_k < 30 or prev_d < 30:
+            cross_strength = 7
+            context = 'oversold'
+        elif prev_k < 50:
+            cross_strength = 4
+            context = 'below_midpoint'
+        else:
+            cross_strength = 2
+            context = 'above_midpoint'
+            
+    # Check for crossunder (K crossing below D)
+    elif prev_k > prev_d and curr_k < curr_d:
+        cross_type = 'crossunder'
+        # Strength based on overbought level
+        if prev_k > 80 and prev_d > 80:
+            cross_strength = 10
+            context = 'deeply_overbought'
+        elif prev_k > 70 or prev_d > 70:
+            cross_strength = 7
+            context = 'overbought'
+        elif prev_k > 50:
+            cross_strength = 4
+            context = 'above_midpoint'
+        else:
+            cross_strength = 2
+            context = 'below_midpoint'
+    
+    return cross_type, cross_strength, context
+
+
 # ============================================================================
 # CANDLESTICK PATTERN DETECTION FUNCTIONS
 # ============================================================================
@@ -970,11 +1104,22 @@ def generate_signal(df, ticker, interval):
     else:
         sell_score += 1
     
-    # MACD analysis
-    if latest_macd > latest_signal and latest_histogram > 0:
-        buy_score += 2
+    # MACD analysis with crossover detection
+    macd_cross_type, macd_cross_strength, macd_cross_location = detect_crossover(
+        macd_line, signal_line, lookback=2
+    )
+    
+    if macd_cross_type == 'crossover':
+        # Bullish crossover - add base score + strength bonus
+        buy_score += 2 + (macd_cross_strength // 4)  # +2 to +4 based on strength
+    elif macd_cross_type == 'crossunder':
+        # Bearish crossunder
+        sell_score += 2 + (macd_cross_strength // 4)
+    elif latest_macd > latest_signal and latest_histogram > 0:
+        # Already above signal line but no fresh cross
+        buy_score += 1
     elif latest_macd < latest_signal and latest_histogram < 0:
-        sell_score += 2
+        sell_score += 1
     
     # Bollinger Bands
     if close < latest_lower:
@@ -982,21 +1127,32 @@ def generate_signal(df, ticker, interval):
     elif close > latest_upper:
         sell_score += 1  # Price above upper band
     
-    # NEW: Stochastic Oscillator (Slow) analysis
-    if latest_stoch_k_slow < 20 and latest_stoch_d_slow < 20:
-        buy_score += 2  # Both lines oversold
-    elif latest_stoch_k_slow > 80 and latest_stoch_d_slow > 80:
-        sell_score += 2  # Both lines overbought
-    elif latest_stoch_k_slow > latest_stoch_d_slow:
-        buy_score += 1  # Bullish crossover
-    elif latest_stoch_k_slow < latest_stoch_d_slow:
-        sell_score += 1  # Bearish crossover
+    # Stochastic Oscillator (Slow) with crossover detection
+    stoch_slow_cross, stoch_slow_strength, stoch_slow_context = detect_stochastic_crossover(
+        stoch_k_slow, stoch_d_slow, lookback=2
+    )
     
-    # NEW: Stochastic Fast (for quick signals)
-    if latest_stoch_k_fast < 20:
+    if stoch_slow_cross == 'crossover':
+        # Bullish %K crossing above %D
+        buy_score += 2 + (stoch_slow_strength // 3)  # +2 to +5 based on oversold level
+    elif stoch_slow_cross == 'crossunder':
+        # Bearish %K crossing below %D
+        sell_score += 2 + (stoch_slow_strength // 3)
+    elif latest_stoch_k_slow < 20 and latest_stoch_d_slow < 20:
+        # Both lines deeply oversold but no cross yet
         buy_score += 1
-    elif latest_stoch_k_fast > 80:
+    elif latest_stoch_k_slow > 80 and latest_stoch_d_slow > 80:
         sell_score += 1
+    
+    # Stochastic Fast crossover
+    stoch_fast_cross, stoch_fast_strength, stoch_fast_context = detect_stochastic_crossover(
+        stoch_k_fast, stoch_d_fast, lookback=2
+    )
+    
+    if stoch_fast_cross == 'crossover':
+        buy_score += 1 + (stoch_fast_strength // 5)  # +1 to +3
+    elif stoch_fast_cross == 'crossunder':
+        sell_score += 1 + (stoch_fast_strength // 5)
     
     # NEW: Money Flow Index analysis
     if latest_mfi < 20:
@@ -1008,15 +1164,20 @@ def generate_signal(df, ticker, interval):
     elif latest_mfi > 70:
         sell_score += 1
     
-    # NEW: TRIX analysis
-    if latest_trix > 0 and latest_trix_signal > 0:
-        buy_score += 1  # Both TRIX and signal above zero (bullish momentum)
-    elif latest_trix < 0 and latest_trix_signal < 0:
-        sell_score += 1  # Both below zero (bearish momentum)
-    elif latest_trix > latest_trix_signal and latest_trix_signal < 0:
-        buy_score += 2  # Bullish crossover from below zero
-    elif latest_trix < latest_trix_signal and latest_trix_signal > 0:
-        sell_score += 2  # Bearish crossover from above zero
+    # NEW: TRIX analysis with crossover detection
+    trix_cross_type, trix_cross_strength, trix_cross_location = detect_crossover(
+        trix, trix_signal, lookback=2
+    )
+    
+    if trix_cross_type == 'crossover':
+        # Bullish TRIX crossing above signal
+        buy_score += 2 + (trix_cross_strength // 4)  # +2 to +4
+    elif trix_cross_type == 'crossunder':
+        sell_score += 2 + (trix_cross_strength // 4)
+    elif latest_trix > latest_trix_signal and latest_trix > 0:
+        buy_score += 1  # TRIX above signal and positive
+    elif latest_trix < latest_trix_signal and latest_trix < 0:
+        sell_score += 1  # TRIX below signal and negative
     
     # Volume analysis (if available)
     volume_avg = df['Volume'].rolling(20).mean().iloc[-1]
@@ -1095,6 +1256,20 @@ def generate_signal(df, ticker, interval):
         'mfi': round(latest_mfi, 2) if not pd.isna(latest_mfi) else None,
         'trix': round(latest_trix, 4) if not pd.isna(latest_trix) else None,
         'trix_signal': round(latest_trix_signal, 4) if not pd.isna(latest_trix_signal) else None,
+        # Crossover detection data
+        'macd_cross_type': macd_cross_type if macd_cross_type else None,
+        'macd_cross_strength': macd_cross_strength if macd_cross_type else None,
+        'macd_cross_location': macd_cross_location if macd_cross_type else None,
+        'stoch_slow_cross': stoch_slow_cross if stoch_slow_cross else None,
+        'stoch_slow_strength': stoch_slow_strength if stoch_slow_cross else None,
+        'stoch_slow_context': stoch_slow_context if stoch_slow_cross else None,
+        'stoch_fast_cross': stoch_fast_cross if stoch_fast_cross else None,
+        'stoch_fast_strength': stoch_fast_strength if stoch_fast_cross else None,
+        'stoch_fast_context': stoch_fast_context if stoch_fast_cross else None,
+        # TRIX crossover data
+        'trix_cross_type': trix_cross_type if trix_cross_type else None,
+        'trix_cross_strength': trix_cross_strength if trix_cross_type else None,
+        'trix_cross_location': trix_cross_location if trix_cross_type else None,
         'stop_loss': round(stop_loss, 2),
         'take_profit': round(take_profit, 2)
     }
