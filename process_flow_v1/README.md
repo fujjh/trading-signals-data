@@ -35,40 +35,64 @@ STEP 1 (Daily): Time Series Data Collection
 └──────────────────────┘──► Outputs: data/time_series/{TICKER}/{TICKER}_{interval}.csv
     │
     ▼
-STEP 2 (Daily): Multi-Timeframe Scanner
+STEP 1.5 (Daily): Time Series Validation
     │
     ▼
 ┌─────────────────────────┐
-│ MultiTimeframeScanner   │──► Technical analysis on all intervals
-│         v1.0            │──► Generates buy/sell signals with confidence
-└─────────────────────────┘──► Outputs: data/signals_timeframe/{TICKER}/{TICKER}_signals.csv
+│ TimeSeriesValidator     │──► Validates OHLCV data integrity
+│         v1.0            │──► Checks for nulls, outliers, date ranges
+│                         │──► Ensures data quality before analysis
+└─────────────────────────┘──► Outputs: data/validated/validation_report_time_series_{date}.json
     │
     ▼
-STEP 3 (Daily): Data Validation
+STEP 2 (Daily): Fundamental Data Collection
+    │
+    ▼
+┌─────────────────────────────┐
+│ FundamentalDataCollector    │──► Retrieves valuation metrics (P/E, PEG, etc.)
+│            v1.0             │──► Collects analyst price targets & ratings
+│                             │──► Gathers growth & profitability data
+└─────────────────────────────┘──► Outputs: data/fundamentals/{TICKER}/{TICKER}_fundamentals.csv
+    │
+    ▼
+STEP 3 (Daily): Technical Analysis
+    │
+    ▼
+┌─────────────────────────┐
+│ TechnicalAnalyzer       │──► Calculates all technical indicators
+│         v1.0            │──► NO SCORING - pure indicator values
+│                         │──► Crossover detection, S/R levels, Fibonacci
+└─────────────────────────┘──► Outputs: data/technical_analysis/{TICKER}/{TICKER}_{interval}_technical.csv
+    │
+    ▼
+STEP 3.5 (Daily): Technical Analysis Validation
+    │
+    ▼
+┌─────────────────────────────┐
+│ TechnicalValidator          │──► Validates indicator calculations
+│           v1.0            │──► Checks for NaN, missing columns
+│                             │──► Ensures crossovers, S/R, Fibonacci complete
+└─────────────────────────────┘──► Outputs: data/validated/validation_report_technical_{date}.json
+    │
+    ▼
+STEP 4 (Daily): Scoring & Ranking
+    │
+    ▼
+┌─────────────────────────┐
+│ ScoringRanker           │──► Takes Step 3 technical + Step 2 fundamental
+│         v1.0            │──► Technical Score (60%) + Fundamental Score (40%)
+│                         │──► Generates final BUY/SELL signals with confidence
+└─────────────────────────┘──► Outputs: data/signals_scored/scored_signals_{date}.csv
+    │
+    ▼
+STEP 5 (Daily): Signal Validation
     │
     ▼
 ┌─────────────────┐
-│ DataValidator   │──► Validates data integrity
-│     v1.0        │──► Checks freshness and completeness
-└─────────────────┘──► Outputs: data/validated/validation_report_{timestamp}.json
-    │
-    ▼
-STEP 4 (Daily): Website Output Generation
-    │
-    ▼
-┌──────────────────────────┐
-│ WebsiteOutputGenerator   │──► Aggregates signals for frontend
-│          v1.0            │──► Creates JSON files for website
-└──────────────────────────┘──► Outputs: signalsalpha/prototype/data/signals/*.json
-    │
-    ▼
-STEP 5 (Daily): Signal History Tracking
-    │
-    ▼
-┌──────────────────────────┐
-│ SignalHistoryTracker     │──► Saves daily signal snapshots
-│          v1.0            │──► Tracks signal changes over time
-└──────────────────────────┘──► Outputs: data/signal_history/signals_{date}.csv
+│ SignalValidator │──► Validates scored signals
+│     v1.0        │──► Checks score ranges, consistency
+│                 │──► Validates price targets before backtesting
+└─────────────────┘──► Outputs: data/validated/validation_report_signals_{date}.json
     │
     ▼
 STEP 6 (Periodic): Backtester
@@ -76,7 +100,8 @@ STEP 6 (Periodic): Backtester
     ▼
 ┌──────────────────────────┐
 │ Backtester               │──► Tests algorithm on historical data
-│          v1.0            │──► Calculates win rate, profit factor
+│          v2.0            │──► Calculates win rate, profit factor, Sharpe ratio
+│                          │──► Portfolio simulation with $100K capital
 └──────────────────────────┘──► Outputs: data/backtests/backtest_{timestamp}.json
     │
     ▼
@@ -87,6 +112,26 @@ STEP 7 (Periodic): Walk-Forward Analyzer
 │ WalkForwardAnalyzer      │──► Day-by-day trading simulation
 │          v1.0            │──► Realistic performance expectations
 └──────────────────────────┘──► Outputs: data/walkforward/walkforward_{timestamp}.json
+    │
+    ▼
+STEP 8 (Daily): Signal History Tracking
+    │
+    ▼
+┌──────────────────────────┐
+│ SignalHistoryTracker     │──► Saves daily signal snapshots
+│          v1.0            │──► Tracks signal changes over time
+│                          │──► Captures S/R context and Fibonacci levels
+└──────────────────────────┘──► Outputs: data/signal_history/signals_{date}.csv
+    │
+    ▼
+STEP 9 (Daily): Website Output Generation
+    │
+    ▼
+┌──────────────────────────┐
+│ WebsiteOutputGenerator   │──► Aggregates signals for frontend
+│          v1.0            │──► Creates JSON files for website
+│                          │──► Includes fundamental data enrichment
+└──────────────────────────┘──► Outputs: signalsalpha/prototype/data/signals/*.json
 ```
 
 ```
@@ -105,18 +150,28 @@ Run these steps in order. **⚠️ Note:** Steps marked with 🔄 **require batc
 
 | Step | Script | Command | Time | 🔄 Batch? |
 |------|--------|---------|------|-----------|
+| 0 | step0_ticker_collector.py | `bash run_step0.sh` | ~1 hr | **YES** |
 | 1 | step1_time_series_collector.py | `bash run_timeseries_batch.sh` | ~10 hrs | **YES** |
-| 2 | step2_multi_timeframe_scanner.py | `bash run_batch_restarter.sh` | ~2 hrs | **YES** |
-| 3 | step3_data_validator.py | `python3 step3_data_validator.py` | ~2 min | No |
-| 4 | step4_website_output_generator.py | `python3 step4_website_output_generator.py` | ~5 min | No |
-| 5 | step5_signal_history_tracker.py | `python3 step5_signal_history_tracker.py` | ~1 min | No |
+| 1.5 | step1_5_time_series_validator.py | `python3 step1_5_time_series_validator.py` | ~5 min | No |
+| 2 | step2_fundamental_data_collector.py | `python3 step2_fundamental_data_collector.py` | ~2 hrs | No |
+| 3 | step3_technical_analysis.py | `python3 step3_technical_analysis.py` | ~2 hrs | No |
+| 3.5 | step3_5_technical_validator.py | `python3 step3_5_technical_validator.py` | ~5 min | No |
+| 4 | step4_scoring_ranking.py | `python3 step4_scoring_ranking.py` | ~10 min | No |
+| 5 | step5_signal_validator.py | `python3 step5_signal_validator.py` | ~2 min | No |
 
-### Periodic Analysis (Weekly/Monthly)
+### Backtesting Workflow (Periodic)
 
 | Step | Script | Command | Time | 🔄 Batch? |
 |------|--------|---------|------|-----------|
 | 6 | step6_backtester.py | `python3 step6_backtester.py` | ~15 min | No |
 | 7 | step7_walk_forward.py | `python3 step7_walk_forward.py` | ~10 min | No |
+
+### Daily Signal Tracking & Output
+
+| Step | Script | Command | Time | 🔄 Batch? |
+|------|--------|---------|------|-----------|
+| 8 | step8_signal_history_tracker.py | `python3 step8_signal_history_tracker.py` | ~1 min | No |
+| 9 | step9_website_output_generator.py | `python3 step9_website_output_generator.py` | ~5 min | No |
 
 ### Why Batch Processing is Required
 
@@ -153,13 +208,14 @@ bash run_timeseries_batch.sh
 echo "Starting Step 2: Multi-Timeframe Scanner..."
 bash run_batch_restarter.sh
 
-# Steps 3-5: Quick validation and output - ~10 minutes total
-echo "Starting Steps 3-5..."
+# Steps 3: Quick validation - ~2 minutes
+echo "Starting Step 3: Data Validation..."
 python3 step3_data_validator.py
-python3 step4_website_output_generator.py
-python3 step5_signal_history_tracker.py
 
-echo "Daily pipeline complete!"
+echo "Daily data collection complete!"
+
+# Run backtesting and output generation separately:
+# bash run_steps_4_5_6_7.sh
 ```
 
 ### Automated Scheduling (Cron)
@@ -171,7 +227,7 @@ Add to crontab (`crontab -e`):
 0 4 * * 0 cd /home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1 && bash run_timeseries_batch.sh >> logs/step1_weekly.log 2>&1
 
 # Daily pipeline - Monday-Saturday at 6 PM UTC
-0 18 * * 1-6 cd /home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1 && bash run_batch_restarter.sh >> logs/step2_daily.log 2>&1 && python3 step3_data_validator.py && python3 step4_website_output_generator.py && python3 step5_signal_history_tracker.py
+0 18 * * 1-6 cd /home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1 && bash run_batch_restarter.sh >> logs/step2_daily.log 2>&1 && python3 step3_data_validator.py && bash run_steps_4_5_6_7.sh
 ```
 
 ## File Structure
@@ -188,27 +244,40 @@ process_flow_v1/
 │   ├── step1_time_series_collector.py  # OHLCV data collection
 │   └── run_timeseries_batch.sh         # Batch restart wrapper for OCI
 │
+├── STEP 1.5 - Daily/
+│   └── step1_5_time_series_validator.py # Validate time series data
+│
 ├── STEP 2 - Daily/
-│   ├── step2_multi_timeframe_scanner.py # Signal generation with candlestick patterns
-│   └── run_batch_restarter.sh          # Batch restart wrapper for OCI
+│   └── step2_fundamental_data_collector.py  # Fundamental data collection
 │
 ├── STEP 3 - Daily/
-│   └── step3_data_validator.py         # Data integrity validation
+│   └── step3_technical_analysis.py     # Technical analysis (NO SCORING)
+│
+├── STEP 3.5 - Daily/
+│   └── step3_5_technical_validator.py  # Validate technical analysis
 │
 ├── STEP 4 - Daily/
-│   └── step4_website_output_generator.py # Website JSON output
+│   └── step4_scoring_ranking.py        # Scoring: Technical + Fundamental
 │
 ├── STEP 5 - Daily/
-│   └── step5_signal_history_tracker.py   # Signal history tracking
+│   └── step5_signal_validator.py       # Validate scored signals
 │
-├── STEP 6 - Periodic/
-│   └── step6_backtester.py               # Historical backtesting
+├── STEP 6 - Backtesting/
+│   └── step6_backtester.py             # Historical backtesting
 │
-├── STEP 7 - Periodic/
-│   └── step7_walk_forward.py             # Walk-forward analysis
+├── STEP 7 - Backtesting/
+│   └── step7_walk_forward.py           # Walk-forward analysis
+│
+├── STEP 8 - Daily/
+│   └── step8_signal_history_tracker.py # Signal history tracking
+│
+├── STEP 9 - Daily/
+│   └── step9_website_output_generator.py  # Website JSON output
 │
 ├── Orchestration/
-│   └── run_master.sh                   # Master orchestration script
+│   ├── run_master.sh                   # Master orchestration script
+│   ├── run_steps_5_6_7_8.sh            # Signal validation + Backtesting script
+│   └── run_steps_6_7_8_9.sh            # Full pipeline script
 │
 └── logs/                               # Execution logs
 ```
