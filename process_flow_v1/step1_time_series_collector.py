@@ -213,8 +213,8 @@ def get_last_date_from_csv(file_path: str) -> Optional[datetime]:
         if date_col is None:
             date_col = df.columns[0]
         
-        # Convert to datetime and get last
-        df[date_col] = pd.to_datetime(df[date_col])
+        # Convert to datetime and get last - handle mixed timezones
+        df[date_col] = pd.to_datetime(df[date_col], utc=True)
         last_date = df[date_col].max()
         
         return last_date
@@ -244,7 +244,7 @@ def validate_data_coverage(file_path: str, min_days: int = 365) -> bool:
         if date_col is None:
             date_col = df.columns[0]
         
-        df[date_col] = pd.to_datetime(df[date_col])
+        df[date_col] = pd.to_datetime(df[date_col], utc=True)
         
         first_date = df[date_col].min()
         last_date = df[date_col].max()
@@ -279,8 +279,14 @@ def fetch_incremental_data(ticker: str, interval: str, period: str, existing_fil
             print("(full)", end=' ', flush=True)
             return fetch_interval_data(ticker, interval, period)
         
-        # Calculate days since last update
-        days_since = (datetime.now() - last_date).days
+        # Calculate days since last update - handle timezone-aware dates
+        now = datetime.now()
+        if last_date.tzinfo is not None:
+            # Make now timezone-aware to match last_date
+            import pytz
+            now = now.replace(tzinfo=pytz.UTC)
+        
+        days_since = (now - last_date).days
         
         if days_since <= 0:
             # Data is up to date
@@ -306,12 +312,12 @@ def fetch_incremental_data(ticker: str, interval: str, period: str, existing_fil
         # Combine with existing data
         existing_df = pd.read_csv(existing_file)
         
-        # Ensure date columns match
+        # Ensure date columns match - use UTC to avoid timezone issues
         date_col_new = 'date' if 'date' in new_df.columns else new_df.columns[0]
         date_col_existing = 'date' if 'date' in existing_df.columns else existing_df.columns[0]
         
-        new_df[date_col_new] = pd.to_datetime(new_df[date_col_new])
-        existing_df[date_col_existing] = pd.to_datetime(existing_df[date_col_existing])
+        new_df[date_col_new] = pd.to_datetime(new_df[date_col_new], utc=True)
+        existing_df[date_col_existing] = pd.to_datetime(existing_df[date_col_existing], utc=True)
         
         # Remove overlapping dates from existing data
         existing_df = existing_df[existing_df[date_col_existing] < new_df[date_col_new].min()]
@@ -528,20 +534,46 @@ def process_all_stocks(symbols: List[str], batch_size: int = 50):
     print(f"Estimated time: {len(symbols) * len(INTERVALS) * MIN_DELAY / 60:.1f} minutes")
     print("=" * 80)
     
-    # Check for existing progress
+    # Check for existing progress - check data freshness, not just file existence
+    from datetime import datetime
+    import pytz
+    
     processed = []
+    needs_update = []
+    
     for symbol in symbols:
         ticker_dir = os.path.join(OUTPUT_BASE_DIR, symbol)
         if os.path.exists(ticker_dir):
-            # Check if all intervals exist
+            # Check if all intervals exist AND are up to date
             existing = [f for f in os.listdir(ticker_dir) if f.endswith('.csv')]
             if len(existing) >= len(INTERVALS):
-                processed.append(symbol)
+                # Check if data is fresh (within 1 day)
+                all_fresh = True
+                for interval in INTERVALS.keys():
+                    file_path = os.path.join(ticker_dir, f"{symbol}_{interval}.csv")
+                    if os.path.exists(file_path):
+                        last_date = get_last_date_from_csv(file_path)
+                        if last_date:
+                            now = datetime.now().replace(tzinfo=pytz.UTC)
+                            days_old = (now - last_date).days
+                            if days_old > 1:  # Data is more than 1 day old
+                                all_fresh = False
+                                break
+                
+                if all_fresh:
+                    processed.append(symbol)
+                else:
+                    needs_update.append(symbol)
     
     if processed:
-        print(f"\nResuming: {len(processed)} already complete")
+        print(f"\nUp to date: {len(processed)} stocks")
+    if needs_update:
+        print(f"\nNeeds update: {len(needs_update)} stocks")
+        symbols = needs_update + [s for s in symbols if s not in processed and s not in needs_update]
+    else:
         symbols = [s for s in symbols if s not in processed]
-        print(f"Remaining: {len(symbols)}")
+    
+    print(f"Remaining to process: {len(symbols)}")
     
     if not symbols:
         print("\n✓ All stocks already processed!")
