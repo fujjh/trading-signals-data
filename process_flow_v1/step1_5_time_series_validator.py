@@ -63,7 +63,12 @@ from typing import Dict, List, Tuple, Optional
 DATA_DIR = Path("/home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1/data")
 TIME_SERIES_DIR = DATA_DIR / "time_series"
 OUTPUT_DIR = DATA_DIR / "validated"
+PROGRESS_FILE = OUTPUT_DIR / ".validation_progress"
 INTERVALS = ['1d', '1wk', '1mo']
+
+# Batch processing configuration
+BATCH_SIZE = 100  # Process 100 tickers per batch
+MAX_BATCHES = 50  # Exit after 50 batches (5000 tickers)
 
 # Validation thresholds
 MIN_ROWS_FOR_INDICATORS = 50
@@ -74,7 +79,7 @@ MAX_DATE_FUTURE_DAYS = 1
 MAX_DATE_STALE_DAYS = 7
 
 class TimeSeriesValidator:
-    """Validator for time series OHLCV data"""
+    """Validator for time series OHLCV data with batch processing"""
     
     def __init__(self):
         self.results = []
@@ -85,6 +90,37 @@ class TimeSeriesValidator:
             'failed': 0,
             'errors_by_type': {}
         }
+        self.processed_tickers = set()
+        self.batch_count = 0
+    
+    def load_progress(self):
+        """Load list of already processed tickers"""
+        if PROGRESS_FILE.exists():
+            try:
+                with open(PROGRESS_FILE, 'r') as f:
+                    data = json.load(f)
+                    self.processed_tickers = set(data.get('processed_tickers', []))
+                    self.batch_count = data.get('batch_count', 0)
+                    self.results = data.get('results', [])
+                print(f"Loaded progress: {len(self.processed_tickers)} tickers already validated")
+                return True
+            except Exception as e:
+                print(f"Warning: Could not load progress: {e}")
+        return False
+    
+    def save_progress(self):
+        """Save progress to resume later"""
+        try:
+            OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            with open(PROGRESS_FILE, 'w') as f:
+                json.dump({
+                    'processed_tickers': list(self.processed_tickers),
+                    'batch_count': self.batch_count,
+                    'results': self.results,
+                    'timestamp': datetime.now().isoformat()
+                }, f, indent=2)
+        except Exception as e:
+            print(f"Warning: Could not save progress: {e}")
     
     def validate_file_exists(self, file_path: Path) -> Tuple[bool, str]:
         """Check if file exists and is readable"""
@@ -292,15 +328,21 @@ class TimeSeriesValidator:
         
         return ticker_results
     
-    def run_validation(self) -> Dict:
-        """Run validation on all tickers"""
+    def run_validation(self, batch_mode=False) -> Dict:
+        """Run validation on all tickers with optional batch processing"""
         print("="*70)
         print("STEP 1.5: Time Series Validator")
+        if batch_mode:
+            print("(BATCH MODE - Will exit after {} batches)".format(MAX_BATCHES))
         print("="*70)
         print()
         
         # Ensure output directory exists
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        
+        # Load progress if resuming
+        if batch_mode:
+            self.load_progress()
         
         # Get all tickers
         tickers = []
@@ -308,42 +350,84 @@ class TimeSeriesValidator:
             tickers = [d.name for d in TIME_SERIES_DIR.iterdir() if d.is_dir() and not d.name.startswith('.')]
         
         tickers.sort()
-        self.summary['total_tickers'] = len(tickers)
+        total_tickers = len(tickers)
+        
+        # Filter out already processed tickers
+        if batch_mode and self.processed_tickers:
+            tickers = [t for t in tickers if t not in self.processed_tickers]
+            print(f"Resuming: {len(tickers)} tickers remaining out of {total_tickers} total")
+        
+        self.summary['total_tickers'] = total_tickers
         
         print(f"Validating {len(tickers)} tickers...")
+        print(f"Batch size: {BATCH_SIZE}, Max batches: {MAX_BATCHES}")
         print(f"Required intervals: {', '.join(INTERVALS)}")
         print(f"Min rows for indicators: {MIN_ROWS_FOR_INDICATORS}")
         print()
         
-        # Validate each ticker
-        for i, ticker in enumerate(tickers):
-            if (i + 1) % 100 == 0:
-                print(f"  Processed {i+1}/{len(tickers)} tickers...")
+        # Process in batches
+        batches_to_process = min(MAX_BATCHES, (len(tickers) + BATCH_SIZE - 1) // BATCH_SIZE)
+        
+        for batch_num in range(batches_to_process):
+            if batch_num < self.batch_count:
+                print(f"  Skipping batch {batch_num + 1} (already processed)")
+                continue
             
-            result = self.validate_ticker(ticker)
-            self.results.append(result)
+            start_idx = batch_num * BATCH_SIZE
+            end_idx = min(start_idx + BATCH_SIZE, len(tickers))
+            batch_tickers = tickers[start_idx:end_idx]
             
-            # Update summary
-            for interval in INTERVALS:
-                if interval in result['intervals']:
-                    self.summary['total_files'] += 1
-                    if result['intervals'][interval]['pass']:
-                        self.summary['passed'] += 1
-                    else:
-                        self.summary['failed'] += 1
+            print(f"\nBatch {batch_num + 1}/{batches_to_process}: Processing {len(batch_tickers)} tickers...")
             
-            # Count error types
-            for interval_data in result['intervals'].values():
-                if not interval_data['pass']:
-                    for error in interval_data['errors']:
-                        error_type = error.split(':')[0]
-                        self.summary['errors_by_type'][error_type] = self.summary['errors_by_type'].get(error_type, 0) + 1
+            for ticker in batch_tickers:
+                result = self.validate_ticker(ticker)
+                self.results.append(result)
+                self.processed_tickers.add(ticker)
+                
+                # Update summary
+                for interval in INTERVALS:
+                    if interval in result['intervals']:
+                        self.summary['total_files'] += 1
+                        if result['intervals'][interval]['pass']:
+                            self.summary['passed'] += 1
+                        else:
+                            self.summary['failed'] += 1
+                
+                # Count error types
+                for interval_data in result['intervals'].values():
+                    if not interval_data['pass']:
+                        for error in interval_data['errors']:
+                            error_type = error.split(':')[0]
+                            self.summary['errors_by_type'][error_type] = self.summary['errors_by_type'].get(error_type, 0) + 1
+            
+            self.batch_count = batch_num + 1
+            self.save_progress()
+            
+            if batch_mode and self.batch_count >= MAX_BATCHES:
+                print(f"\nReached max batches ({MAX_BATCHES}). Exiting.")
+                print(f"Progress saved to: {PROGRESS_FILE}")
+                print("Run again to continue from where we left off.")
+                break
+        
+        # Check if completed
+        remaining = len(tickers) - len(self.processed_tickers)
+        completed = remaining == 0
+        
+        if completed:
+            # Clear progress file
+            if PROGRESS_FILE.exists():
+                PROGRESS_FILE.unlink()
+            print("\n" + "="*70)
+            print("VALIDATION COMPLETE")
+            print("="*70)
         
         # Generate report
         report = {
             'timestamp': datetime.now().isoformat(),
             'summary': self.summary,
-            'results': self.results
+            'results': self.results,
+            'completed': completed,
+            'processed_tickers': len(self.processed_tickers)
         }
         
         # Save report
@@ -373,7 +457,12 @@ class TimeSeriesValidator:
 
 def main():
     validator = TimeSeriesValidator()
-    validator.run_validation()
+    
+    # Check if batch mode requested via environment variable
+    import os
+    batch_mode = os.getenv('BATCH_MODE', 'false').lower() == 'true'
+    
+    validator.run_validation(batch_mode=batch_mode)
 
 if __name__ == "__main__":
     main()
