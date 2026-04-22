@@ -144,7 +144,12 @@ from typing import Dict, List, Tuple, Optional
 DATA_DIR = Path("/home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1/data")
 TIME_SERIES_DIR = DATA_DIR / "time_series"
 OUTPUT_DIR = DATA_DIR / "technical_analysis"
+PROGRESS_FILE = DATA_DIR / ".step3_progress"
 INTERVALS = ['1d', '1wk', '1mo']
+
+# Batch processing configuration
+BATCH_SIZE = 20  # Process 20 tickers per batch
+MAX_BATCHES = 5000  # Process all tickers in one run
 
 ADX_TREND_THRESHOLD = 25
 ADX_RANGE_THRESHOLD = 20
@@ -183,34 +188,34 @@ def calculate_bollinger_bands(data, period=20, std_dev=2):
     return upper, sma, lower
 
 def calculate_atr(df, period=14):
-    high_low = df['High'] - df['Low']
-    high_close = np.abs(df['High'] - df['Close'].shift())
-    low_close = np.abs(df['Low'] - df['Close'].shift())
+    high_low = df['high'] - df['low']
+    high_close = np.abs(df['high'] - df['close'].shift())
+    low_close = np.abs(df['low'] - df['close'].shift())
     ranges = pd.concat([high_low, high_close, low_close], axis=1)
     true_range = ranges.max(axis=1)
     atr = true_range.rolling(window=period, min_periods=period).mean()
     return atr
 
 def calculate_vwap(df):
-    typical_price = (df['High'] + df['Low'] + df['Close']) / 3
-    vwap = (typical_price * df['Volume']).cumsum() / df['Volume'].cumsum()
+    typical_price = (df['high'] + df['low'] + df['close']) / 3
+    vwap = (typical_price * df['volume']).cumsum() / df['volume'].cumsum()
     return vwap
 
 def calculate_obv(df):
-    obv = (np.sign(df['Close'].diff()) * df['Volume']).cumsum()
+    obv = (np.sign(df['close'].diff()) * df['volume']).cumsum()
     return obv
 
 def calculate_stochastic(df, k_period=14, d_period=3, slowing=3, stoch_type='slow'):
-    lowest_low = df['Low'].rolling(window=k_period, min_periods=k_period).min()
-    highest_high = df['High'].rolling(window=k_period, min_periods=k_period).max()
-    k_fast = 100 * ((df['Close'] - lowest_low) / (highest_high - lowest_low).replace(0, np.nan))
+    lowest_low = df['low'].rolling(window=k_period, min_periods=k_period).min()
+    highest_high = df['high'].rolling(window=k_period, min_periods=k_period).max()
+    k_fast = 100 * ((df['close'] - lowest_low) / (highest_high - lowest_low).replace(0, np.nan))
     k = k_fast.rolling(window=slowing, min_periods=slowing).mean()
     d = k.rolling(window=d_period, min_periods=d_period).mean()
     return k, d
 
 def calculate_mfi(df, period=14):
-    typical_price = (df['High'] + df['Low'] + df['Close']) / 3
-    raw_money_flow = typical_price * df['Volume']
+    typical_price = (df['high'] + df['low'] + df['close']) / 3
+    raw_money_flow = typical_price * df['volume']
     money_flow_plus = raw_money_flow.where(typical_price > typical_price.shift(1), 0)
     money_flow_minus = abs(raw_money_flow.where(typical_price < typical_price.shift(1), 0))
     positive_sum = money_flow_plus.rolling(window=period, min_periods=period).sum()
@@ -403,25 +408,25 @@ def analyze_candlestick_patterns(df):
     c1 = df.iloc[-3]
     c2 = df.iloc[-2]
     c3 = df.iloc[-1]
-    if detect_doji(c3['Open'], c3['Close'], c3['High'], c3['Low']):
+    if detect_doji(c3['open'], c3['close'], c3['high'], c3['low']):
         patterns.append('DOJI')
-    if detect_hammer(c3['Open'], c3['Close'], c3['High'], c3['Low']):
-        if c3['Close'] < df['Close'].mean():
+    if detect_hammer(c3['open'], c3['close'], c3['high'], c3['low']):
+        if c3['close'] < df['close'].mean():
             patterns.append('HAMMER')
         else:
             patterns.append('HANGING_MAN')
-    if detect_shooting_star(c3['Open'], c3['Close'], c3['High'], c3['Low']):
-        if c3['Close'] > df['Close'].mean():
+    if detect_shooting_star(c3['open'], c3['close'], c3['high'], c3['low']):
+        if c3['close'] > df['close'].mean():
             patterns.append('SHOOTING_STAR')
         else:
             patterns.append('INVERTED_HAMMER')
-    if detect_bullish_engulfing(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+    if detect_bullish_engulfing(c2['open'], c2['close'], c3['open'], c3['close']):
         patterns.append('BULLISH_ENGULFING')
-    if detect_bearish_engulfing(c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+    if detect_bearish_engulfing(c2['open'], c2['close'], c3['open'], c3['close']):
         patterns.append('BEARISH_ENGULFING')
-    if detect_morning_star(c1['Open'], c1['Close'], c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+    if detect_morning_star(c1['open'], c1['close'], c2['open'], c2['close'], c3['open'], c3['close']):
         patterns.append('MORNING_STAR')
-    if detect_evening_star(c1['Open'], c1['Close'], c2['Open'], c2['Close'], c3['Open'], c3['Close']):
+    if detect_evening_star(c1['open'], c1['close'], c2['open'], c2['close'], c3['open'], c3['close']):
         patterns.append('EVENING_STAR')
     return patterns
 
@@ -431,7 +436,7 @@ def analyze_candlestick_patterns(df):
 # ============================================================================
 
 def find_pivot_highs(df, window=5):
-    highs = df['High']
+    highs = df['high']
     pivot_highs = []
     for i in range(window, len(highs) - window):
         if highs.iloc[i] == highs.iloc[i-window:i+window+1].max():
@@ -439,7 +444,7 @@ def find_pivot_highs(df, window=5):
     return pivot_highs
 
 def find_pivot_lows(df, window=5):
-    lows = df['Low']
+    lows = df['low']
     pivot_lows = []
     for i in range(window, len(lows) - window):
         if lows.iloc[i] == lows.iloc[i-window:i+window+1].min():
@@ -461,7 +466,7 @@ def calculate_fibonacci_retracement(high, low):
 def find_support_resistance(df, window=5, cluster_tolerance=0.02):
     pivot_highs = find_pivot_highs(df, window)
     pivot_lows = find_pivot_lows(df, window)
-    current_price = df['Close'].iloc[-1]
+    current_price = df['close'].iloc[-1]
     
     resistance_levels = []
     if pivot_highs:
@@ -497,8 +502,8 @@ def find_support_resistance(df, window=5, cluster_tolerance=0.02):
                 clustered.append({'price': round(price, 2), 'count': 1})
         support_levels = sorted(clustered, key=lambda x: x['price'], reverse=True)[:5]
     
-    swing_high = df['High'].max()
-    swing_low = df['Low'].min()
+    swing_high = df['high'].max()
+    swing_low = df['low'].min()
     fib_levels = calculate_fibonacci_retracement(swing_high, swing_low)
     
     return {
@@ -518,40 +523,59 @@ def generate_technical_analysis(df: pd.DataFrame, ticker: str, interval: str) ->
     if len(df) < 50:
         return None
     
-    close = df['Close']
-    high = df['High']
-    low = df['Low']
-    volume = df['Volume']
+    close = df['close']
+    high = df['high']
+    low = df['low']
+    volume = df['volume']
     current_price = close.iloc[-1]
     
-    # Calculate all indicators
-    sma_20 = calculate_sma(close, 20)
-    sma_50 = calculate_sma(close, 50)
-    ema_12 = calculate_ema(close, 12)
-    ema_26 = calculate_ema(close, 26)
-    rsi = calculate_rsi(close, 14)
-    macd_line, macd_signal, _ = calculate_macd(close)
-    stoch_k_slow, stoch_d_slow = calculate_stochastic(df, 14, 3, 3, 'slow')
-    stoch_k_fast, stoch_d_fast = calculate_stochastic(df, 14, 3, 1, 'fast')
-    trix, trix_signal = calculate_trix(close)
-    mfi = calculate_mfi(df)
-    bb_upper, bb_middle, bb_lower = calculate_bollinger_bands(close)
-    atr = calculate_atr(df)
-    vwap = calculate_vwap(df)
-    obv = calculate_obv(df)
-    adx, plus_di, minus_di = calculate_adx(high, low, close)
+    # Calculate all indicators with error handling
+    try:
+        sma_20 = calculate_sma(close, 20)
+        sma_50 = calculate_sma(close, 50)
+        ema_12 = calculate_ema(close, 12)
+        ema_26 = calculate_ema(close, 26)
+        rsi = calculate_rsi(close, 14)
+        macd_line, macd_signal, _ = calculate_macd(close)
+        stoch_k_slow, stoch_d_slow = calculate_stochastic(df, 14, 3, 3, 'slow')
+        stoch_k_fast, stoch_d_fast = calculate_stochastic(df, 14, 3, 1, 'fast')
+        trix, trix_signal = calculate_trix(close)
+        mfi = calculate_mfi(df)
+        bb_upper, bb_middle, bb_lower = calculate_bollinger_bands(close)
+        atr = calculate_atr(df)
+        vwap = calculate_vwap(df)
+        obv = calculate_obv(df)
+        adx, plus_di, minus_di = calculate_adx(high, low, close)
+    except Exception as e:
+        print(f"Indicator calculation failed for {ticker} {interval}: {e}")
+        return None
+    
+    # Verify all indicators have valid data
+    required_indicators = [sma_20, sma_50, ema_12, ema_26, rsi, macd_line, macd_signal,
+                          stoch_k_slow, stoch_d_slow, stoch_k_fast, stoch_d_fast, 
+                          trix, trix_signal, mfi, bb_upper, bb_middle, bb_lower, 
+                          atr, vwap, obv, adx, plus_di, minus_di]
+    
+    for ind in required_indicators:
+        if ind is None or len(ind) == 0 or ind.iloc[-1] != ind.iloc[-1]:  # Check for NaN
+            print(f"Invalid indicator data for {ticker} {interval}")
+            return None
     
     # Crossover detection
-    macd_cross, macd_cross_str, macd_cross_loc = detect_crossover(macd_line, macd_signal)
-    stoch_slow_cross, stoch_slow_str, stoch_slow_ctx = detect_stochastic_crossover(stoch_k_slow, stoch_d_slow)
-    stoch_fast_cross, stoch_fast_str, stoch_fast_ctx = detect_stochastic_crossover(stoch_k_fast, stoch_d_fast)
-    trix_cross, trix_cross_str, trix_cross_loc = detect_crossover(trix, trix_signal)
-    
-    # Candlestick patterns
-    candlestick_patterns = analyze_candlestick_patterns(df)
-    
-    # Support/Resistance
-    sr_levels = find_support_resistance(df)
+    try:
+        macd_cross, macd_cross_str, macd_cross_loc = detect_crossover(macd_line, macd_signal)
+        stoch_slow_cross, stoch_slow_str, stoch_slow_ctx = detect_stochastic_crossover(stoch_k_slow, stoch_d_slow)
+        stoch_fast_cross, stoch_fast_str, stoch_fast_ctx = detect_stochastic_crossover(stoch_k_fast, stoch_d_fast)
+        trix_cross, trix_cross_str, trix_cross_loc = detect_crossover(trix, trix_signal)
+        
+        # Candlestick patterns
+        candlestick_patterns = analyze_candlestick_patterns(df)
+        
+        # Support/Resistance
+        sr_levels = find_support_resistance(df)
+    except Exception as e:
+        print(f"Pattern/SR calculation failed for {ticker} {interval}: {e}")
+        return None
     
     # Market regime
     adx_value = adx.iloc[-1]
@@ -662,9 +686,20 @@ def get_tickers_with_time_series() -> List[str]:
     return tickers
 
 def process_ticker(ticker: str) -> Dict[str, pd.DataFrame]:
+    """Process a single ticker - skip if no time series files exist"""
+    ticker_dir = TIME_SERIES_DIR / ticker
+    if not ticker_dir.exists():
+        return {}
+    
+    # Check if any CSV files exist for this ticker
+    csv_files = list(ticker_dir.glob("*.csv"))
+    if not csv_files:
+        print(f"Skipping {ticker}: no time series files found")
+        return {}
+    
     results = {}
     for interval in INTERVALS:
-        price_file = TIME_SERIES_DIR / ticker / f"{ticker}_{interval}.csv"
+        price_file = ticker_dir / f"{ticker}_{interval}.csv"
         if not price_file.exists():
             continue
         try:
@@ -689,27 +724,61 @@ def save_technical_analysis(ticker: str, results: Dict[str, pd.DataFrame]):
         output_file = ticker_dir / f"{ticker}_{interval}_technical.csv"
         df.to_csv(output_file, index=False)
 
-def main():
-    print("="*70)
-    print("STEP 3: Technical Analysis & Signal Generation")
-    print("Pure technical indicators - NO SCORING")
-    print("="*70)
-    print()
+def load_progress() -> set:
+    """Load set of already processed tickers"""
+    if PROGRESS_FILE.exists():
+        try:
+            with open(PROGRESS_FILE, 'r') as f:
+                data = json.load(f)
+                return set(data.get('processed_tickers', []))
+        except Exception as e:
+            print(f"Warning: Could not load progress: {e}")
+    return set()
+
+def save_progress(processed_tickers: set, batch_count: int):
+    """Save progress to resume later"""
+    try:
+        with open(PROGRESS_FILE, 'w') as f:
+            json.dump({
+                'processed_tickers': list(processed_tickers),
+                'batch_count': batch_count,
+                'timestamp': pd.Timestamp.now().isoformat()
+            }, f, indent=2)
+    except Exception as e:
+        print(f"Warning: Could not save progress: {e}")
+
+def clear_progress():
+    """Clear progress file after completion"""
+    if PROGRESS_FILE.exists():
+        PROGRESS_FILE.unlink()
+
+def validate_technical_output(ticker: str) -> bool:
+    """Validate that a ticker's technical analysis output is valid (at least 1 interval)"""
+    ticker_dir = OUTPUT_DIR / ticker
+    if not ticker_dir.exists():
+        return False
     
-    ensure_dirs()
-    tickers = get_tickers_with_time_series()
-    tickers.sort()
+    # Check at least 1 interval has valid data
+    valid_count = 0
+    for interval in INTERVALS:
+        file_path = ticker_dir / f"{ticker}_{interval}_technical.csv"
+        if file_path.exists():
+            try:
+                df = pd.read_csv(file_path)
+                if len(df) > 0:
+                    valid_count += 1
+            except Exception:
+                pass
     
-    if not tickers:
-        print("No tickers found!")
-        return
-    
-    print(f"Processing {len(tickers)} tickers...")
-    print(f"Output directory: {OUTPUT_DIR}")
-    print()
-    
+    return valid_count > 0
+
+def process_batch(tickers: List[str], batch_num: int, total_batches: int, failed_tickers: set) -> Tuple[int, int, set]:
+    """Process a batch of tickers"""
     processed = 0
     errors = 0
+    processed_set = set()
+    
+    print(f"\nBatch {batch_num}/{total_batches}: Processing {len(tickers)} tickers...")
     
     for ticker in tickers:
         try:
@@ -717,15 +786,145 @@ def main():
             if results:
                 save_technical_analysis(ticker, results)
                 processed += 1
-                if processed % 100 == 0:
-                    print(f"Processed {processed}/{len(tickers)} tickers...")
+                processed_set.add(ticker)
+            else:
+                # Ticker failed validation, add to failed set
+                failed_tickers.add(ticker)
+                errors += 1
+                print(f"Failed validation: {ticker}")
         except Exception as e:
             errors += 1
+            failed_tickers.add(ticker)
             print(f"Error: {ticker} - {e}")
+    
+    print(f"  Batch {batch_num}: {processed} processed, {errors} errors")
+    return processed, errors, processed_set
+
+def load_failed_tickers() -> set:
+    """Load set of tickers that have failed processing"""
+    failed_file = DATA_DIR / '.step3_failed_tickers'
+    if failed_file.exists():
+        try:
+            with open(failed_file, 'r') as f:
+                return set(json.load(f))
+        except Exception:
+            pass
+    return set()
+
+def save_failed_tickers(failed_tickers: set):
+    """Save set of failed tickers"""
+    failed_file = DATA_DIR / '.step3_failed_tickers'
+    try:
+        with open(failed_file, 'w') as f:
+            json.dump(list(failed_tickers), f, indent=2)
+    except Exception as e:
+        print(f"Warning: Could not save failed tickers: {e}")
+
+def main():
+    import sys
+    import os
+    
+    # Check if batch mode requested
+    batch_mode = os.getenv('BATCH_MODE', 'false').lower() == 'true'
+    
+    print("="*70)
+    print("STEP 3: Technical Analysis & Signal Generation")
+    print("Pure technical indicators - NO SCORING")
+    if batch_mode:
+        print(f"(BATCH MODE - {BATCH_SIZE} tickers per batch, max {MAX_BATCHES} batches)")
+    print("="*70)
+    print()
+    
+    ensure_dirs()
+    
+    # Load failed tickers to skip
+    failed_tickers = load_failed_tickers()
+    if failed_tickers:
+        print(f"Note: {len(failed_tickers)} tickers previously failed, will skip")
+    
+    tickers = get_tickers_with_time_series()
+    tickers.sort()
+    
+    if not tickers:
+        print("No tickers found!")
+        return
+    
+    total_tickers = len(tickers)
+    
+    # Filter out previously failed tickers
+    tickers = [t for t in tickers if t not in failed_tickers]
+    
+    if not tickers:
+        print("No tickers left to process (or all previously failed)!")
+        return
+    
+    print(f"Processing {total_tickers} tickers...")
+    print(f"Output directory: {OUTPUT_DIR}")
+    print()
+    
+    if batch_mode:
+        # Process in batches
+        total_batches = (total_tickers + BATCH_SIZE - 1) // BATCH_SIZE
+        total_processed = 0
+        total_errors = 0
+        batches_run = 0
+        
+        for batch_num in range(1, total_batches + 1):
+            start_idx = (batch_num - 1) * BATCH_SIZE
+            end_idx = min(start_idx + BATCH_SIZE, total_tickers)
+            batch_tickers = tickers[start_idx:end_idx]
+            
+            # Filter to tickers that need processing (missing or invalid)
+            tickers_to_process = []
+            for t in batch_tickers:
+                if not validate_technical_output(t):
+                    tickers_to_process.append(t)
+            
+            if not tickers_to_process:
+                print(f"Skipping batch {batch_num}/{total_batches} (all tickers valid)")
+                total_processed += len(batch_tickers)
+                continue
+            
+            if len(tickers_to_process) != len(batch_tickers):
+                print(f"Batch {batch_num}: Re-processing {len(tickers_to_process)}/{len(batch_tickers)} tickers (some invalid/partial)")
+            
+            # Process tickers that need re-processing
+            processed, errors, _ = process_batch(tickers_to_process, batch_num, total_batches, failed_tickers)
+            total_processed += processed
+            total_errors += errors
+            batches_run += 1
+            
+            # Save failed tickers after each batch
+            if failed_tickers:
+                save_failed_tickers(failed_tickers)
+        
+        print("\n" + "="*70)
+        print(f"PROCESSING COMPLETE: {total_processed}/{total_tickers} tickers")
+        print(f"Failed tickers: {len(failed_tickers)}")
+        print("="*70)
+    else:
+        # Process all at once
+        processed = 0
+        errors = 0
+        
+        for ticker in tickers:
+            try:
+                results = process_ticker(ticker)
+                if results:
+                    save_technical_analysis(ticker, results)
+                    processed += 1
+                    if processed % 100 == 0:
+                        print(f"Processed {processed}/{len(tickers)} tickers...")
+            except Exception as e:
+                errors += 1
+                print(f"Error: {ticker} - {e}")
+        
+        total_processed = processed
+        total_errors = errors
     
     print()
     print("="*70)
-    print(f"Complete: {processed} tickers processed, {errors} errors")
+    print(f"Complete: {total_processed} tickers processed, {total_errors} errors")
     print("="*70)
 
 if __name__ == "__main__":

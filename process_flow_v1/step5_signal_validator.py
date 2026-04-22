@@ -66,7 +66,7 @@ from typing import Dict, List, Tuple, Optional
 
 # Configuration
 DATA_DIR = Path("/home/ubuntu/.openclaw/workspace/trading-signals-data/process_flow_v1/data")
-SCORED_SIGNALS_DIR = DATA_DIR / "scored_signals"
+SCORED_SIGNALS_DIR = DATA_DIR / "signals_scored"
 TIME_SERIES_DIR = DATA_DIR / "time_series"
 TECHNICAL_DIR = DATA_DIR / "technical_analysis"
 FUNDAMENTALS_DIR = DATA_DIR / "fundamentals"
@@ -114,7 +114,8 @@ class SignalValidator:
             'technical_signal', 'technical_confidence', 'technical_raw_score',
             'fundamental_score', 'fundamental_grade',
             'combined_score', 'final_signal', 'conviction_pct',
-            'stop_loss', 'take_profit'
+            'stop_loss', 'take_profit',
+            'technical_drivers', 'fundamental_drivers', 'key_drivers'
         ]
         
         missing = [c for c in required_cols if c not in df.columns]
