@@ -29,6 +29,8 @@ This module serves as the technical analysis foundation:
 7. Computes Fibonacci retracement levels
 8. Provides volume analysis (VWAP, OBV, volume ratio)
 9. Generates price targets (stop_loss, take_profit) based on ATR
+10. Hull Moving Average (HMA) with slope, turn, and peak/valley detection
+11. Elder Impulse System (trend + momentum color-coded signals)
 
 Output: Raw technical data for each ticker/interval combination
 Next Step: Step 4 (Scoring & Ranking) combines this with fundamental data
@@ -94,6 +96,17 @@ Columns Added:
     Price Targets:
         - stop_loss: ATR-based stop loss level
         - take_profit: Risk-reward based take profit
+    
+    Hull Moving Average (HMA):
+        - hma_13: Hull Moving Average value (13-period)
+        - hma_slope_2bar: 2-bar slope percentage
+        - hma_turn: up/down/none (direction change detection)
+        - hma_peak_valley: peak/valley/none (local extrema)
+        - hma_signal: cross_above/cross_below/above/below
+    
+    Elder Impulse System:
+        - elder_impulse: green/red/blue (trend + momentum)
+        - elder_trend_strength: 0-10 scale (conviction level)
 
 ================================================================================
 TECHNICAL DETAILS
@@ -463,6 +476,189 @@ def calculate_fibonacci_retracement(high, low):
         '100.0%': round(low, 2)
     }
 
+# ============================================================================
+# HULL MOVING AVERAGE (HMA)
+# ============================================================================
+
+def calculate_wma(data, period):
+    """Calculate Weighted Moving Average"""
+    weights = np.arange(1, period + 1)
+    return data.rolling(window=period, min_periods=period).apply(
+        lambda x: np.dot(x, weights) / weights.sum(), raw=True
+    )
+
+def calculate_hma(data, period=13):
+    """
+    Calculate Hull Moving Average with slope, turn detection, and signals.
+    
+    Formula: HMA = WMA(2 * WMA(n/2) - WMA(n)), sqrt(n)
+    
+    Returns:
+        hma: HMA values
+        slope: 2-bar slope percentage
+        turn: 'up', 'down', or 'none'
+        peak_valley: 'peak', 'valley', or 'none'
+        signal: 'cross_above', 'cross_below', 'above', 'below'
+    """
+    n = period
+    n_half = int(n / 2)
+    n_sqrt = int(np.sqrt(n))
+    
+    # Calculate WMAs
+    wma_half = calculate_wma(data, n_half)
+    wma_full = calculate_wma(data, n)
+    
+    # Raw HMA = 2 * WMA(n/2) - WMA(n)
+    raw_hma = 2 * wma_half - wma_full
+    
+    # Final HMA = WMA of raw HMA with period sqrt(n)
+    hma = calculate_wma(raw_hma, n_sqrt)
+    
+    return hma
+
+def calculate_hma_indicators(df, period=13):
+    """
+    Calculate HMA with all indicator signals.
+    
+    Returns dict with:
+        hma: HMA values
+        hma_slope_2bar: 2-bar slope percentage
+        hma_turn: 'up', 'down', 'none'
+        hma_peak_valley: 'peak', 'valley', 'none'
+        hma_signal: 'cross_above', 'cross_below', 'above', 'below', 'none'
+    """
+    close = df['close']
+    hma = calculate_hma(close, period)
+    
+    # Initialize result arrays
+    slope = pd.Series(np.nan, index=df.index)
+    turn = pd.Series('none', index=df.index)
+    peak_valley = pd.Series('none', index=df.index)
+    signal = pd.Series('none', index=df.index)
+    
+    # Calculate 2-bar slope (% change)
+    for i in range(2, len(hma)):
+        if not np.isnan(hma.iloc[i]) and not np.isnan(hma.iloc[i-1]):
+            slope.iloc[i] = (hma.iloc[i] - hma.iloc[i-1]) / hma.iloc[i-1] * 100
+    
+    # Turn detection (3-bar confirmation)
+    for i in range(2, len(hma)):
+        if not np.isnan(hma.iloc[i]) and not np.isnan(hma.iloc[i-1]) and not np.isnan(hma.iloc[i-2]):
+            # Turn up: current > prev AND prev <= prev2
+            if hma.iloc[i] > hma.iloc[i-1] and hma.iloc[i-1] <= hma.iloc[i-2]:
+                turn.iloc[i] = 'up'
+            # Turn down: current < prev AND prev >= prev2
+            elif hma.iloc[i] < hma.iloc[i-1] and hma.iloc[i-1] >= hma.iloc[i-2]:
+                turn.iloc[i] = 'down'
+    
+    # Peak/Valley detection (2-bar)
+    for i in range(2, len(hma)):
+        if not np.isnan(hma.iloc[i]) and not np.isnan(hma.iloc[i-1]) and not np.isnan(hma.iloc[i-2]):
+            # Peak: prev > prev2 AND prev > current
+            if hma.iloc[i-1] > hma.iloc[i-2] and hma.iloc[i-1] > hma.iloc[i]:
+                peak_valley.iloc[i-1] = 'peak'
+            # Valley: prev < prev2 AND prev < current
+            elif hma.iloc[i-1] < hma.iloc[i-2] and hma.iloc[i-1] < hma.iloc[i]:
+                peak_valley.iloc[i-1] = 'valley'
+    
+    # Price vs HMA cross signals
+    for i in range(1, len(close)):
+        if not np.isnan(hma.iloc[i]) and not np.isnan(hma.iloc[i-1]):
+            price_curr = close.iloc[i]
+            price_prev = close.iloc[i-1]
+            hma_curr = hma.iloc[i]
+            hma_prev = hma.iloc[i-1]
+            
+            # Cross above: price was below, now above
+            if price_prev < hma_prev and price_curr > hma_curr:
+                signal.iloc[i] = 'cross_above'
+            # Cross below: price was above, now below
+            elif price_prev > hma_prev and price_curr < hma_curr:
+                signal.iloc[i] = 'cross_below'
+            # Above HMA
+            elif price_curr > hma_curr:
+                signal.iloc[i] = 'above'
+            # Below HMA
+            else:
+                signal.iloc[i] = 'below'
+    
+    return {
+        'hma': hma,
+        'hma_slope_2bar': slope,
+        'hma_turn': turn,
+        'hma_peak_valley': peak_valley,
+        'hma_signal': signal
+    }
+
+# ============================================================================
+# ELDER IMPULSE SYSTEM
+# ============================================================================
+
+def calculate_elder_impulse(df, ema_period=13, macd_fast=12, macd_slow=26, macd_signal=9):
+    """
+    Calculate Elder Impulse System.
+    
+    Combines 13-period EMA trend direction with MACD Histogram momentum.
+    
+    Rules:
+        - GREEN: EMA rising AND Histogram rising (bullish)
+        - RED: EMA falling AND Histogram falling (bearish)  
+        - BLUE: Mixed signals (neutral/transition)
+    
+    Returns dict with:
+        elder_impulse: 'green', 'red', 'blue'
+        elder_trend_strength: 0-10 scale
+    """
+    close = df['close']
+    
+    # 13-period EMA
+    ema_13 = calculate_ema(close, ema_period)
+    
+    # MACD Histogram
+    macd_line, macd_sig, macd_hist = calculate_macd(close, macd_fast, macd_slow, macd_signal)
+    
+    # Initialize results
+    impulse = pd.Series('blue', index=df.index)
+    trend_strength = pd.Series(5, index=df.index)
+    
+    for i in range(2, len(close)):
+        if np.isnan(ema_13.iloc[i]) or np.isnan(ema_13.iloc[i-1]) or np.isnan(ema_13.iloc[i-2]):
+            continue
+        if np.isnan(macd_hist.iloc[i]) or np.isnan(macd_hist.iloc[i-1]):
+            continue
+            
+        # EMA slope (2-bar)
+        ema_rising = ema_13.iloc[i] > ema_13.iloc[i-1]
+        ema_falling = ema_13.iloc[i] < ema_13.iloc[i-1]
+        
+        # Histogram slope (current vs previous)
+        hist_rising = macd_hist.iloc[i] > macd_hist.iloc[i-1]
+        hist_falling = macd_hist.iloc[i] < macd_hist.iloc[i-1]
+        
+        # Elder Impulse rules
+        if ema_rising and hist_rising:
+            impulse.iloc[i] = 'green'
+            # Strength: steeper EMA slope + larger hist increase = stronger
+            ema_slope = abs((ema_13.iloc[i] - ema_13.iloc[i-1]) / ema_13.iloc[i-1] * 100)
+            hist_change = abs(macd_hist.iloc[i] - macd_hist.iloc[i-1])
+            trend_strength.iloc[i] = min(10, int(5 + ema_slope * 10 + hist_change * 2))
+        elif ema_falling and hist_falling:
+            impulse.iloc[i] = 'red'
+            # Strength calculation
+            ema_slope = abs((ema_13.iloc[i] - ema_13.iloc[i-1]) / ema_13.iloc[i-1] * 100)
+            hist_change = abs(macd_hist.iloc[i] - macd_hist.iloc[i-1])
+            trend_strength.iloc[i] = min(10, int(5 + ema_slope * 10 + hist_change * 2))
+        else:
+            impulse.iloc[i] = 'blue'
+            # Neutral strength based on EMA slope magnitude
+            ema_slope = abs((ema_13.iloc[i] - ema_13.iloc[i-1]) / ema_13.iloc[i-1] * 100)
+            trend_strength.iloc[i] = min(10, int(5 + ema_slope * 5))
+    
+    return {
+        'elder_impulse': impulse,
+        'elder_trend_strength': trend_strength
+    }
+
 def find_support_resistance(df, window=5, cluster_tolerance=0.02):
     pivot_highs = find_pivot_highs(df, window)
     pivot_lows = find_pivot_lows(df, window)
@@ -573,6 +769,13 @@ def generate_technical_analysis(df: pd.DataFrame, ticker: str, interval: str) ->
         
         # Support/Resistance
         sr_levels = find_support_resistance(df)
+        
+        # HMA (Hull Moving Average) indicators
+        hma_indicators = calculate_hma_indicators(df, period=13)
+        
+        # Elder Impulse System
+        elder_indicators = calculate_elder_impulse(df)
+        
     except Exception as e:
         print(f"Pattern/SR calculation failed for {ticker} {interval}: {e}")
         return None
@@ -664,6 +867,15 @@ def generate_technical_analysis(df: pd.DataFrame, ticker: str, interval: str) ->
         'candlestick_patterns': ','.join(candlestick_patterns) if candlestick_patterns else None,
         'stop_loss': stop_loss,
         'take_profit': take_profit,
+        # HMA indicators
+        'hma_13': round(hma_indicators['hma'].iloc[-1], 2) if not np.isnan(hma_indicators['hma'].iloc[-1]) else None,
+        'hma_slope_2bar': round(hma_indicators['hma_slope_2bar'].iloc[-1], 4) if not np.isnan(hma_indicators['hma_slope_2bar'].iloc[-1]) else None,
+        'hma_turn': hma_indicators['hma_turn'].iloc[-1],
+        'hma_peak_valley': hma_indicators['hma_peak_valley'].iloc[-1],
+        'hma_signal': hma_indicators['hma_signal'].iloc[-1],
+        # Elder Impulse System
+        'elder_impulse': elder_indicators['elder_impulse'].iloc[-1],
+        'elder_trend_strength': int(elder_indicators['elder_trend_strength'].iloc[-1]),
     }
 
 
