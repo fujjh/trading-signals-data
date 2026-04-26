@@ -964,11 +964,20 @@ def clear_progress():
     if PROGRESS_FILE.exists():
         PROGRESS_FILE.unlink()
 
-def validate_technical_output(ticker: str) -> bool:
-    """Validate that a ticker's technical analysis output is valid (at least 1 interval)"""
+def validate_technical_output(ticker: str, require_new_columns: bool = True) -> bool:
+    """Validate that a ticker's technical analysis output is valid (at least 1 interval)
+    
+    Args:
+        ticker: Ticker symbol
+        require_new_columns: If True, requires new HMA/Elder columns to be present
+    """
     ticker_dir = OUTPUT_DIR / ticker
     if not ticker_dir.exists():
         return False
+    
+    # Required new columns (HMA and Elder Impulse)
+    new_columns = ['hma_13', 'hma_slope_2bar', 'hma_turn', 'hma_peak_valley', 
+                   'hma_signal', 'elder_impulse', 'elder_trend_strength']
     
     # Check at least 1 interval has valid data
     valid_count = 0
@@ -978,7 +987,13 @@ def validate_technical_output(ticker: str) -> bool:
             try:
                 df = pd.read_csv(file_path)
                 if len(df) > 0:
-                    valid_count += 1
+                    # If requiring new columns, check they exist
+                    if require_new_columns:
+                        has_new_cols = all(col in df.columns for col in new_columns)
+                        if has_new_cols:
+                            valid_count += 1
+                    else:
+                        valid_count += 1
             except Exception:
                 pass
     
