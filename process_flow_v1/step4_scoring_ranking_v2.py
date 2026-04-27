@@ -176,6 +176,82 @@ def calculate_technical_score_detailed(ta_row: pd.Series) -> Tuple[int, int, Lis
         sell_score += 1
         detailed_scores.append("Volume:-1(low)")
     
+    # HMA (Hull Moving Average) - New Indicator
+    hma = ta_row.get('hma_13', 0)
+    hma_signal = ta_row.get('hma_signal', 'none')
+    hma_slope = ta_row.get('hma_slope_2bar', 0)
+    hma_turn = ta_row.get('hma_turn', 'none')
+    hma_peak_valley = ta_row.get('hma_peak_valley', 'none')
+    
+    if hma > 0:
+        # Price vs HMA position
+        if hma_signal == 'cross_above':
+            buy_score += 3
+            drivers.append(f"HMA bullish crossover (price crossed above HMA13)")
+            detailed_scores.append("HMA:+3(cross_above)")
+        elif hma_signal == 'cross_below':
+            sell_score += 3
+            drivers.append(f"HMA bearish crossunder (price crossed below HMA13)")
+            detailed_scores.append("HMA:-3(cross_below)")
+        elif close > hma:
+            buy_score += 1
+            detailed_scores.append("HMA:+1(above)")
+        elif close < hma:
+            sell_score += 1
+            detailed_scores.append("HMA:-1(below)")
+        
+        # HMA slope (2-bar) - momentum
+        if hma_slope > 0.5:
+            buy_score += 2
+            drivers.append(f"HMA slope rising {hma_slope:.2f}% (strong momentum)")
+            detailed_scores.append(f"HMA_Slope:+2({hma_slope:.2f}%)")
+        elif hma_slope > 0.1:
+            buy_score += 1
+            detailed_scores.append(f"HMA_Slope:+1({hma_slope:.2f}%)")
+        elif hma_slope < -0.5:
+            sell_score += 2
+            drivers.append(f"HMA slope falling {hma_slope:.2f}% (strong decline)")
+            detailed_scores.append(f"HMA_Slope:-2({hma_slope:.2f}%)")
+        elif hma_slope < -0.1:
+            sell_score += 1
+            detailed_scores.append(f"HMA_Slope:-1({hma_slope:.2f}%)")
+        
+        # HMA turn detection
+        if hma_turn == 'up':
+            buy_score += 2
+            drivers.append("HMA turning up (reversal signal)")
+            detailed_scores.append("HMA_Turn:+2")
+        elif hma_turn == 'down':
+            sell_score += 2
+            drivers.append("HMA turning down (reversal signal)")
+            detailed_scores.append("HMA_Turn:-2")
+        
+        # HMA peak/valley
+        if hma_peak_valley == 'valley':
+            buy_score += 1
+            detailed_scores.append("HMA_Valley:+1")
+        elif hma_peak_valley == 'peak':
+            sell_score += 1
+            detailed_scores.append("HMA_Peak:-1")
+    
+    # Elder Impulse System - New Indicator
+    elder_impulse = ta_row.get('elder_impulse', 'blue')
+    elder_strength = ta_row.get('elder_trend_strength', 5)
+    
+    if elder_impulse == 'green':
+        # Green: EMA rising AND histogram rising - bullish
+        buy_score += 3 + min(2, elder_strength // 4)  # Up to +5 for strong green
+        drivers.append(f"Elder Impulse GREEN (strength: {elder_strength}/10) - bullish momentum")
+        detailed_scores.append(f"Elder:+{3 + min(2, elder_strength // 4)}(green)")
+    elif elder_impulse == 'red':
+        # Red: EMA falling AND histogram falling - bearish
+        sell_score += 3 + min(2, elder_strength // 4)
+        drivers.append(f"Elder Impulse RED (strength: {elder_strength}/10) - bearish momentum")
+        detailed_scores.append(f"Elder:-{3 + min(2, elder_strength // 4)}(red)")
+    else:
+        # Blue: mixed signals
+        detailed_scores.append(f"Elder:0(blue,{elder_strength})")
+    
     # Support/Resistance distance
     support_dist = ta_row.get('support_distance_pct', 0)
     resistance_dist = ta_row.get('resistance_distance_pct', 0)
