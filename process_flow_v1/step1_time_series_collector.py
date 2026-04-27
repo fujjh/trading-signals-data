@@ -181,6 +181,27 @@ INTERVALS = {
 MIN_DELAY = 1.0  # seconds between API calls
 last_call = 0
 
+# Progress tracking file
+PROGRESS_FILE = ".step1_progress"
+
+def load_progress():
+    """Load list of already processed tickers from this session"""
+    try:
+        if os.path.exists(PROGRESS_FILE):
+            with open(PROGRESS_FILE, 'r') as f:
+                return set(line.strip() for line in f if line.strip())
+    except Exception:
+        pass
+    return set()
+
+def save_progress(ticker):
+    """Save a ticker as processed"""
+    try:
+        with open(PROGRESS_FILE, 'a') as f:
+            f.write(f"{ticker}\n")
+    except Exception:
+        pass
+
 
 def rate_limit():
     """Ensure we don't hit rate limits"""
@@ -534,6 +555,13 @@ def process_all_stocks(symbols: List[str], batch_size: int = 50):
     print(f"Estimated time: {len(symbols) * len(INTERVALS) * MIN_DELAY / 60:.1f} minutes")
     print("=" * 80)
     
+    # Load session progress (tickers already processed in this run)
+    session_processed = load_progress()
+    if session_processed:
+        print(f"\nSession progress: {len(session_processed)} tickers already processed")
+        symbols = [s for s in symbols if s not in session_processed]
+        print(f"Remaining in this session: {len(symbols)}")
+    
     # Check for existing progress - check data freshness, not just file existence
     from datetime import datetime
     import pytz
@@ -597,6 +625,9 @@ def process_all_stocks(symbols: List[str], batch_size: int = 50):
         try:
             results = process_ticker(symbol)
             total_processed += 1
+            
+            # Save progress immediately after successful processing
+            save_progress(symbol)
             
             # Progress update every 10 stocks
             if (i + 1) % 10 == 0:
