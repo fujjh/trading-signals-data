@@ -114,26 +114,29 @@ def calculate_technical_score_detailed(ta_row: pd.Series) -> Tuple[int, int, Lis
     else:
         detailed_scores.append(f"RSI:0({rsi:.1f})")
     
-    # MACD
+    # MACD - INCREASED CROSSOVER BONUS
     macd = ta_row.get('macd', 0)
     macd_signal = ta_row.get('macd_signal', 0)
     macd_cross = ta_row.get('macd_cross_type', 'none')
     macd_strength = ta_row.get('macd_cross_strength', 0)
     
     if macd_cross == 'crossover':
-        buy_score += weights['macd'] + int(macd_strength / 3)
-        drivers.append(f"MACD bullish crossover (strength: {macd_strength})")
-        detailed_scores.append(f"MACD:+{weights['macd'] + int(macd_strength / 3)}")
+        # Increased bonus: base weight + strength/2 (was /3) + additional crossover bonus
+        macd_bonus = weights['macd'] + int(macd_strength / 2) + 2
+        buy_score += macd_bonus
+        drivers.append(f"MACD bullish crossover (strength: {macd_strength}) [+{macd_bonus}]")
+        detailed_scores.append(f"MACD:+{macd_bonus}(crossover)")
     elif macd_cross == 'crossunder':
-        sell_score += weights['macd'] + int(macd_strength / 3)
-        drivers.append(f"MACD bearish crossunder (strength: {macd_strength})")
-        detailed_scores.append(f"MACD:-{weights['macd'] + int(macd_strength / 3)}")
+        macd_bonus = weights['macd'] + int(macd_strength / 2) + 2
+        sell_score += macd_bonus
+        drivers.append(f"MACD bearish crossunder (strength: {macd_strength}) [-{macd_bonus}]")
+        detailed_scores.append(f"MACD:-{macd_bonus}(crossunder)")
     elif macd > macd_signal:
         buy_score += 1
-        detailed_scores.append("MACD:+1(above signal)")
+        detailed_scores.append("MACD:+1(above_signal)")
     elif macd < macd_signal:
         sell_score += 1
-        detailed_scores.append("MACD:-1(below signal)")
+        detailed_scores.append("MACD:-1(below_signal)")
     
     # Bollinger Bands
     bb_upper = ta_row.get('bb_upper', 0)
@@ -152,13 +155,16 @@ def calculate_technical_score_detailed(ta_row: pd.Series) -> Tuple[int, int, Lis
     stoch_cross = ta_row.get('stoch_slow_cross', 'none')
     
     if stoch_cross == 'crossover':
-        buy_score += weights['stoch']
-        drivers.append(f"Stochastic bullish crossover (%K: {stoch_k:.1f})")
-        detailed_scores.append(f"Stoch:+{weights['stoch']}")
+        # Increased bonus: base weight + additional crossover bonus
+        stoch_bonus = weights['stoch'] + 2
+        buy_score += stoch_bonus
+        drivers.append(f"Stochastic bullish crossover (%K: {stoch_k:.1f}) [+{stoch_bonus}]")
+        detailed_scores.append(f"Stoch:+{stoch_bonus}(crossover)")
     elif stoch_cross == 'crossunder':
-        sell_score += weights['stoch']
-        drivers.append(f"Stochastic bearish crossunder (%K: {stoch_k:.1f})")
-        detailed_scores.append(f"Stoch:-{weights['stoch']}")
+        stoch_bonus = weights['stoch'] + 2
+        sell_score += stoch_bonus
+        drivers.append(f"Stochastic bearish crossunder (%K: {stoch_k:.1f}) [-{stoch_bonus}]")
+        detailed_scores.append(f"Stoch:-{stoch_bonus}(crossunder)")
     elif stoch_k < 20:
         buy_score += 1
         detailed_scores.append("Stoch:+1(oversold)")
@@ -184,15 +190,15 @@ def calculate_technical_score_detailed(ta_row: pd.Series) -> Tuple[int, int, Lis
     hma_peak_valley = ta_row.get('hma_peak_valley', 'none')
     
     if hma > 0:
-        # Price vs HMA position
+        # Price vs HMA position - INCREASED CROSSOVER BONUS
         if hma_signal == 'cross_above':
-            buy_score += 3
-            drivers.append(f"HMA bullish crossover (price crossed above HMA13)")
-            detailed_scores.append("HMA:+3(cross_above)")
+            buy_score += 5  # Increased from 3
+            drivers.append(f"HMA bullish crossover (price crossed above HMA13) [+5]")
+            detailed_scores.append("HMA:+5(cross_above)")
         elif hma_signal == 'cross_below':
-            sell_score += 3
-            drivers.append(f"HMA bearish crossunder (price crossed below HMA13)")
-            detailed_scores.append("HMA:-3(cross_below)")
+            sell_score += 5  # Increased from 3
+            drivers.append(f"HMA bearish crossunder (price crossed below HMA13) [-5]")
+            detailed_scores.append("HMA:-5(cross_below)")
         elif close > hma:
             buy_score += 1
             detailed_scores.append("HMA:+1(above)")
