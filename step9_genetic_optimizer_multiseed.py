@@ -49,7 +49,7 @@ ELITISM_COUNT = 3
 MUTATION_RATE = 0.15
 
 # Multi-seed Parameters
-NUM_SEEDS = 3  # Number of independent GA runs
+NUM_SEEDS = 10  # Number of independent GA runs
 CONVERGENCE_THRESHOLD = 0.01  # Stop early if fitness plateaus
 
 
