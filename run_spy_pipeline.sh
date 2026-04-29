@@ -67,9 +67,13 @@ if [ $? -ne 0 ]; then
 fi
 echo ""
 
+# Steps 7-13 are optional and run separately via run_spy_backtesting.sh
 echo "=========================================="
-echo "Pipeline Complete!"
+echo "Core Pipeline Complete (Steps 1-6)"
 echo "=========================================="
+echo ""
+echo "For backtesting and optimization (Steps 7-13), run:"
+echo "  bash run_spy_backtesting.sh"
 echo ""
 echo "Output files:"
 echo "  - data/signals_scored/spy_scored_*.csv"
