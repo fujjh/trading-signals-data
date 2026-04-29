@@ -2,12 +2,26 @@
 
 ## Overview
 
-This repository contains the complete data pipeline for SignalsAlpha - an automated stock signal generation system with **backtesting and performance analysis**. The pipeline runs on an Oracle Cloud Infrastructure (OCI) Free Tier instance and generates daily trading signals for a universe of US stocks.
+This repository contains the complete data pipeline for SignalsAlpha - an automated stock signal generation system with **recursive backtesting and self-improving optimization**. The pipeline runs on an Oracle Cloud Infrastructure (OCI) Free Tier instance and generates daily trading signals for a universe of ~4,800 US stocks.
 
-**New in v1:**
-- Signal History Tracking (Step 5)
-- Backtester with Win Rate Analysis (Step 6)
-- Walk-Forward Performance Simulator (Step 7)
+**Key Features:**
+- **Recursive Backtesting:** Self-improving signal generation through genetic optimization
+- **Walk-Forward Validation:** Out-of-sample robustness testing
+- **Monte Carlo Stress Testing:** 10,000 simulation statistical validation
+- **Model Selection:** Multi-criteria ranking for production deployment
+
+## What's New - Backtesting Enhancement v2.0
+
+Six new phases added for comprehensive strategy validation:
+
+| Phase | Step | Purpose | Key Feature |
+|-------|------|---------|-------------|
+| **1** | **Enhanced Metrics** | Comprehensive risk-adjusted returns | Sharpe, Sortino, Calmar, Ulcer Index |
+| **2** | **ML Features** | Pattern detection features | 40+ ML features (price, volatility, momentum) |
+| **3** | **Genetic Optimizer** | Weight/threshold optimization | 14 genes, 30 individuals, 50 generations |
+| **4** | **Walk-Forward** | Out-of-sample validation | 252d train, 20d test, rolling windows |
+| **5** | **Monte Carlo** | Statistical stress testing | 10,000 simulations, 95% CI |
+| **6** | **Model Selector** | Production deployment | Multi-criteria ranking, risk management |
 
 ## Architecture
 
@@ -95,7 +109,12 @@ STEP 5 (Daily): Signal Validation
 └─────────────────┘──► Outputs: data/validated/validation_report_signals_{date}.json
     │
     ▼
-STEP 6 (Periodic): Backtester
+═══════════════════════════════════════════════════════════════════════════════════
+                  BACKTESTING ENHANCEMENT v2.0 (Self-Improving)
+═══════════════════════════════════════════════════════════════════════════════════
+    │
+    ▼
+STEP 6 (Periodic): Enhanced Backtester
     │
     ▼
 ┌──────────────────────────┐
@@ -105,13 +124,82 @@ STEP 6 (Periodic): Backtester
 └──────────────────────────┘──► Outputs: data/backtests/backtest_{timestamp}.json
     │
     ▼
-STEP 7 (Periodic): Walk-Forward Analyzer
+STEP 7 (Daily): Enhanced Metrics Module
     │
     ▼
 ┌──────────────────────────┐
-│ WalkForwardAnalyzer      │──► Day-by-day trading simulation
-│          v1.0            │──► Realistic performance expectations
-└──────────────────────────┘──► Outputs: data/walkforward/walkforward_{timestamp}.json
+│ MetricsCalculator        │──► Calculates comprehensive performance metrics
+│    (modules/)            │──► Sharpe, Sortino, Calmar, Ulcer Index
+│                          │──► Drawdown analysis, consecutive trades
+└──────────────────────────┘──► Used by Steps 10-13 for scoring
+    │
+    ▼
+STEP 8 (Daily): ML Feature Engineering
+    │
+    ▼
+┌──────────────────────────┐
+│ FeatureEngineer          │──► Generates ML features for optimization
+│    (modules/)            │──► Price action, volatility, momentum
+│                          │──► Regime detection, pattern recognition
+└──────────────────────────┘──► 40+ features for genetic algorithm
+    │
+    ▼
+STEP 9 (Daily): Results Database
+    │
+    ▼
+┌──────────────────────────┐
+│ ResultsDatabase          │──► SQLite storage for all backtest results
+│    (modules/)            │──► Enables A/B comparison of strategies
+│                          │──► Configuration versioning and tracking
+└──────────────────────────┘──► Centralized results storage
+    │
+    ▼
+STEP 10 (Periodic): Genetic Optimizer ⭐
+    │
+    ▼
+┌──────────────────────────┐
+│ GeneticOptimizer         │──► Self-improving weight optimization
+│         v1.0             │──► 14 genes: weights, thresholds, sizing
+│                          │──► Population: 30, Generations: 50
+│                          │──► Fitness: PF×0.35 + Sharpe×0.25 + ...
+└──────────────────────────┘──► Outputs: data/optimizer/best_config_*.json
+    │
+    ▼
+STEP 11 (Periodic): Walk-Forward Validation ⭐
+    │
+    ▼
+┌──────────────────────────┐
+│ WalkForwardValidator     │──► Rolling train/test validation
+│         v1.0             │──► 252d train, 20d test windows
+│                          │──► Overfitting detection (Train/Test < 1.5)
+└──────────────────────────┘──► Outputs: data/walk_forward/walkforward_*.csv
+    │
+    ▼
+STEP 12 (Periodic): Monte Carlo Stress Testing ⭐
+    │
+    ▼
+┌──────────────────────────┐
+│ MonteCarloEngine         │──► Statistical robustness testing
+│         v1.0             │──► 10,000 simulations
+│                          │──► Black swan injection (5% probability)
+│                          │──► 95% confidence intervals
+└──────────────────────────┘──► Outputs: data/monte_carlo/monte_carlo_*.csv
+    │
+    ▼
+STEP 13 (Periodic): Model Selector & Deployment ⭐
+    │
+    ▼
+┌──────────────────────────┐
+│ ModelSelector            │──► Multi-criteria model ranking
+│         v1.0             │──► Ranking: PF×0.30 + Sharpe×0.25 + ...
+│                          │──► Minimum thresholds validation
+│                          │──► Production config generation
+└──────────────────────────┘──► Outputs: data/deployment/production_config.json
+    │
+    ▼
+═══════════════════════════════════════════════════════════════════════════════════
+                           END BACKTESTING ENHANCEMENT
+═══════════════════════════════════════════════════════════════════════════════════
     │
     ▼
 STEP 8 (Daily): Signal History Tracking
@@ -191,6 +279,36 @@ Run these steps in order. **⚠️ Note:** Steps marked with 🔄 **require batc
 - Shell wrapper automatically restarts script
 - Continues from where it left off
 
+### Backtesting Enhancement Workflow (Periodic - Weekly/Monthly)
+
+Run the recursive optimization pipeline weekly or monthly to continuously improve signal generation:
+
+| Step | Script | Purpose | Time |
+|------|--------|---------|------|
+| 10 | step10_genetic_optimizer.py | Optimize indicator weights | ~1-2 hrs |
+| 11 | step11_walk_forward.py | Validate on unseen data | ~30 min |
+| 12 | step12_monte_carlo.py | Statistical stress testing | ~15 min |
+| 13 | step13_model_selector.py | Select best model for production | ~5 min |
+
+**Execution Command:**
+```bash
+# Run the full optimization pipeline
+python3 step10_genetic_optimizer.py  # Generates optimized configs
+python3 step11_walk_forward.py        # Validates configs
+python3 step12_monte_carlo.py         # Stress tests
+python3 step13_model_selector.py      # Selects best for production
+```
+
+### Enhanced Backtesting Modules (Located in `modules/`)
+
+| Module | Purpose | Key Features |
+|--------|---------|--------------|
+| `metrics_calculator.py` | Performance metrics calculation | Sharpe, Sortino, Calmar, Ulcer Index, drawdown analysis |
+| `feature_engineering.py` | ML feature generation | 40+ features: price, momentum, volatility, regime detection |
+| `results_db.py` | Results storage | SQLite database, A/B comparison, config versioning |
+| `step6_enhanced.py` | Step 6 integration | Bridge between Step 6 and enhanced metrics |
+| `pipeline_bridge.py` | Data flow standardization | Format conversion between Steps 10-13 |
+
 ### Complete Daily Command Sequence
 
 ```bash
@@ -257,27 +375,58 @@ process_flow_v1/
 │   └── step3_5_technical_validator.py  # Validate technical analysis
 │
 ├── STEP 4 - Daily/
-│   └── step4_scoring_ranking.py        # Scoring: Technical + Fundamental
+│   ├── step4_scoring_ranking.py        # Scoring: Technical + Fundamental
+│   ├── step4_scoring_ranking_v2.py     # Enhanced with driver tracking
+│   └── step4_scoring_ranking_1d.py     # 1-day interval only
 │
 ├── STEP 5 - Daily/
 │   └── step5_signal_validator.py       # Validate scored signals
 │
 ├── STEP 6 - Backtesting/
-│   └── step6_backtester.py             # Historical backtesting
+│   ├── step6_backtester.py             # Historical backtesting
+│   └── step6_enhanced.py               # Enhanced metrics integration (module)
 │
-├── STEP 7 - Backtesting/
-│   └── step7_walk_forward.py           # Walk-forward analysis
+├── STEP 7 - Daily (Module)/
+│   └── modules/metrics_calculator.py   # Comprehensive metrics calculation
 │
-├── STEP 8 - Daily/
+├── STEP 8 - Daily (Module)/
+│   └── modules/feature_engineering.py  # ML feature generation
+│
+├── STEP 9 - Daily (Module)/
+│   └── modules/results_db.py           # Results database
+│
+├── STEP 10 - Weekly/
+│   └── step10_genetic_optimizer.py     # Genetic algorithm optimization
+│
+├── STEP 11 - Weekly/
+│   └── step11_walk_forward.py          # Walk-forward validation
+│
+├── STEP 12 - Weekly/
+│   └── step12_monte_carlo.py           # Monte Carlo stress testing
+│
+├── STEP 13 - Weekly/
+│   └── step13_model_selector.py        # Production model selection
+│
+├── modules/                            # Shared modules
+│   ├── metrics_calculator.py           # Performance metrics
+│   ├── feature_engineering.py          # ML features
+│   ├── results_db.py                   # SQLite database
+│   ├── step6_enhanced.py               # Step 6 bridge
+│   └── pipeline_bridge.py              # Data flow standardization
+│
+├── STEP 8 - Daily (Signal History)/
 │   └── step8_signal_history_tracker.py # Signal history tracking
 │
-├── STEP 9 - Daily/
+├── STEP 9 - Daily (Website)/
 │   └── step9_website_output_generator.py  # Website JSON output
 │
 ├── Orchestration/
 │   ├── run_master.sh                   # Master orchestration script
-│   ├── run_steps_5_6_7_8.sh            # Signal validation + Backtesting script
-│   └── run_steps_6_7_8_9.sh            # Full pipeline script
+│   ├── run_step1_batched.sh            # Step 1 batch wrapper
+│   ├── run_step3_auto_restart.sh       # Step 3 auto-restart
+│   ├── run_step4_batched.sh            # Step 4 batch wrapper
+│   ├── run_steps_5_6_7_8.sh            # Signal validation + Backtesting
+│   └── run_steps_5_6_7.sh              # Signal validation only
 │
 └── logs/                               # Execution logs
 ```
@@ -513,69 +662,295 @@ bash run_batch_restarter.sh
 
 ---
 
-### STEP 5: Signal History Tracking (Daily)
+### STEP 5: Signal Validation (Daily)
 
-**Purpose:** Track signal history over time to analyze performance and changes
+**Purpose:** Ensure scored signal data integrity before backtesting
 
 **Frequency:** Daily (after STEP 4 completes)
 
-**Process:**
-1. Saves daily snapshot of all signals
-2. Detects signal changes from previous day (BUY -> SELL, etc.)
-3. Calculates holding periods for each signal type
-4. Tracks signal distribution trends
+**Validations:**
+| Check | Description |
+|-------|-------------|
+| Score Range | 0-100 for all scores |
+| Signal Consistency | Direction matches technical/fundamental scores |
+| Price Targets | stop_loss < price < take_profit |
+| Coverage | All tickers have signals |
+| Grade Distribution | Reasonable spread (A, B, C, D, F) |
+
+**Exit Codes:**
+- 0: Validation passed
+- 1: Validation failed (critical errors)
 
 **Outputs:**
-- `data/signal_history/signals_{date}.csv` - Daily snapshots
-- `data/signal_history/changes_{date}.csv` - Signal changes
-- `data/signal_history/summary_{date}.json` - Historical statistics
-
-**Metrics Tracked:**
-- Signal persistence (avg holding period)
-- Signal flip frequency
-- Distribution changes over time
+- `data/validated/validation_report_signals_{date}.json`
 
 **Command:**
 ```bash
-python3 step5_signal_history_tracker.py
+python3 step5_signal_validator.py
 ```
 
 ---
 
-### STEP 6: Backtester (Periodic)
+### STEP 6: Backtester v2.0 (Periodic)
 
-**Purpose:** Test signal algorithm on historical data to calculate performance metrics
+**Purpose:** Portfolio simulation with realistic constraints
 
 **Frequency:** Weekly or after algorithm changes
 
-**Simulation Parameters:**
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| Initial Capital | $100,000 | Starting portfolio value |
-| Position Size | 5% | Capital allocated per trade |
-| Stop Loss | -5% | Exit losing trades |
-| Take Profit | +10% | Exit winning trades |
-| Max Hold | 5 days | Time-based exit |
+**Portfolio Parameters:**
+| Parameter | Value |
+|-----------|-------|
+| Initial Capital | $100,000 |
+| Max Position Size | 20% ($20,000) |
+| Partial Fills | Allowed |
+| Cash-Constrained | Yes |
+| Signal Priority | Strength-based entry |
+| Short Selling | No |
 
 **Process:**
-1. Runs algorithm on historical data (past 1-2 years)
-2. Simulates trades based on generated signals
-3. Calculates P&L for each trade
-4. Aggregates performance statistics
+1. Simulates real portfolio with capital constraints
+2. Entry at next-day open (eliminates lookahead bias)
+3. Signal reversal exits
+4. Tracks daily P&L and equity curve
 
 **Outputs:**
 - `data/backtests/backtest_{timestamp}.json`
 
-**Performance Metrics:**
-- Win Rate (%)
-- Profit Factor (gross profits / gross losses)
-- Average Return per Trade
-- Total Trades
-- Gross Profits/Losses
-
 **Command:**
 ```bash
 python3 step6_backtester.py
+```
+
+---
+
+### STEP 7: Enhanced Metrics Module (Daily)
+
+**Purpose:** Calculate comprehensive performance metrics from backtest results
+
+**Location:** `modules/metrics_calculator.py`
+
+**Metrics Calculated:**
+| Category | Metrics |
+|----------|---------|
+| Profitability | Profit Factor, Expectancy, Payoff Ratio |
+| Risk-Adjusted | Sharpe Ratio, Sortino Ratio, Calmar Ratio |
+| Drawdown | Max Drawdown, Duration, Ulcer Index |
+| Consistency | Consecutive Wins/Losses tracking |
+
+**Usage:**
+```python
+from modules.metrics_calculator import MetricsCalculator
+calc = MetricsCalculator()
+metrics = calc.calculate_from_trades(trade_list)
+```
+
+---
+
+### STEP 8: ML Feature Engineering (Daily)
+
+**Purpose:** Generate machine learning features for optimization
+
+**Location:** `modules/feature_engineering.py`
+
+**Feature Categories (40+ total):**
+| Category | Features |
+|----------|----------|
+| Price Action | Returns (5d, 20d, 60d), Price vs range |
+| Volatility | Volatility (20d, 60d), ATR ratio, BB squeeze |
+| Momentum | RSI slope, MACD hist slope, ROC |
+| Trend | ADX strength, Higher highs/lows |
+| Volume | Volume ratios, OBV slope, Money flow |
+| Regime | Trending/ranging detection |
+| Patterns | S/R touches, Breakout/breakdown |
+
+**Usage:**
+```python
+from modules.feature_engineering import FeatureEngineer
+engineer = FeatureEngineer()
+features_df = engineer.calculate_all_features(price_df)
+```
+
+---
+
+### STEP 9: Results Database (Daily)
+
+**Purpose:** Centralized storage for all backtest results
+
+**Location:** `modules/results_db.py`
+
+**Tables:**
+- `backtest_results` - Individual backtest runs
+- `optimization_runs` - Genetic algorithm tracking
+- `walk_forward_results` - Walk-forward analysis
+- `config_versions` - Configuration lineage
+
+**Features:**
+- SQLite database
+- A/B comparison queries
+- Historical tracking
+- Config versioning
+
+**Usage:**
+```python
+from modules.results_db import ResultsDatabase
+db = ResultsDatabase()
+db.save_backtest_result(config_name, config, metrics, trades)
+```
+
+---
+
+### STEP 10: Genetic Optimizer ⭐ (Periodic)
+
+**Purpose:** Self-improving signal generation through genetic algorithm
+
+**Frequency:** Weekly or monthly
+
+**Genome Structure (14 genes):**
+| Gene | Range | Description |
+|------|-------|-------------|
+| macd_weight | [0, 5] | MACD indicator weight |
+| hma_weight | [0, 5] | HMA indicator weight |
+| rsi_weight | [0, 5] | RSI indicator weight |
+| stoch_weight | [0, 5] | Stochastic weight |
+| sma_weight | [0, 5] | SMA weight |
+| ema_weight | [0, 5] | EMA weight |
+| mfi_weight | [0, 5] | MFI weight |
+| bb_weight | [0, 5] | Bollinger Bands weight |
+| oversold_threshold | [20, 35] | RSI oversold level |
+| overbought_threshold | [65, 80] | RSI overbought level |
+| adx_strong | [20, 35] | ADX strong trend threshold |
+| volume_confirm | [1.0, 2.0] | Volume confirmation multiplier |
+| max_position_pct | [0.10, 0.30] | Max position size |
+| volatility_adj | [0, 1] | Volatility adjustment (binary) |
+
+**Algorithm Parameters:**
+| Parameter | Value |
+|-----------|-------|
+| Population | 30 individuals |
+| Generations | 50 max |
+| Elitism | 5 preserved |
+| Mutation Rate | 15% |
+| Early Stop | 10 generations no improvement |
+
+**Fitness Function:**
+```
+Fitness = (PF × 0.35) + (Sharpe × 0.25) + (Expectancy × 0.20) + (1/DD × 0.15) + (WR × 0.05)
+```
+
+**Outputs:**
+- `data/optimizer/best_config_{timestamp}.json`
+- `data/optimizer/generation_log.csv`
+- `data/optimizer/population_history.json`
+
+**Command:**
+```bash
+python3 step10_genetic_optimizer.py
+```
+
+**Auto-Resume:**
+The optimizer saves progress every 5 generations. If interrupted, restart with:
+```bash
+# Automatically resumes from checkpoint
+python3 step10_genetic_optimizer.py
+```
+
+---
+
+### STEP 11: Walk-Forward Validation ⭐ (Periodic)
+
+**Purpose:** Test strategy on unseen data to prevent overfitting
+
+**Frequency:** After genetic optimization
+
+**Window Configuration:**
+| Parameter | Value |
+|-----------|-------|
+| Train Window | 252 days (1 year) |
+| Test Window | 20 days (1 month) |
+| Step Size | 20 days |
+| Min Windows | 3 |
+
+**Consistency Checks:**
+- Train/Test correlation > 0.7
+- Profit Factor > 1.5 in both
+- Max Drawdown < 20% in test
+- Win rate within ±10%
+
+**Overfitting Detection:**
+- Flag if Train/Test PF > 1.5
+- Flag if Train/Test Sharpe > 1.5
+
+**Outputs:**
+- `data/walk_forward/walkforward_{timestamp}.csv`
+- `data/walk_forward/consistency_report.json`
+
+**Command:**
+```bash
+python3 step11_walk_forward.py
+```
+
+---
+
+### STEP 12: Monte Carlo Stress Testing ⭐ (Periodic)
+
+**Purpose:** Statistical robustness through randomized simulation
+
+**Frequency:** After walk-forward validation
+
+**Methods:**
+| Method | Description |
+|--------|-------------|
+| Trade Shuffling | Randomize trade sequence (10,000 iterations) |
+| Parameter Perturbation | Vary weights ±10% |
+| Black Swan Injection | 5% probability of extreme events |
+| Market Regime Simulation | Volatile/trending/ranging markets |
+
+**Confidence Analysis:**
+| Metric | Output |
+|--------|--------|
+| PF Probability | Prob(PF > 1.5) at 95% CI |
+| Sharpe Probability | Prob(Sharpe > 1.0) at 95% CI |
+| DD Probability | Prob(DD < 20%) at 95% CI |
+
+**Outputs:**
+- `data/monte_carlo/monte_carlo_{timestamp}.csv`
+- `data/monte_carlo/confidence_intervals.json`
+
+**Command:**
+```bash
+python3 step12_monte_carlo.py
+```
+
+---
+
+### STEP 13: Model Selector & Deployment ⭐ (Periodic)
+
+**Purpose:** Select best configuration for production
+
+**Frequency:** After all optimization steps complete
+
+**Selection Criteria:**
+| Criterion | Weight | Threshold |
+|-----------|--------|-----------|
+| Profit Factor | 30% | ≥ 1.5 |
+| Sharpe Ratio | 25% | ≥ 1.0 |
+| Walk-Forward Consistency | 20% | ≥ 3 windows |
+| Monte Carlo Confidence | 15% | PF prob ≥ 0.95 |
+| Max Drawdown | 10% | ≤ 20% |
+
+**Composite Score:**
+```
+Score = (PF × 0.30) + (Sharpe × 0.25) + (WF × 0.20) + (MC × 0.15) + (1/DD × 0.10)
+```
+
+**Outputs:**
+- `data/deployment/production_config.json` - Production-ready configuration
+- `data/deployment/deployment_report.html` - Full comparison report
+- `data/deployment/model_ranking.csv` - All candidates ranked
+
+**Command:**
+```bash
+python3 step13_model_selector.py
 ```
 
 ---
@@ -617,6 +992,36 @@ python3 step6_backtester.py
 **Command:**
 ```bash
 python3 step7_walk_forward.py
+```
+
+## Step 13: Model Selector (Periodic)
+
+**Purpose:** Select best configuration for production deployment
+
+**Frequency:** After optimization completes (weekly/monthly)
+
+**Selection Criteria:**
+| Criterion | Weight | Threshold |
+|-----------|--------|-----------|
+| Profit Factor | 30% | ≥ 1.5 |
+| Sharpe Ratio | 25% | ≥ 1.0 |
+| Walk-Forward Consistency | 20% | ≥ 3 windows |
+| Monte Carlo Confidence | 15% | PF prob ≥ 0.95 |
+| Max Drawdown | 10% | ≤ 20% |
+
+**Composite Score:**
+```
+Score = (PF × 0.30) + (Sharpe × 0.25) + (WF × 0.20) + (MC × 0.15) + (1/DD × 0.10)
+```
+
+**Outputs:**
+- `data/deployment/production_config.json` - Production-ready configuration
+- `data/deployment/deployment_report.html` - Full comparison report
+- `data/deployment/model_ranking.csv` - All candidates ranked
+
+**Command:**
+```bash
+python3 step13_model_selector.py
 ```
 
 ---
@@ -757,7 +1162,18 @@ These JSON files are consumed by the SignalsAlpha website frontend.
 
 | Version | Date | Changes |
 |---------|------|---------|
-| **v1.0** | **2026-04-18** | **Added backtesting, signal history, walk-forward analysis** |
+| **v2.0** | **2026-04-29** | **Backtesting Enhancement: 6-phase optimization pipeline** |
+| | | - Step 10: Genetic Algorithm Optimizer (self-improving) |
+| | | - Step 11: Walk-Forward Validation (overfitting prevention) |
+| | | - Step 12: Monte Carlo Stress Testing (10,000 simulations) |
+| | | - Step 13: Model Selector (multi-criteria ranking) |
+| | | - Modules: metrics_calculator, feature_engineering, results_db |
+| **v1.0** | **2026-04-18** | **Initial v1: Steps 0-9 with backtesting, validation, HMA/Elder** |
+| | | - Step 1.5, 3.5, 5: Validators for data quality |
+| | | - Step 2: Fundamental data collection |
+| | | - Step 3/4: Technical/Scoring separation (75/25 weighting) |
+| | | - Step 6: Enhanced backtester v2.0 |
+| | | - Step 3: HMA 13 and Elder Impulse System added |
 | v0.1 | 2026-04-16 | Initial release with 4-step pipeline |
 
 ---
