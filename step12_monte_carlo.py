@@ -84,7 +84,7 @@ def run_single_simulation(df: pd.DataFrame, sim_id: int) -> Dict:
     n = len(sim_df)
     
     # Shuffle returns
-    shuffled_returns = sim_df['returns'].dropna().sample(n=n-1, replace=True).values
+    shuffled_returns = sim_df['returns'].dropna().sample(n=n-1, replace=True).values.copy()
     
     # Add black swan events (5% probability)
     black_swan_mask = np.random.random(len(shuffled_returns)) < 0.05
