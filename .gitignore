@@ -1,0 +1,30 @@
+# Data directories - exclude all data files
+data/
+*.csv
+*.json
+*.log
+*.db
+*.sqlite
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
