@@ -1,0 +1,321 @@
+{
+  "ticker": "SPY",
+  "base_config": {
+    "macd_weight": 8.32,
+    "hma_weight": 4.74,
+    "rsi_weight": 5.41,
+    "stoch_weight": 3.21,
+    "sma_weight": 1.26,
+    "ema_weight": 4.19,
+    "mfi_weight": 4.01,
+    "bb_weight": 1.65,
+    "high_52w_weight": 0.94,
+    "low_52w_weight": 2.55,
+    "sma_200_weight": 8.02,
+    "long_entry": 55,
+    "exit": 50,
+    "short_entry": 25
+  },
+  "best_config": {
+    "macd_weight": 7.5,
+    "hma_weight": 4.74,
+    "rsi_weight": 5.41,
+    "stoch_weight": 3.21,
+    "sma_weight": 1.26,
+    "ema_weight": 4.19,
+    "mfi_weight": 4.01,
+    "bb_weight": 1.65,
+    "high_52w_weight": 0.94,
+    "low_52w_weight": 2.55,
+    "sma_200_weight": 8.8,
+    "long_entry": 55,
+    "exit": 50,
+    "short_entry": 23
+  },
+  "best_fitness": 0.7569203827318849,
+  "baseline_fitness": 0.7566351399330974,
+  "improvement_pct": 0.03769885691705,
+  "top_10_results": [
+    {
+      "rank": 1,
+      "fitness": 0.7569203827318849,
+      "config": {
+        "macd_weight": 7.5,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.8,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 23
+      },
+      "details": {
+        "total_return": 3.3630188797719485,
+        "sharpe": 0.8611110730500975,
+        "max_dd": 0.16371204429376188,
+        "win_rate": 0.5596576606813224,
+        "trades": 71,
+        "volatility": 0.11759723336043965
+      }
+    },
+    {
+      "rank": 2,
+      "fitness": 0.7566351399330974,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.02,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 23
+      },
+      "details": {
+        "total_return": 3.350841624328811,
+        "sharpe": 0.8592186833761938,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596438172043011,
+        "trades": 71,
+        "volatility": 0.11742948670170679
+      }
+    },
+    {
+      "rank": 3,
+      "fitness": 0.7566351399330974,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.02,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 24
+      },
+      "details": {
+        "total_return": 3.350841624328811,
+        "sharpe": 0.8592186833761938,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596438172043011,
+        "trades": 71,
+        "volatility": 0.11742948670170679
+      }
+    },
+    {
+      "rank": 4,
+      "fitness": 0.7566351399330974,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.02,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 25
+      },
+      "details": {
+        "total_return": 3.350841624328811,
+        "sharpe": 0.8592186833761938,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596438172043011,
+        "trades": 71,
+        "volatility": 0.11742948670170679
+      }
+    },
+    {
+      "rank": 5,
+      "fitness": 0.7566351399330974,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.02,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 26
+      },
+      "details": {
+        "total_return": 3.350841624328811,
+        "sharpe": 0.8592186833761938,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596438172043011,
+        "trades": 71,
+        "volatility": 0.11742948670170679
+      }
+    },
+    {
+      "rank": 6,
+      "fitness": 0.7566351399330974,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.02,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 27
+      },
+      "details": {
+        "total_return": 3.350841624328811,
+        "sharpe": 0.8592186833761938,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596438172043011,
+        "trades": 71,
+        "volatility": 0.11742948670170679
+      }
+    },
+    {
+      "rank": 7,
+      "fitness": 0.7566351399330974,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.02,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 23
+      },
+      "details": {
+        "total_return": 3.350841624328811,
+        "sharpe": 0.8592186833761938,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596438172043011,
+        "trades": 71,
+        "volatility": 0.11742948670170679
+      }
+    },
+    {
+      "rank": 8,
+      "fitness": 0.7565119076204682,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.8,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 23
+      },
+      "details": {
+        "total_return": 3.3481700024551824,
+        "sharpe": 0.8583837690640533,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596638655462185,
+        "trades": 71,
+        "volatility": 0.11744998804527276
+      }
+    },
+    {
+      "rank": 9,
+      "fitness": 0.7561047787608423,
+      "config": {
+        "macd_weight": 9.0,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 8.02,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 23
+      },
+      "details": {
+        "total_return": 3.3554935399607313,
+        "sharpe": 0.8628206732263237,
+        "max_dd": 0.16479942564811037,
+        "win_rate": 0.5598110342500422,
+        "trades": 71,
+        "volatility": 0.11710160233621728
+      }
+    },
+    {
+      "rank": 10,
+      "fitness": 0.7527045072328561,
+      "config": {
+        "macd_weight": 8.32,
+        "hma_weight": 4.74,
+        "rsi_weight": 5.41,
+        "stoch_weight": 3.21,
+        "sma_weight": 1.26,
+        "ema_weight": 4.19,
+        "mfi_weight": 4.01,
+        "bb_weight": 1.65,
+        "high_52w_weight": 0.94,
+        "low_52w_weight": 2.55,
+        "sma_200_weight": 7.2,
+        "long_entry": 55,
+        "exit": 50,
+        "short_entry": 23
+      },
+      "details": {
+        "total_return": 3.285119118032541,
+        "sharpe": 0.8404250317309505,
+        "max_dd": 0.16479942564811056,
+        "win_rate": 0.5594017812132415,
+        "trades": 71,
+        "volatility": 0.11770071887018341
+      }
+    }
+  ],
+  "generated_at": "2026-04-29T18:42:01.946858"
+}
