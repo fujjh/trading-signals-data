@@ -99,8 +99,14 @@ def load_latest_results():
         with open(latest) as f:
             results['monte_carlo'] = json.load(f)
     
-    # Load optimizer results
-    opt_files = list(OPTIMIZER_DIR.glob("spy_best_config_*.json"))
+    # Load optimizer results - prefer v3 configs, then v2, then v1
+    opt_files = list(OPTIMIZER_DIR.glob("spy_best_config_v3_*.json"))
+    if not opt_files:
+        opt_files = list(OPTIMIZER_DIR.glob("spy_best_config_v2_*.json"))
+    if not opt_files:
+        # Fall back to v1 configs
+        opt_files = list(OPTIMIZER_DIR.glob("spy_best_config_*.json"))
+    
     if opt_files:
         latest = max(opt_files, key=lambda p: p.stat().st_mtime)
         with open(latest) as f:
