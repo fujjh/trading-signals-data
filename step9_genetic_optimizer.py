@@ -1,25 +1,33 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-STEP 9: SPY Genetic Algorithm Optimizer
+STEP 9: SPY Genetic Algorithm Optimizer v3.0 (Simplified)
 ================================================================================
 
-Self-improving signal generator using genetic algorithms to optimize
-indicator weights for SPY-only analysis.
+Simplified genetic optimizer that focuses on risk-adjusted returns,
+not beating buy-and-hold (which is nearly impossible for SPY).
 
 Author: SignalsAlpha
-Version: 1.0 (SPY Edition)
+Version: 3.0 (SPY Edition - Simplified)
 Date: 2026-04-29
+
+================================================================================
+STRATEGY:
 ================================================================================
 
-GENOME STRUCTURE:
-- Indicator weights (8 genes): macd, hma, rsi, stoch, sma, ema, mfi, bb
-- Threshold parameters (4 genes): oversold, overbought, adx_strong, volume_confirm
-- Position sizing (2 genes): max_position_pct, volatility_adj
+Instead of trying to beat 2834% buy-and-hold returns, optimize for:
+1. Capture 30-50% of bull market upside
+2. Avoid major drawdowns (exit during crashes)
+3. Maintain reasonable Sharpe ratio (>0.5)
+4. Trade frequency: 50-200 trades over 33 years
 
-FITNESS FUNCTION:
-Fitness = (Profit_Factor × 0.35) + (Sharpe × 0.25) + (Expectancy × 0.20)
 ================================================================================
+GENOME:
+================================================================================
+
+- 8 indicator weights (normalized)
+- 3 signal thresholds (entry/exit levels)
+- No buy-and-hold benchmark requirement
 """
 
 import json
@@ -28,25 +36,22 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, Tuple
 
 # Configuration
 TICKER = "SPY"
-SIGNALS_DIR = Path("data/signals_scored")
 TECHNICAL_DIR = Path("data/technical_analysis") / TICKER
 OUTPUT_DIR = Path("data/optimizer")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-POPULATION_SIZE = 20
-GENERATIONS = 30
+POPULATION_SIZE = 30
+GENERATIONS = 50
 ELITISM_COUNT = 3
 MUTATION_RATE = 0.15
-TARGET_FITNESS = 2.0
 
 
 def load_spy_data():
-    """Load SPY technical data and signals."""
-    # Load technical data
+    """Load SPY technical data."""
     tech_file = TECHNICAL_DIR / f"{TICKER}_1d_technical.csv"
     if not tech_file.exists():
         print(f"ERROR: Technical file not found: {tech_file}")
@@ -54,241 +59,269 @@ def load_spy_data():
     
     df = pd.read_csv(tech_file)
     df['date'] = pd.to_datetime(df['date'])
+    df['returns'] = df['close'].pct_change().fillna(0)
     return df
 
 
 def create_individual():
-    """Create a random individual (genome)."""
-    individual = {
-        # Indicator weights (0-5)
-        'macd_weight': random.randint(0, 5),
-        'hma_weight': random.randint(0, 5),
-        'rsi_weight': random.randint(0, 5),
-        'stoch_weight': random.randint(0, 5),
-        'sma_weight': random.randint(0, 5),
-        'ema_weight': random.randint(0, 5),
-        'mfi_weight': random.randint(0, 5),
-        'bb_weight': random.randint(0, 5),
+    """Create a random individual."""
+    return {
+        # Indicator weights (0-10)
+        'macd_weight': random.uniform(0, 10),
+        'hma_weight': random.uniform(0, 10),
+        'rsi_weight': random.uniform(0, 10),
+        'stoch_weight': random.uniform(0, 10),
+        'sma_weight': random.uniform(0, 10),
+        'ema_weight': random.uniform(0, 10),
+        'mfi_weight': random.uniform(0, 10),
+        'bb_weight': random.uniform(0, 10),
         
-        # Thresholds
-        'oversold': random.randint(20, 35),
-        'overbought': random.randint(65, 80),
-        'adx_strong': random.randint(20, 35),
-        'volume_confirm': round(random.uniform(1.0, 2.0), 2),
-        
-        # Position sizing
-        'max_position_pct': round(random.uniform(0.10, 0.30), 2),
-        'volatility_adj': random.choice([True, False])
+        # Signal thresholds
+        'long_entry': random.randint(55, 75),    # Go long above this
+        'exit': random.randint(35, 50),           # Exit below this
+        'short_entry': random.randint(25, 40),    # Go short below this (optional)
     }
-    return individual
 
 
-def calculate_fitness(df: pd.DataFrame, individual: Dict) -> float:
-    """Calculate fitness score for an individual."""
-    # Simplified backtest using the genome's parameters
+def calculate_signal_score(df: pd.DataFrame, individual: Dict) -> pd.Series:
+    """Calculate technical score."""
+    score = pd.Series(50.0, index=df.index)
     
-    # Calculate technical score based on weights
-    score = 50  # Base
+    # Get positive weights only
+    weights = {k: max(0, individual[f'{k}_weight']) for k in 
+               ['macd', 'hma', 'rsi', 'stoch', 'sma', 'ema', 'mfi', 'bb']}
+    total_weight = sum(weights.values()) or 1
     
-    # Trend (SMA/EMA weighted)
-    if 'sma_20' in df.columns and 'sma_50' in df.columns:
-        trend_score = np.where(
-            (df['close'] > df['sma_20']) & (df['sma_20'] > df['sma_50']),
-            individual['sma_weight'] + individual['ema_weight'],
-            np.where(
-                (df['close'] < df['sma_20']) & (df['sma_20'] < df['sma_50']),
-                -(individual['sma_weight'] + individual['ema_weight']),
-                0
-            )
-        )
-        score += trend_score
-    
-    # RSI
+    # RSI (low = bullish)
     if 'rsi' in df.columns:
-        rsi_score = np.where(
-            df['rsi'] < individual['oversold'],
-            individual['rsi_weight'],
-            np.where(
-                df['rsi'] > individual['overbought'],
-                -individual['rsi_weight'],
-                0
-            )
-        )
-        score += rsi_score
+        score += (50 - df['rsi']) / 50 * weights['rsi'] / total_weight * 30
     
     # MACD
     if 'macd' in df.columns and 'macd_signal' in df.columns:
-        macd_score = np.where(
-            df['macd'] > df['macd_signal'],
-            individual['macd_weight'],
-            -individual['macd_weight']
-        )
-        score += macd_score
+        macd_diff = df['macd'] - df['macd_signal']
+        score += np.clip(macd_diff * 5, -20, 20) * weights['macd'] / total_weight
     
     # HMA
     if 'hma_13' in df.columns:
-        hma_score = np.where(
-            df['close'] > df['hma_13'],
-            individual['hma_weight'],
-            -individual['hma_weight']
-        )
-        score += hma_score
+        hma_diff = (df['close'] - df['hma_13']) / df['hma_13'] * 100
+        score += hma_diff * weights['hma'] / total_weight
     
-    # Calculate returns based on score
-    df_copy = df.copy()
-    df_copy['score'] = score
-    df_copy['position'] = np.where(df_copy['score'] > 60, 1, 
-                                   np.where(df_copy['score'] < 40, -1, 0))
+    # Stochastic (low = bullish)
+    if 'stoch_k' in df.columns:
+        score += (50 - df['stoch_k']) / 50 * weights['stoch'] / total_weight * 30
     
-    # Simple strategy: go long when score > 60
-    df_copy['returns'] = df_copy['close'].pct_change()
-    df_copy['strategy_returns'] = df_copy['position'].shift(1) * df_copy['returns']
+    # MFI (low = bullish)
+    if 'mfi' in df.columns:
+        score += (50 - df['mfi']) / 50 * weights['mfi'] / total_weight * 30
     
-    # Calculate metrics
-    total_return = df_copy['strategy_returns'].sum()
-    volatility = df_copy['strategy_returns'].std() * np.sqrt(252)
-    sharpe = total_return / volatility if volatility > 0 else 0
+    # Trend (SMA/EMA)
+    if 'sma_20' in df.columns and 'sma_50' in df.columns:
+        trend = (df['close'] > df['sma_20']).astype(float) * 20
+        score += trend * (weights['sma'] + weights['ema']) / total_weight
     
-    # Calculate win rate
-    trades = df_copy[df_copy['position'] != 0]['strategy_returns']
-    if len(trades) > 0:
-        win_rate = (trades > 0).sum() / len(trades)
+    return np.clip(score, 0, 100)
+
+
+def calculate_fitness(df: pd.DataFrame, individual: Dict) -> Tuple[float, Dict]:
+    """Calculate fitness."""
+    
+    # Calculate signal
+    score = calculate_signal_score(df, individual)
+    
+    # Generate positions
+    n = len(df)
+    position = np.zeros(n)
+    current_pos = 0.0
+    
+    long_entry = individual['long_entry']
+    exit_level = individual['exit']
+    short_entry = individual['short_entry']
+    
+    for i in range(n):
+        s = score.iloc[i]
+        if s >= long_entry:
+            current_pos = 1.0
+        elif s <= short_entry:
+            current_pos = -0.5  # Light short
+        elif s <= exit_level:
+            current_pos = 0.0
+        position[i] = current_pos
+    
+    # Calculate strategy returns
+    returns = df['returns'].values
+    strategy_returns = np.zeros(n)
+    strategy_returns[1:] = position[:-1] * returns[1:]
+    
+    # Metrics
+    total_return = strategy_returns.sum()
+    
+    # Count trades
+    trades = np.sum(np.abs(np.diff(position)) > 0.01)
+    
+    if trades < 20:
+        return 0.05, {'reason': f'Too few trades: {trades}', 'trades': trades}
+    
+    if trades > 500:
+        return 0.05, {'reason': f'Too many trades: {trades}', 'trades': trades}
+    
+    # Volatility
+    volatility = np.std(strategy_returns) * np.sqrt(252)
+    
+    # Sharpe
+    if volatility > 0:
+        sharpe = (np.mean(strategy_returns) * 252) / volatility
     else:
-        win_rate = 0.5
+        sharpe = 0
     
-    # Fitness calculation
-    fitness = (sharpe * 0.4) + (win_rate * 0.3) + (min(abs(total_return) * 10, 1.0) * 0.3)
+    # Max drawdown
+    cumulative = np.cumprod(1 + strategy_returns)
+    peak = np.maximum.accumulate(cumulative)
+    drawdown = (peak - cumulative) / peak
+    max_dd = np.max(drawdown)
     
-    return max(0, fitness)
+    # Win rate
+    winning_days = np.sum(strategy_returns > 0)
+    total_trading_days = np.sum(np.abs(strategy_returns) > 0.0001)
+    win_rate = winning_days / total_trading_days if total_trading_days > 0 else 0
+    
+    # Fitness: balance return, risk, and activity
+    # Target: 50-200% return (reasonable for timing model), low drawdown, decent Sharpe
+    
+    return_score = min(abs(total_return) / 2.0, 1.0)  # Cap at 200% return
+    dd_score = max(0, 1 - max_dd / 0.30)  # Penalize >30% DD
+    activity_score = min(trades / 100, 1.0)  # Prefer some activity
+    
+    fitness = (
+        return_score * 0.40 +
+        dd_score * 0.30 +
+        min(sharpe / 1.0, 1.0) * 0.15 +
+        win_rate * 0.10 +
+        activity_score * 0.05
+    )
+    
+    details = {
+        'total_return': total_return,
+        'sharpe': sharpe,
+        'max_dd': max_dd,
+        'win_rate': win_rate,
+        'trades': trades,
+        'volatility': volatility
+    }
+    
+    return fitness, details
 
 
 def mutate(individual: Dict) -> Dict:
-    """Apply mutation to an individual."""
+    """Mutate individual."""
     mutated = individual.copy()
     
-    # Mutate weights
+    # Weights
     for key in ['macd_weight', 'hma_weight', 'rsi_weight', 'stoch_weight', 
                 'sma_weight', 'ema_weight', 'mfi_weight', 'bb_weight']:
         if random.random() < MUTATION_RATE:
-            mutated[key] = max(0, min(5, individual[key] + random.randint(-1, 1)))
+            mutated[key] = max(0, min(10, individual[key] + random.uniform(-1, 1)))
     
-    # Mutate thresholds
+    # Thresholds
     if random.random() < MUTATION_RATE:
-        mutated['oversold'] = max(20, min(35, individual['oversold'] + random.randint(-2, 2)))
+        mutated['long_entry'] = max(55, min(75, individual['long_entry'] + random.randint(-3, 3)))
     if random.random() < MUTATION_RATE:
-        mutated['overbought'] = max(65, min(80, individual['overbought'] + random.randint(-2, 2)))
+        mutated['exit'] = max(35, min(50, individual['exit'] + random.randint(-3, 3)))
+    if random.random() < MUTATION_RATE:
+        mutated['short_entry'] = max(25, min(40, individual['short_entry'] + random.randint(-3, 3)))
     
     return mutated
 
 
-def crossover(parent1: Dict, parent2: Dict) -> Tuple[Dict, Dict]:
-    """Create two children from two parents."""
-    child1 = {}
-    child2 = {}
-    
-    for key in parent1.keys():
-        if isinstance(parent1[key], bool):
-            # Boolean: randomly choose
-            child1[key] = random.choice([parent1[key], parent2[key]])
-            child2[key] = random.choice([parent1[key], parent2[key]])
-        elif isinstance(parent1[key], int):
-            # Integer: average and round
-            avg = (parent1[key] + parent2[key]) // 2
-            child1[key] = max(0, min(5, avg + random.randint(-1, 1)))
-            child2[key] = max(0, min(5, avg + random.randint(-1, 1)))
+def crossover(p1: Dict, p2: Dict) -> Tuple[Dict, Dict]:
+    """Crossover two parents."""
+    c1, c2 = {}, {}
+    for key in p1:
+        if isinstance(p1[key], float):
+            alpha = random.uniform(0, 1)
+            c1[key] = alpha * p1[key] + (1 - alpha) * p2[key]
+            c2[key] = (1 - alpha) * p1[key] + alpha * p2[key]
         else:
-            # Float: average
-            avg = (parent1[key] + parent2[key]) / 2
-            child1[key] = round(avg, 2)
-            child2[key] = round(avg, 2)
-    
-    return child1, child2
+            c1[key] = random.choice([p1[key], p2[key]])
+            c2[key] = random.choice([p1[key], p2[key]])
+    return c1, c2
 
 
-def run_genetic_optimizer():
-    """Main genetic algorithm."""
+def run_optimizer():
+    """Main optimization."""
     print("=" * 70)
-    print("STEP 9: SPY Genetic Algorithm Optimizer")
+    print("STEP 9: SPY Genetic Optimizer v3.0 (Simplified)")
     print("=" * 70)
     print(f"Population: {POPULATION_SIZE}")
     print(f"Generations: {GENERATIONS}")
-    print(f"Elitism: {ELITISM_COUNT}")
-    print(f"Target fitness: {TARGET_FITNESS}")
     print("=" * 70)
     
-    # Load data
     df = load_spy_data()
     if df is None:
-        print("ERROR: Could not load SPY data")
         return
     
-    print(f"Loaded {len(df)} rows of SPY data")
+    print(f"Loaded {len(df)} rows")
     
-    # Initialize population
+    # Benchmark
+    first = df['close'].iloc[0]
+    last = df['close'].iloc[-1]
+    bh_return = (last - first) / first
+    print(f"Buy-and-Hold: {bh_return*100:.2f}% ({first:.2f} → {last:.2f})")
+    print("=" * 70)
+    
+    # Init population
     population = [create_individual() for _ in range(POPULATION_SIZE)]
     
     best_fitness = 0
     best_individual = None
-    no_improvement_count = 0
+    best_details = None
     
-    for generation in range(GENERATIONS):
-        # Evaluate fitness
-        fitness_scores = []
-        for i, individual in enumerate(population):
-            fitness = calculate_fitness(df, individual)
-            fitness_scores.append((fitness, individual))
+    for gen in range(GENERATIONS):
+        # Evaluate
+        results = []
+        for ind in population:
+            fit, det = calculate_fitness(df, ind)
+            results.append((fit, ind, det))
         
-        # Sort by fitness
-        fitness_scores.sort(key=lambda x: x[0], reverse=True)
+        results.sort(key=lambda x: x[0], reverse=True)
         
         # Update best
-        if fitness_scores[0][0] > best_fitness:
-            best_fitness = fitness_scores[0][0]
-            best_individual = fitness_scores[0][1].copy()
-            no_improvement_count = 0
-            print(f"Generation {generation}: New best fitness = {best_fitness:.4f}")
-        else:
-            no_improvement_count += 1
+        if results[0][0] > best_fitness:
+            best_fitness = results[0][0]
+            best_individual = results[0][1].copy()
+            best_details = results[0][2].copy()
+            print(f"\nGen {gen}: New best fitness = {best_fitness:.4f}")
+            if 'total_return' in best_details:
+                print(f"  Return: {best_details['total_return']*100:.2f}%, Trades: {best_details['trades']}")
         
-        # Check early stopping
-        if best_fitness >= TARGET_FITNESS:
-            print(f"Target fitness reached!")
-            break
+        if (gen + 1) % 10 == 0:
+            avg_fit = sum([r[0] for r in results]) / len(results)
+            print(f"Gen {gen+1}: Best={best_fitness:.4f}, Avg={avg_fit:.4f}")
         
-        if no_improvement_count >= 10:
-            print(f"No improvement for 10 generations, stopping early")
-            break
+        # Next generation
+        new_pop = [results[i][1] for i in range(ELITISM_COUNT)]
         
-        # Create next generation
-        new_population = []
-        
-        # Elitism
-        for i in range(ELITISM_COUNT):
-            new_population.append(fitness_scores[i][1])
-        
-        # Crossover and mutation
-        while len(new_population) < POPULATION_SIZE:
-            parent1 = random.choice(fitness_scores[:POPULATION_SIZE//2])[1]
-            parent2 = random.choice(fitness_scores[:POPULATION_SIZE//2])[1]
+        while len(new_pop) < POPULATION_SIZE:
+            # Tournament selection
+            candidates = random.sample(results[:POPULATION_SIZE//2], 6)
+            p1 = max(candidates[:3], key=lambda x: x[0])[1]
+            p2 = max(candidates[3:], key=lambda x: x[0])[1]
             
-            child1, child2 = crossover(parent1, parent2)
-            child1 = mutate(child1)
-            child2 = mutate(child2)
-            
-            new_population.append(child1)
-            if len(new_population) < POPULATION_SIZE:
-                new_population.append(child2)
+            c1, c2 = crossover(p1, p2)
+            new_pop.append(mutate(c1))
+            if len(new_pop) < POPULATION_SIZE:
+                new_pop.append(mutate(c2))
         
-        population = new_population
+        population = new_pop
     
-    # Save best configuration
+    # Save best
     if best_individual:
-        output_file = OUTPUT_DIR / f"spy_best_config_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        output_file = OUTPUT_DIR / f"spy_best_config_v3_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         with open(output_file, 'w') as f:
             json.dump({
                 'ticker': TICKER,
-                'fitness': best_fitness,
-                'config': best_individual,
+                'fitness': float(best_fitness),
+                'config': {k: float(v) if isinstance(v, (np.floating, float)) else int(v) if isinstance(v, (np.integer, int)) else v for k, v in best_individual.items()},
+                'details': {k: float(v) if isinstance(v, np.floating) else int(v) if isinstance(v, np.integer) else v for k, v in best_details.items()},
                 'generated_at': datetime.now().isoformat()
             }, f, indent=2)
         
@@ -296,12 +329,15 @@ def run_genetic_optimizer():
         print("OPTIMIZATION COMPLETE")
         print(f"{'='*70}")
         print(f"Best fitness: {best_fitness:.4f}")
-        print(f"\nBest configuration:")
-        for key, value in best_individual.items():
-            print(f"  {key}: {value}")
-        print(f"\nSaved to: {output_file}")
+        if best_details:
+            print(f"Return: {best_details.get('total_return', 0)*100:.2f}%")
+            print(f"Sharpe: {best_details.get('sharpe', 0):.2f}")
+            print(f"Max DD: {best_details.get('max_dd', 0)*100:.1f}%")
+            print(f"Win Rate: {best_details.get('win_rate', 0)*100:.1f}%")
+            print(f"Trades: {best_details.get('trades', 0)}")
+        print(f"\nSaved: {output_file}")
         print(f"{'='*70}")
 
 
 if __name__ == "__main__":
-    run_genetic_optimizer()
+    run_optimizer()
