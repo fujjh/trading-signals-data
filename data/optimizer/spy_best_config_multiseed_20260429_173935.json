@@ -1,0 +1,1315 @@
+{
+  "ticker": "SPY",
+  "num_seeds": 100,
+  "best_seed": 93,
+  "fitness": 0.7566351399330974,
+  "fitness_mean": 0.6936779072061379,
+  "fitness_std": 0.14831046746684842,
+  "config": {
+    "macd_weight": 8.316663515069136,
+    "hma_weight": 4.739198502852049,
+    "rsi_weight": 5.40599834417749,
+    "stoch_weight": 3.207025339330552,
+    "sma_weight": 1.2598269881661763,
+    "ema_weight": 4.1897370649653825,
+    "mfi_weight": 4.011416134976333,
+    "bb_weight": 1.6497129505526038,
+    "high_52w_weight": 0.9389810959519262,
+    "low_52w_weight": 2.550702971075188,
+    "sma_200_weight": 8.021150342983493,
+    "long_entry": 55,
+    "exit": 50,
+    "short_entry": 25
+  },
+  "details": {
+    "total_return": 3.350841624328811,
+    "sharpe": 0.8592186833761938,
+    "max_dd": 0.1637120442937617,
+    "win_rate": 0.5596438172043011,
+    "trades": 71,
+    "volatility": 0.11742948670170679
+  },
+  "all_seeds_results": [
+    {
+      "seed": 93,
+      "fitness": 0.7566351399330974,
+      "generations": 22,
+      "details": {
+        "total_return": 3.350841624328811,
+        "sharpe": 0.8592186833761938,
+        "max_dd": 0.1637120442937617,
+        "win_rate": 0.5596438172043011,
+        "trades": 71,
+        "volatility": 0.11742948670170679
+      }
+    },
+    {
+      "seed": 61,
+      "fitness": 0.7505786838136111,
+      "generations": 22,
+      "details": {
+        "total_return": 3.2480199215953833,
+        "sharpe": 0.8312715726401517,
+        "max_dd": 0.1635632219705092,
+        "win_rate": 0.5595116988809766,
+        "trades": 67,
+        "volatility": 0.11765292485824815
+      }
+    },
+    {
+      "seed": 24,
+      "fitness": 0.7455660027635805,
+      "generations": 22,
+      "details": {
+        "total_return": 3.425186652640684,
+        "sharpe": 0.8678666744394584,
+        "max_dd": 0.1760120135709683,
+        "win_rate": 0.5589801516862998,
+        "trades": 71,
+        "volatility": 0.11883878524900941
+      }
+    },
+    {
+      "seed": 52,
+      "fitness": 0.7444191698557342,
+      "generations": 22,
+      "details": {
+        "total_return": 3.451670072990061,
+        "sharpe": 0.8734100314122887,
+        "max_dd": 0.17601201357096855,
+        "win_rate": 0.5591967871485943,
+        "trades": 67,
+        "volatility": 0.11899756491778965
+      }
+    },
+    {
+      "seed": 8,
+      "fitness": 0.7434016651258741,
+      "generations": 22,
+      "details": {
+        "total_return": 3.392937556920849,
+        "sharpe": 0.8600003115185355,
+        "max_dd": 0.17601201357096838,
+        "win_rate": 0.5591363196906219,
+        "trades": 69,
+        "volatility": 0.11879666024245686
+      }
+    },
+    {
+      "seed": 77,
+      "fitness": 0.7430278533875133,
+      "generations": 22,
+      "details": {
+        "total_return": 3.368014405543222,
+        "sharpe": 0.8574118762570637,
+        "max_dd": 0.1760120135709685,
+        "win_rate": 0.5592808551992225,
+        "trades": 69,
+        "volatility": 0.11828002796896854
+      }
+    },
+    {
+      "seed": 2,
+      "fitness": 0.7429938238325092,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3977590204235857,
+        "sharpe": 0.8590307480030801,
+        "max_dd": 0.17721707965198694,
+        "win_rate": 0.5585629128403415,
+        "trades": 71,
+        "volatility": 0.11909974670984533
+      }
+    },
+    {
+      "seed": 86,
+      "fitness": 0.7428144503012389,
+      "generations": 22,
+      "details": {
+        "total_return": 3.383428995210605,
+        "sharpe": 0.8624230589479318,
+        "max_dd": 0.1760120135709687,
+        "win_rate": 0.5596300503001785,
+        "trades": 67,
+        "volatility": 0.11813094545008085
+      }
+    },
+    {
+      "seed": 38,
+      "fitness": 0.7427599511905906,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3817924812487905,
+        "sharpe": 0.8620468267012575,
+        "max_dd": 0.1760120135709687,
+        "win_rate": 0.5596494075637072,
+        "trades": 67,
+        "volatility": 0.11812533948494285
+      }
+    },
+    {
+      "seed": 6,
+      "fitness": 0.7426184694271873,
+      "generations": 25,
+      "details": {
+        "total_return": 3.364201208473489,
+        "sharpe": 0.8500416100715755,
+        "max_dd": 0.17721707965198694,
+        "win_rate": 0.55829307568438,
+        "trades": 73,
+        "volatility": 0.11917049689461716
+      }
+    },
+    {
+      "seed": 81,
+      "fitness": 0.7425790455512753,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4052040718574457,
+        "sharpe": 0.8675808873345361,
+        "max_dd": 0.1760120135709687,
+        "win_rate": 0.5595392602206359,
+        "trades": 65,
+        "volatility": 0.11818439625606467
+      }
+    },
+    {
+      "seed": 79,
+      "fitness": 0.7424605401258192,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4027439097305545,
+        "sharpe": 0.8668294503610817,
+        "max_dd": 0.1760120135709687,
+        "win_rate": 0.559481361426256,
+        "trades": 65,
+        "volatility": 0.11820138907652031
+      }
+    },
+    {
+      "seed": 21,
+      "fitness": 0.7419084674401416,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3683957519664447,
+        "sharpe": 0.8563613563300132,
+        "max_dd": 0.1760120135709687,
+        "win_rate": 0.559662775616083,
+        "trades": 67,
+        "volatility": 0.11843853383210048
+      }
+    },
+    {
+      "seed": 45,
+      "fitness": 0.7418747871737992,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4196736599891517,
+        "sharpe": 0.8696808708555888,
+        "max_dd": 0.17601201357096857,
+        "win_rate": 0.559346701164295,
+        "trades": 63,
+        "volatility": 0.11840000440587217
+      }
+    },
+    {
+      "seed": 72,
+      "fitness": 0.7410372861395279,
+      "generations": 22,
+      "details": {
+        "total_return": 3.288829004932162,
+        "sharpe": 0.8328660419230043,
+        "max_dd": 0.1772170796519881,
+        "win_rate": 0.558244595030655,
+        "trades": 75,
+        "volatility": 0.11890308197519608
+      }
+    },
+    {
+      "seed": 71,
+      "fitness": 0.7404374415866984,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4062452985747376,
+        "sharpe": 0.8656500510122233,
+        "max_dd": 0.1767800531285245,
+        "win_rate": 0.5586998706338939,
+        "trades": 63,
+        "volatility": 0.11848422553686747
+      }
+    },
+    {
+      "seed": 16,
+      "fitness": 0.7401290495074027,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3570067188671686,
+        "sharpe": 0.8464945719163074,
+        "max_dd": 0.17721707965198683,
+        "win_rate": 0.5587194337194337,
+        "trades": 69,
+        "volatility": 0.11941393392878455
+      }
+    },
+    {
+      "seed": 68,
+      "fitness": 0.739216628337796,
+      "generations": 22,
+      "details": {
+        "total_return": 3.213545801344627,
+        "sharpe": 0.8130503059032427,
+        "max_dd": 0.17601201357096863,
+        "win_rate": 0.5577109602327837,
+        "trades": 75,
+        "volatility": 0.11901290319558724
+      }
+    },
+    {
+      "seed": 82,
+      "fitness": 0.7384644649332305,
+      "generations": 22,
+      "details": {
+        "total_return": 3.2515143516308442,
+        "sharpe": 0.8338670506030633,
+        "max_dd": 0.17601201357096805,
+        "win_rate": 0.5589642091373908,
+        "trades": 67,
+        "volatility": 0.11741290535377759
+      }
+    },
+    {
+      "seed": 74,
+      "fitness": 0.7383935369012544,
+      "generations": 23,
+      "details": {
+        "total_return": 3.325654066112786,
+        "sharpe": 0.852456992241416,
+        "max_dd": 0.1868854498671279,
+        "win_rate": 0.5591043793216991,
+        "trades": 83,
+        "volatility": 0.11747124390594493
+      }
+    },
+    {
+      "seed": 19,
+      "fitness": 0.7371936143968076,
+      "generations": 22,
+      "details": {
+        "total_return": 3.414923861872409,
+        "sharpe": 0.8561053281118611,
+        "max_dd": 0.18656971117844676,
+        "win_rate": 0.5584752635847526,
+        "trades": 79,
+        "volatility": 0.12011045113558672
+      }
+    },
+    {
+      "seed": 73,
+      "fitness": 0.7367116060261765,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4777626466392446,
+        "sharpe": 0.86297286848185,
+        "max_dd": 0.18301361709531608,
+        "win_rate": 0.5577929284921516,
+        "trades": 69,
+        "volatility": 0.1213472027548207
+      }
+    },
+    {
+      "seed": 35,
+      "fitness": 0.736656903464614,
+      "generations": 22,
+      "details": {
+        "total_return": 3.2188896366774102,
+        "sharpe": 0.8355083949196377,
+        "max_dd": 0.17225147724467463,
+        "win_rate": 0.5608212147134303,
+        "trades": 55,
+        "volatility": 0.11600647800713022
+      }
+    },
+    {
+      "seed": 31,
+      "fitness": 0.7366346488264007,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4395843050950115,
+        "sharpe": 0.8557766267428362,
+        "max_dd": 0.18301361709531574,
+        "win_rate": 0.5578177191029108,
+        "trades": 71,
+        "volatility": 0.12102428088813395
+      }
+    },
+    {
+      "seed": 27,
+      "fitness": 0.7355857561521102,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4559537233813895,
+        "sharpe": 0.8659613483958385,
+        "max_dd": 0.18563019982072984,
+        "win_rate": 0.5582175371346431,
+        "trades": 71,
+        "volatility": 0.12017008915625521
+      }
+    },
+    {
+      "seed": 4,
+      "fitness": 0.735281994132977,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4042582008891693,
+        "sharpe": 0.8634876634998184,
+        "max_dd": 0.18266678190775967,
+        "win_rate": 0.5592562651576395,
+        "trades": 65,
+        "volatility": 0.11871164634719086
+      }
+    },
+    {
+      "seed": 69,
+      "fitness": 0.7352803896169293,
+      "generations": 22,
+      "details": {
+        "total_return": 3.286659732819925,
+        "sharpe": 0.8400225980810473,
+        "max_dd": 0.17516449918115107,
+        "win_rate": 0.5594149908592322,
+        "trades": 57,
+        "volatility": 0.11781233059777464
+      }
+    },
+    {
+      "seed": 1,
+      "fitness": 0.7351370986274457,
+      "generations": 22,
+      "details": {
+        "total_return": 3.425274423971919,
+        "sharpe": 0.8523681672720963,
+        "max_dd": 0.18301361709531533,
+        "win_rate": 0.5579549063194665,
+        "trades": 69,
+        "volatility": 0.12100271713811066
+      }
+    },
+    {
+      "seed": 30,
+      "fitness": 0.7349012136282265,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4690095935552856,
+        "sharpe": 0.8670526266066336,
+        "max_dd": 0.18656753307594687,
+        "win_rate": 0.5591085271317829,
+        "trades": 71,
+        "volatility": 0.12047224835959518
+      }
+    },
+    {
+      "seed": 25,
+      "fitness": 0.7348401600094924,
+      "generations": 24,
+      "details": {
+        "total_return": 3.3158799208427476,
+        "sharpe": 0.8339708667084353,
+        "max_dd": 0.18656753307594703,
+        "win_rate": 0.5581206307917412,
+        "trades": 81,
+        "volatility": 0.11972225498114142
+      }
+    },
+    {
+      "seed": 39,
+      "fitness": 0.7346755733983811,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4840410859116018,
+        "sharpe": 0.8727018971788499,
+        "max_dd": 0.18656971117844645,
+        "win_rate": 0.5584,
+        "trades": 69,
+        "volatility": 0.12021103064929695
+      }
+    },
+    {
+      "seed": 18,
+      "fitness": 0.7346439075274152,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4511515972377214,
+        "sharpe": 0.8659059263921629,
+        "max_dd": 0.18656971117844737,
+        "win_rate": 0.558277297470381,
+        "trades": 71,
+        "volatility": 0.12001079084646209
+      }
+    },
+    {
+      "seed": 26,
+      "fitness": 0.7345905215827289,
+      "generations": 22,
+      "details": {
+        "total_return": 3.436559541385898,
+        "sharpe": 0.8589202611415041,
+        "max_dd": 0.1865697111784468,
+        "win_rate": 0.5582219358995008,
+        "trades": 73,
+        "volatility": 0.12047529496930652
+      }
+    },
+    {
+      "seed": 56,
+      "fitness": 0.7345890882751797,
+      "generations": 26,
+      "details": {
+        "total_return": 3.5096145017917086,
+        "sharpe": 0.8739081363792702,
+        "max_dd": 0.18582476773585302,
+        "win_rate": 0.5582763555414215,
+        "trades": 67,
+        "volatility": 0.12092625576629812
+      }
+    },
+    {
+      "seed": 76,
+      "fitness": 0.7345054775515485,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3292542613825242,
+        "sharpe": 0.8386066805374048,
+        "max_dd": 0.18656971117844662,
+        "win_rate": 0.5578418664938432,
+        "trades": 79,
+        "volatility": 0.11954065178477313
+      }
+    },
+    {
+      "seed": 15,
+      "fitness": 0.7338886297248851,
+      "generations": 22,
+      "details": {
+        "total_return": 3.29244419738633,
+        "sharpe": 0.8159556919265232,
+        "max_dd": 0.18574710985089526,
+        "win_rate": 0.5574238578680203,
+        "trades": 83,
+        "volatility": 0.12150071106523785
+      }
+    },
+    {
+      "seed": 36,
+      "fitness": 0.7337189923621154,
+      "generations": 22,
+      "details": {
+        "total_return": 3.457692226007861,
+        "sharpe": 0.8661704767819113,
+        "max_dd": 0.1865675330759473,
+        "win_rate": 0.5586095392077607,
+        "trades": 69,
+        "volatility": 0.1202015117142435
+      }
+    },
+    {
+      "seed": 37,
+      "fitness": 0.733708185564841,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4170008198778694,
+        "sharpe": 0.85966977309434,
+        "max_dd": 0.18656971117844715,
+        "win_rate": 0.5582743077913715,
+        "trades": 71,
+        "volatility": 0.11968518603323547
+      }
+    },
+    {
+      "seed": 50,
+      "fitness": 0.7336513088047659,
+      "generations": 26,
+      "details": {
+        "total_return": 3.1996481995969717,
+        "sharpe": 0.8219543012938775,
+        "max_dd": 0.17601201357096818,
+        "win_rate": 0.5587017718165259,
+        "trades": 61,
+        "volatility": 0.11721455168861658
+      }
+    },
+    {
+      "seed": 0,
+      "fitness": 0.733266902297272,
+      "generations": 22,
+      "details": {
+        "total_return": 3.399700448262354,
+        "sharpe": 0.8597113690333448,
+        "max_dd": 0.18611128261645782,
+        "win_rate": 0.5592147955872809,
+        "trades": 69,
+        "volatility": 0.1190734550752557
+      }
+    },
+    {
+      "seed": 85,
+      "fitness": 0.7330953956358683,
+      "generations": 22,
+      "details": {
+        "total_return": 3.230768134767689,
+        "sharpe": 0.8044859895321799,
+        "max_dd": 0.18574710985089526,
+        "win_rate": 0.5566960705693664,
+        "trades": 85,
+        "volatility": 0.12092449394938877
+      }
+    },
+    {
+      "seed": 34,
+      "fitness": 0.7329982750857724,
+      "generations": 22,
+      "details": {
+        "total_return": 3.373701700858031,
+        "sharpe": 0.8484570866829596,
+        "max_dd": 0.18656971117844662,
+        "win_rate": 0.5579942326177507,
+        "trades": 73,
+        "volatility": 0.1197302175392448
+      }
+    },
+    {
+      "seed": 95,
+      "fitness": 0.7329302979267066,
+      "generations": 22,
+      "details": {
+        "total_return": 3.2570684942824473,
+        "sharpe": 0.8151043582578935,
+        "max_dd": 0.18656753307594662,
+        "win_rate": 0.5573217726396917,
+        "trades": 83,
+        "volatility": 0.12032078294851933
+      }
+    },
+    {
+      "seed": 90,
+      "fitness": 0.7327657924449148,
+      "generations": 22,
+      "details": {
+        "total_return": 3.2488787467149964,
+        "sharpe": 0.8022527346646563,
+        "max_dd": 0.18574710985089485,
+        "win_rate": 0.5567499209611129,
+        "trades": 85,
+        "volatility": 0.12194086456249417
+      }
+    },
+    {
+      "seed": 54,
+      "fitness": 0.732732379718339,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4538450934666938,
+        "sharpe": 0.8665925759195279,
+        "max_dd": 0.18656971117844687,
+        "win_rate": 0.5581320450885668,
+        "trades": 67,
+        "volatility": 0.12000928938792045
+      }
+    },
+    {
+      "seed": 41,
+      "fitness": 0.7325682783191473,
+      "generations": 22,
+      "details": {
+        "total_return": 3.471778121480858,
+        "sharpe": 0.8720003548766649,
+        "max_dd": 0.18656753307594753,
+        "win_rate": 0.5583575816359522,
+        "trades": 65,
+        "volatility": 0.11988428935549822
+      }
+    },
+    {
+      "seed": 97,
+      "fitness": 0.732494377598525,
+      "generations": 22,
+      "details": {
+        "total_return": 3.417834855036798,
+        "sharpe": 0.8581421128970357,
+        "max_dd": 0.18656753307594653,
+        "win_rate": 0.558405937399161,
+        "trades": 69,
+        "volatility": 0.11992751423062697
+      }
+    },
+    {
+      "seed": 12,
+      "fitness": 0.732304798992872,
+      "generations": 22,
+      "details": {
+        "total_return": 3.425871677276907,
+        "sharpe": 0.8456034941250633,
+        "max_dd": 0.1848015911987361,
+        "win_rate": 0.5576586607284874,
+        "trades": 69,
+        "volatility": 0.1219919843368764
+      }
+    },
+    {
+      "seed": 43,
+      "fitness": 0.732101136667543,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4092526093707756,
+        "sharpe": 0.8625862528884287,
+        "max_dd": 0.1826667819077603,
+        "win_rate": 0.5587998064203904,
+        "trades": 59,
+        "volatility": 0.11901004571523462
+      }
+    },
+    {
+      "seed": 67,
+      "fitness": 0.7319910103702618,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4574786432649542,
+        "sharpe": 0.8682120664853131,
+        "max_dd": 0.186567533075947,
+        "win_rate": 0.5582673347341199,
+        "trades": 65,
+        "volatility": 0.11991145195245359
+      }
+    },
+    {
+      "seed": 44,
+      "fitness": 0.7318156523498295,
+      "generations": 22,
+      "details": {
+        "total_return": 3.305538388606937,
+        "sharpe": 0.8364584000928512,
+        "max_dd": 0.17496250714190503,
+        "win_rate": 0.5580939947780679,
+        "trades": 51,
+        "volatility": 0.11899393631094024
+      }
+    },
+    {
+      "seed": 13,
+      "fitness": 0.7314938207651969,
+      "generations": 22,
+      "details": {
+        "total_return": 3.172085741294284,
+        "sharpe": 0.8199399135149333,
+        "max_dd": 0.17601201357096835,
+        "win_rate": 0.5601484730892525,
+        "trades": 57,
+        "volatility": 0.11649032660802588
+      }
+    },
+    {
+      "seed": 94,
+      "fitness": 0.7308543173256631,
+      "generations": 22,
+      "details": {
+        "total_return": 3.359553364529942,
+        "sharpe": 0.8411077489902894,
+        "max_dd": 0.18656971117844648,
+        "win_rate": 0.557578661555662,
+        "trades": 71,
+        "volatility": 0.12026988143629568
+      }
+    },
+    {
+      "seed": 5,
+      "fitness": 0.7308517851477189,
+      "generations": 22,
+      "details": {
+        "total_return": 3.1680146771652327,
+        "sharpe": 0.8171620611876518,
+        "max_dd": 0.1861112826164568,
+        "win_rate": 0.5588875858602781,
+        "trades": 77,
+        "volatility": 0.11673631038045153
+      }
+    },
+    {
+      "seed": 63,
+      "fitness": 0.7306653379996477,
+      "generations": 26,
+      "details": {
+        "total_return": 3.4375643559462383,
+        "sharpe": 0.852974899277529,
+        "max_dd": 0.17967955089039805,
+        "win_rate": 0.5589865399841647,
+        "trades": 53,
+        "volatility": 0.12135049694899769
+      }
+    },
+    {
+      "seed": 42,
+      "fitness": 0.7304208296525686,
+      "generations": 22,
+      "details": {
+        "total_return": 3.2898763813261525,
+        "sharpe": 0.8436315406181445,
+        "max_dd": 0.18360580492540768,
+        "win_rate": 0.5598190348525469,
+        "trades": 63,
+        "volatility": 0.11742315474054431
+      }
+    },
+    {
+      "seed": 48,
+      "fitness": 0.7296570535771079,
+      "generations": 22,
+      "details": {
+        "total_return": 3.549318109293426,
+        "sharpe": 0.8706549720776954,
+        "max_dd": 0.19030044451227188,
+        "win_rate": 0.5585925227772541,
+        "trades": 67,
+        "volatility": 0.12275121891870718
+      }
+    },
+    {
+      "seed": 20,
+      "fitness": 0.7290566788017635,
+      "generations": 29,
+      "details": {
+        "total_return": 3.3143294212585386,
+        "sharpe": 0.8423920752469434,
+        "max_dd": 0.18266678190776048,
+        "win_rate": 0.5586464942248252,
+        "trades": 59,
+        "volatility": 0.11846999562028446
+      }
+    },
+    {
+      "seed": 47,
+      "fitness": 0.7261870433940523,
+      "generations": 29,
+      "details": {
+        "total_return": 3.3171818238560933,
+        "sharpe": 0.8253209930623909,
+        "max_dd": 0.18783944577476358,
+        "win_rate": 0.5572834020945732,
+        "trades": 69,
+        "volatility": 0.12102451695050416
+      }
+    },
+    {
+      "seed": 14,
+      "fitness": 0.7250293812451,
+      "generations": 22,
+      "details": {
+        "total_return": 3.173155282227619,
+        "sharpe": 0.8145347032566564,
+        "max_dd": 0.18360580492540765,
+        "win_rate": 0.5595498068200907,
+        "trades": 61,
+        "volatility": 0.11730288841270628
+      }
+    },
+    {
+      "seed": 64,
+      "fitness": 0.7245543632864391,
+      "generations": 30,
+      "details": {
+        "total_return": 3.242597349434405,
+        "sharpe": 0.8311573210094911,
+        "max_dd": 0.17862263622552876,
+        "win_rate": 0.5600340136054421,
+        "trades": 45,
+        "volatility": 0.11747264887133746
+      }
+    },
+    {
+      "seed": 75,
+      "fitness": 0.72182026053845,
+      "generations": 22,
+      "details": {
+        "total_return": 3.60623980098438,
+        "sharpe": 0.8779942428218057,
+        "max_dd": 0.19030044451227174,
+        "win_rate": 0.5592156862745098,
+        "trades": 49,
+        "volatility": 0.12367727477350758
+      }
+    },
+    {
+      "seed": 99,
+      "fitness": 0.721710533937257,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3423053959321782,
+        "sharpe": 0.8307533063918717,
+        "max_dd": 0.19120268541389646,
+        "win_rate": 0.5580022339237275,
+        "trades": 65,
+        "volatility": 0.12114375319844685
+      }
+    },
+    {
+      "seed": 55,
+      "fitness": 0.7211790568125406,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3435233782920486,
+        "sharpe": 0.8459153520045676,
+        "max_dd": 0.19804654523117884,
+        "win_rate": 0.5583829924303431,
+        "trades": 73,
+        "volatility": 0.11901574796827541
+      }
+    },
+    {
+      "seed": 62,
+      "fitness": 0.720309346546859,
+      "generations": 22,
+      "details": {
+        "total_return": 3.5340534589670036,
+        "sharpe": 0.861507012402584,
+        "max_dd": 0.19030044451227174,
+        "win_rate": 0.5588373919874313,
+        "trades": 51,
+        "volatility": 0.1235211342025966
+      }
+    },
+    {
+      "seed": 53,
+      "fitness": 0.7202432453269717,
+      "generations": 22,
+      "details": {
+        "total_return": 3.516220285271893,
+        "sharpe": 0.8609211868547981,
+        "max_dd": 0.19030044451227163,
+        "win_rate": 0.5590551181102362,
+        "trades": 51,
+        "volatility": 0.12298146218343126
+      }
+    },
+    {
+      "seed": 29,
+      "fitness": 0.7202307875422337,
+      "generations": 22,
+      "details": {
+        "total_return": 2.7629786840981767,
+        "sharpe": 0.7693609514117976,
+        "max_dd": 0.16616776969177816,
+        "win_rate": 0.5599441452224218,
+        "trades": 30,
+        "volatility": 0.10813701252261108
+      }
+    },
+    {
+      "seed": 80,
+      "fitness": 0.7201851552190288,
+      "generations": 22,
+      "details": {
+        "total_return": 3.620486354928126,
+        "sharpe": 0.8806145520226735,
+        "max_dd": 0.19030044451227188,
+        "win_rate": 0.5589341692789969,
+        "trades": 45,
+        "volatility": 0.12379640414358994
+      }
+    },
+    {
+      "seed": 66,
+      "fitness": 0.7194938104244508,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4790381706461053,
+        "sharpe": 0.8561382476677415,
+        "max_dd": 0.19030044451227163,
+        "win_rate": 0.5587351778656127,
+        "trades": 51,
+        "volatility": 0.12236078856537858
+      }
+    },
+    {
+      "seed": 17,
+      "fitness": 0.719026827231369,
+      "generations": 22,
+      "details": {
+        "total_return": 3.6128799052616696,
+        "sharpe": 0.87950387382423,
+        "max_dd": 0.19030044451227174,
+        "win_rate": 0.5590169067000627,
+        "trades": 43,
+        "volatility": 0.123692321844863
+      }
+    },
+    {
+      "seed": 9,
+      "fitness": 0.7190098247495569,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4907720217449905,
+        "sharpe": 0.8598479959430162,
+        "max_dd": 0.19030044451227163,
+        "win_rate": 0.5583306987037623,
+        "trades": 49,
+        "volatility": 0.12224378151897966
+      }
+    },
+    {
+      "seed": 58,
+      "fitness": 0.7185689642287255,
+      "generations": 22,
+      "details": {
+        "total_return": 3.6244954484391716,
+        "sharpe": 0.8831978962014685,
+        "max_dd": 0.19030044451227174,
+        "win_rate": 0.5588972431077694,
+        "trades": 41,
+        "volatility": 0.12357098421509637
+      }
+    },
+    {
+      "seed": 70,
+      "fitness": 0.7183081856341206,
+      "generations": 23,
+      "details": {
+        "total_return": 3.611807265210926,
+        "sharpe": 0.8814224344869768,
+        "max_dd": 0.19030044451227174,
+        "win_rate": 0.5589526497334588,
+        "trades": 41,
+        "volatility": 0.12338644170111177
+      }
+    },
+    {
+      "seed": 91,
+      "fitness": 0.7182151356030776,
+      "generations": 24,
+      "details": {
+        "total_return": 3.5373786051366745,
+        "sharpe": 0.8609772937533761,
+        "max_dd": 0.19030044451227174,
+        "win_rate": 0.558689860523429,
+        "trades": 47,
+        "volatility": 0.12371342189645514
+      }
+    },
+    {
+      "seed": 65,
+      "fitness": 0.7177748165178413,
+      "generations": 22,
+      "details": {
+        "total_return": 3.502498176516781,
+        "sharpe": 0.8576909219691631,
+        "max_dd": 0.19120268541389682,
+        "win_rate": 0.5582386363636364,
+        "trades": 49,
+        "volatility": 0.12296289439368026
+      }
+    },
+    {
+      "seed": 22,
+      "fitness": 0.7175509405759961,
+      "generations": 22,
+      "details": {
+        "total_return": 3.5620078392271344,
+        "sharpe": 0.8700088156867378,
+        "max_dd": 0.19030044451227174,
+        "win_rate": 0.5585006273525721,
+        "trades": 43,
+        "volatility": 0.12328157966076145
+      }
+    },
+    {
+      "seed": 33,
+      "fitness": 0.7173810857895407,
+      "generations": 22,
+      "details": {
+        "total_return": 3.3857738143648977,
+        "sharpe": 0.8348689653833213,
+        "max_dd": 0.19120268541389646,
+        "win_rate": 0.5585342639593909,
+        "trades": 55,
+        "volatility": 0.12211432056991404
+      }
+    },
+    {
+      "seed": 89,
+      "fitness": 0.7172788169102051,
+      "generations": 22,
+      "details": {
+        "total_return": 3.6758677038813667,
+        "sharpe": 0.8816824537902376,
+        "max_dd": 0.19030044451227188,
+        "win_rate": 0.5582689335394126,
+        "trades": 39,
+        "volatility": 0.12553783869486382
+      }
+    },
+    {
+      "seed": 84,
+      "fitness": 0.7171907309997418,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4340367977865007,
+        "sharpe": 0.8467932744789565,
+        "max_dd": 0.19120268541389646,
+        "win_rate": 0.5587442524179483,
+        "trades": 51,
+        "volatility": 0.12211092398371028
+      }
+    },
+    {
+      "seed": 51,
+      "fitness": 0.7169808923054215,
+      "generations": 22,
+      "details": {
+        "total_return": 2.6899741978999865,
+        "sharpe": 0.7480166591965451,
+        "max_dd": 0.16616776969177816,
+        "win_rate": 0.5594616311771796,
+        "trades": 30,
+        "volatility": 0.10828388201869553
+      }
+    },
+    {
+      "seed": 3,
+      "fitness": 0.7165210663467323,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4372417689396366,
+        "sharpe": 0.848858424625353,
+        "max_dd": 0.19120268541389646,
+        "win_rate": 0.5589498806682578,
+        "trades": 49,
+        "volatility": 0.12192753402965585
+      }
+    },
+    {
+      "seed": 7,
+      "fitness": 0.7165144398740261,
+      "generations": 25,
+      "details": {
+        "total_return": 3.281420579918305,
+        "sharpe": 0.8081611995619585,
+        "max_dd": 0.20394563668806465,
+        "win_rate": 0.5573589662779703,
+        "trades": 87,
+        "volatility": 0.12226182512050222
+      }
+    },
+    {
+      "seed": 96,
+      "fitness": 0.7161530611803613,
+      "generations": 22,
+      "details": {
+        "total_return": 3.5257587359876448,
+        "sharpe": 0.8599549642149494,
+        "max_dd": 0.1912026854138965,
+        "win_rate": 0.5586250196201539,
+        "trades": 45,
+        "volatility": 0.12345362754778982
+      }
+    },
+    {
+      "seed": 28,
+      "fitness": 0.7156194831373704,
+      "generations": 22,
+      "details": {
+        "total_return": 3.511007454907639,
+        "sharpe": 0.8563024100777951,
+        "max_dd": 0.1912026854138965,
+        "win_rate": 0.5587680703959774,
+        "trades": 45,
+        "volatility": 0.12346150256774797
+      }
+    },
+    {
+      "seed": 92,
+      "fitness": 0.7120728066905664,
+      "generations": 22,
+      "details": {
+        "total_return": 3.6685754186422734,
+        "sharpe": 0.8871923911964937,
+        "max_dd": 0.19030044451227207,
+        "win_rate": 0.5579439252336449,
+        "trades": 27,
+        "volatility": 0.1245106831981843
+      }
+    },
+    {
+      "seed": 40,
+      "fitness": 0.711876084078743,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4475505399124007,
+        "sharpe": 0.8412373114397326,
+        "max_dd": 0.19858746416184542,
+        "win_rate": 0.5577795152462861,
+        "trades": 57,
+        "volatility": 0.123401116103906
+      }
+    },
+    {
+      "seed": 83,
+      "fitness": 0.7118248744376959,
+      "generations": 22,
+      "details": {
+        "total_return": 3.631995591531327,
+        "sharpe": 0.8653994986938658,
+        "max_dd": 0.19030044451227207,
+        "win_rate": 0.5581539414588819,
+        "trades": 33,
+        "volatility": 0.12637339309411602
+      }
+    },
+    {
+      "seed": 88,
+      "fitness": 0.7058939776425537,
+      "generations": 22,
+      "details": {
+        "total_return": 3.4616993473690654,
+        "sharpe": 0.8391733548940019,
+        "max_dd": 0.2063487339770284,
+        "win_rate": 0.5586670838548186,
+        "trades": 61,
+        "volatility": 0.1242123084977389
+      }
+    },
+    {
+      "seed": 60,
+      "fitness": 0.6974677885672312,
+      "generations": 22,
+      "details": {
+        "total_return": 3.384383437130108,
+        "sharpe": 0.8157674164456468,
+        "max_dd": 0.21417440396241003,
+        "win_rate": 0.5577708006279435,
+        "trades": 67,
+        "volatility": 0.12492235972704954
+      }
+    },
+    {
+      "seed": 23,
+      "fitness": 0.6967845150284723,
+      "generations": 22,
+      "details": {
+        "total_return": 3.415894461745668,
+        "sharpe": 0.824231621111378,
+        "max_dd": 0.21417440396241028,
+        "win_rate": 0.5582417582417583,
+        "trades": 63,
+        "volatility": 0.12479067824881532
+      }
+    },
+    {
+      "seed": 78,
+      "fitness": 0.6934929325553528,
+      "generations": 26,
+      "details": {
+        "total_return": 3.4629670548569513,
+        "sharpe": 0.81052220770208,
+        "max_dd": 0.2063487339770284,
+        "win_rate": 0.5576333537706928,
+        "trades": 45,
+        "volatility": 0.12865018471814485
+      }
+    },
+    {
+      "seed": 59,
+      "fitness": 0.6930284312568271,
+      "generations": 24,
+      "details": {
+        "total_return": 3.4466280364464645,
+        "sharpe": 0.8075177524037274,
+        "max_dd": 0.2063487339770286,
+        "win_rate": 0.5574950237329659,
+        "trades": 45,
+        "volatility": 0.128519583890726
+      }
+    },
+    {
+      "seed": 49,
+      "fitness": 0.6917463750053765,
+      "generations": 22,
+      "details": {
+        "total_return": 3.512880577523185,
+        "sharpe": 0.8319900360475215,
+        "max_dd": 0.21426312194671712,
+        "win_rate": 0.5571099154496542,
+        "trades": 51,
+        "volatility": 0.1271370803082751
+      }
+    },
+    {
+      "seed": 32,
+      "fitness": 0.6875964717942036,
+      "generations": 22,
+      "details": {
+        "total_return": 3.300362183788053,
+        "sharpe": 0.8156999888891049,
+        "max_dd": 0.2042910091377701,
+        "win_rate": 0.5603248259860789,
+        "trades": 27,
+        "volatility": 0.12183108691172602
+      }
+    },
+    {
+      "seed": 87,
+      "fitness": 0.681393560521658,
+      "generations": 24,
+      "details": {
+        "total_return": 3.2306606108758142,
+        "sharpe": 0.7528383598169295,
+        "max_dd": 0.19878634835837583,
+        "win_rate": 0.5575415490749451,
+        "trades": 23,
+        "volatility": 0.1292160823631847
+      }
+    },
+    {
+      "seed": 10,
+      "fitness": 0.05,
+      "generations": 22,
+      "details": {
+        "reason": "Too few trades: 0",
+        "trades": 0
+      }
+    },
+    {
+      "seed": 11,
+      "fitness": 0.05,
+      "generations": 22,
+      "details": {
+        "reason": "Too few trades: 0",
+        "trades": 0
+      }
+    },
+    {
+      "seed": 46,
+      "fitness": 0.05,
+      "generations": 22,
+      "details": {
+        "reason": "Too few trades: 1",
+        "trades": 1
+      }
+    },
+    {
+      "seed": 57,
+      "fitness": 0.05,
+      "generations": 22,
+      "details": {
+        "reason": "Too few trades: 0",
+        "trades": 0
+      }
+    },
+    {
+      "seed": 98,
+      "fitness": 0.05,
+      "generations": 22,
+      "details": {
+        "reason": "Too few trades: 0",
+        "trades": 0
+      }
+    }
+  ],
+  "generated_at": "2026-04-29T17:39:35.445936"
+}
