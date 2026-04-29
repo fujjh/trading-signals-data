@@ -66,6 +66,7 @@ sys.path.insert(0, str(Path(__file__).parent / 'modules'))
 
 from metrics_calculator import MetricsCalculator, Trade, PerformanceMetrics
 from results_db import ResultsDatabase
+from pipeline_bridge import PipelineBridge
 
 # Configuration
 DATA_DIR = Path(__file__).parent / "data"
@@ -127,6 +128,7 @@ class WalkForwardValidator:
         self.windows: List[WindowResult] = []
         self.aggregate_metrics: Optional[Dict] = None
         self.results_db = ResultsDatabase()
+        self.pipeline_bridge = PipelineBridge()
         
     def load_historical_data(self, ticker: str = "AAPL") -> Optional[pd.DataFrame]:
         """
@@ -349,6 +351,15 @@ class WalkForwardValidator:
         # Calculate aggregate metrics
         self.calculate_aggregate_metrics()
         
+        # Calculate walk-forward score using bridge
+        consistency_score, _ = self.pipeline_bridge.calculate_walk_forward_score(
+            self.windows, MIN_WINDOWS
+        )
+        
+        # Save results to database (if config_id is available)
+        # For now, we store in aggregate_metrics for later use
+        self.aggregate_metrics['consistency_score'] = consistency_score
+        
         # Print summary
         self.print_summary()
         
@@ -457,54 +468,24 @@ class WalkForwardValidator:
         print(f"\nExported results to: {output_path}")
     
     def save_to_database(self, config_id: int):
-        """Save walk-forward results to database"""
+        """Save walk-forward results to database using bridge"""
         if not self.windows or not self.aggregate_metrics:
             return
         
-        # Calculate aggregate metrics for storage
-        from metrics_calculator import PerformanceMetrics
-        
-        metrics = PerformanceMetrics(
-            total_trades=len(self.windows) * 20,  # Approximate
-            winning_trades=int(len(self.windows) * 20 * self.aggregate_metrics['avg_test_win_rate']),
-            losing_trades=int(len(self.windows) * 20 * (1 - self.aggregate_metrics['avg_test_win_rate'])),
-            win_rate=self.aggregate_metrics['avg_test_win_rate'],
-            gross_profit=self.aggregate_metrics['avg_test_pf'] * 10000,
-            gross_loss=10000,
-            net_profit=(self.aggregate_metrics['avg_test_pf'] - 1) * 10000,
-            profit_factor=self.aggregate_metrics['avg_test_pf'],
-            expectancy=(self.aggregate_metrics['avg_test_pf'] - 1) * 100,
-            payoff_ratio=1.5,
-            avg_trade=(self.aggregate_metrics['avg_test_pf'] - 1) * 100,
-            avg_win=(self.aggregate_metrics['avg_test_pf'] - 1) * 200,
-            avg_loss=-(self.aggregate_metrics['avg_test_pf'] - 1) * 100,
-            sharpe_ratio=self.aggregate_metrics['avg_test_sharpe'],
-            sortino_ratio=self.aggregate_metrics['avg_test_sharpe'] * 1.2,
-            calmar_ratio=self.aggregate_metrics['avg_test_sharpe'] / max(self.aggregate_metrics['avg_test_max_dd'], 0.01),
-            max_drawdown=self.aggregate_metrics['avg_test_max_dd'],
-            max_drawdown_duration=20,
-            avg_drawdown=self.aggregate_metrics['avg_test_max_dd'] / 2,
-            ulcer_index=self.aggregate_metrics['avg_test_max_dd'] / 3,
-            total_return=self.aggregate_metrics['avg_test_pf'] - 1,
-            annualized_return=(self.aggregate_metrics['avg_test_pf'] - 1) * 12,
-            volatility=0.15,
-            downside_volatility=0.12,
-            consecutive_wins=5,
-            consecutive_losses=3,
-            max_consecutive_wins=8,
-            max_consecutive_losses=5
+        # Calculate consistency score and aggregate metrics
+        consistency_score, aggregate_metrics = self.pipeline_bridge.calculate_walk_forward_score(
+            self.windows, MIN_WINDOWS
         )
         
-        result_id = self.results_db.save_backtest_result(
-            config_name=f"walk_forward_{config_id}",
-            config={'walk_forward': True, 'windows': len(self.windows)},
-            metrics=metrics,
-            trades=[],
-            notes=f"Walk-forward analysis: {len(self.windows)} windows, "
-                  f"{self.aggregate_metrics['consistent_windows']} consistent"
+        # Save using bridge
+        success = self.pipeline_bridge.save_step11_result(
+            config_id=config_id,
+            consistency_score=consistency_score,
+            aggregate_metrics=aggregate_metrics
         )
         
-        print(f"Saved to database (ID: {result_id})")
+        if success:
+            print(f"Saved walk-forward results to database for config {config_id}")
 
 
 def main():

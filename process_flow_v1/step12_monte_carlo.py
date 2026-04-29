@@ -72,6 +72,7 @@ sys.path.insert(0, str(Path(__file__).parent / 'modules'))
 
 from metrics_calculator import MetricsCalculator, Trade, PerformanceMetrics
 from results_db import ResultsDatabase
+from pipeline_bridge import PipelineBridge
 
 # Configuration
 DATA_DIR = Path(__file__).parent / "data"
@@ -113,6 +114,7 @@ class MonteCarloEngine:
         self.confidence_level = confidence_level
         self.calculator = MetricsCalculator()
         self.results_db = ResultsDatabase()
+        self.pipeline_bridge = PipelineBridge()
         
         # Set random seed for reproducibility
         np.random.seed(RANDOM_SEED)
@@ -436,55 +438,35 @@ class MonteCarloEngine:
         df.to_csv(output_path, index=False)
         print(f"\nExported {len(df)} simulations to: {output_path}")
     
-    def save_to_database(self):
-        """Save Monte Carlo results to database"""
+    def save_to_database(self, config_id: Optional[int] = None):
+        """Save Monte Carlo results to database using bridge"""
         if not self.simulation_results:
             return
         
-        # Calculate aggregate metrics
-        avg_pf = np.mean([r.profit_factor for r in self.simulation_results])
-        avg_sharpe = np.mean([r.sharpe_ratio for r in self.simulation_results])
-        avg_dd = np.mean([r.max_drawdown for r in self.simulation_results])
-        
-        metrics = PerformanceMetrics(
-            total_trades=100,
-            winning_trades=55,
-            losing_trades=45,
-            win_rate=0.55,
-            gross_profit=avg_pf * 10000,
-            gross_loss=10000,
-            net_profit=(avg_pf - 1) * 10000,
-            profit_factor=avg_pf,
-            expectancy=(avg_pf - 1) * 100,
-            payoff_ratio=1.5,
-            avg_trade=(avg_pf - 1) * 100,
-            avg_win=(avg_pf - 1) * 200,
-            avg_loss=-(avg_pf - 1) * 100,
-            sharpe_ratio=avg_sharpe,
-            sortino_ratio=avg_sharpe * 1.2,
-            calmar_ratio=avg_sharpe / max(avg_dd, 0.01),
-            max_drawdown=avg_dd,
-            max_drawdown_duration=20,
-            avg_drawdown=avg_dd / 2,
-            ulcer_index=avg_dd / 3,
-            total_return=avg_pf - 1,
-            annualized_return=(avg_pf - 1) * 12,
-            volatility=0.15,
-            downside_volatility=0.12,
-            consecutive_wins=5,
-            consecutive_losses=3,
-            max_consecutive_wins=8,
-            max_consecutive_losses=5
+        # Calculate scores using bridge
+        pf_prob, sharpe_prob, dd_prob, aggregate_metrics = self.pipeline_bridge.calculate_monte_carlo_scores(
+            self.simulation_results
         )
         
+        # Save using bridge
+        if config_id:
+            self.pipeline_bridge.save_step12_result(
+                config_id=config_id,
+                pf_probability=pf_prob,
+                sharpe_probability=sharpe_prob,
+                dd_probability=dd_prob
+            )
+        
+        # Also save aggregate metrics to database
         result_id = self.results_db.save_backtest_result(
             config_name="monte_carlo_stress_test",
             config={'simulations': self.n_simulations, 'confidence': self.confidence_level},
-            metrics=metrics,
+            metrics=aggregate_metrics,
             trades=[],
             notes=f"Monte Carlo: {self.n_simulations} sims, "
-                  f"PF>{self.probabilities.get('pf_above_1_5', 0)*100:.0f}%, "
-                  f"Sharpe>{self.probabilities.get('sharpe_above_1', 0)*100:.0f}%"
+                  f"PF>1.5={pf_prob:.1%}, "
+                  f"Sharpe>1.0={sharpe_prob:.1%}, "
+                  f"DD<20%={dd_prob:.1%}"
         )
         
         print(f"Saved to database (ID: {result_id})")

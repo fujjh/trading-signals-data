@@ -69,6 +69,7 @@ sys.path.insert(0, str(Path(__file__).parent / 'modules'))
 
 from metrics_calculator import PerformanceMetrics
 from results_db import ResultsDatabase
+from pipeline_bridge import PipelineBridge
 
 # Configuration
 DATA_DIR = Path(__file__).parent / "data"
@@ -117,32 +118,28 @@ class ModelSelector:
     def __init__(self):
         """Initialize model selector"""
         self.results_db = ResultsDatabase()
+        self.pipeline_bridge = PipelineBridge()
         self.candidates: List[ModelCandidate] = []
         self.selected_model: Optional[ModelCandidate] = None
         
     def load_candidates_from_database(self) -> List[ModelCandidate]:
-        """Load all candidate configurations from database"""
+        """Load all candidate configurations from database using bridge"""
         print("Loading candidates from database...")
         
-        candidates = []
+        # Use pipeline bridge for consistent loading
+        raw_candidates = self.pipeline_bridge.load_model_candidates()
         
-        # Query all results
-        with self.results_db as db:
-            # Get genetic optimizer results
-            cursor = db.conn.execute(
-                "SELECT id, config_name, config, profit_factor, sharpe_ratio, max_drawdown "
-                "FROM backtest_results WHERE config_name LIKE '%genetic%'"
+        candidates = []
+        for raw in raw_candidates:
+            candidate = ModelCandidate(
+                config_id=raw['config_id'],
+                config_name=raw['config_name'],
+                config=raw['config'],
+                backtest_metrics=raw['metrics'],
+                walk_forward_score=raw.get('walk_forward_score', 0.0),
+                monte_carlo_score=raw.get('monte_carlo_score', 0.0)
             )
-            rows = cursor.fetchall()
-            
-            for row in rows:
-                candidate = ModelCandidate(
-                    config_id=row['id'],
-                    config_name=row['config_name'],
-                    config=json.loads(row['config']),
-                    backtest_metrics=None  # Would load from DB
-                )
-                candidates.append(candidate)
+            candidates.append(candidate)
         
         print(f"Loaded {len(candidates)} candidates")
         return candidates

@@ -77,6 +77,7 @@ sys.path.insert(0, str(Path(__file__).parent / 'modules'))
 
 from metrics_calculator import MetricsCalculator
 from results_db import ResultsDatabase
+from pipeline_bridge import PipelineBridge
 
 # Configuration
 DATA_DIR = Path(__file__).parent / "data"
@@ -168,6 +169,7 @@ class GeneticOptimizer:
         # For progress tracking
         self.progress_file = OPTIMIZER_DIR / 'optimizer_progress.pkl'
         self.results_db = ResultsDatabase()
+        self.pipeline_bridge = PipelineBridge()
         
     def create_random_individual(self) -> Individual:
         """Create a random individual"""
@@ -475,53 +477,19 @@ class GeneticOptimizer:
                     print(f"  {name:15s}: {val}")
     
     def save_best_to_database(self):
-        """Save best individual to results database"""
+        """Save best individual to results database using bridge"""
         if not self.best_individual:
             return
         
-        # Create backtest result entry
         metrics = self.best_individual.metrics
         if metrics:
-            # Convert to PerformanceMetrics format
-            from metrics_calculator import PerformanceMetrics
-            
-            perf_metrics = PerformanceMetrics(
-                total_trades=100,  # Simulated
-                winning_trades=int(100 * metrics['win_rate']),
-                losing_trades=int(100 * (1 - metrics['win_rate'])),
-                win_rate=metrics['win_rate'],
-                gross_profit=metrics['profit_factor'] * 10000,
-                gross_loss=10000,
-                net_profit=(metrics['profit_factor'] - 1) * 10000,
-                profit_factor=metrics['profit_factor'],
-                expectancy=metrics['expectancy'],
-                payoff_ratio=1.5,
-                avg_trade=metrics['expectancy'],
-                avg_win=metrics['expectancy'] * 2,
-                avg_loss=-metrics['expectancy'],
-                sharpe_ratio=metrics['sharpe_ratio'],
-                sortino_ratio=metrics['sharpe_ratio'] * 1.2,
-                calmar_ratio=metrics['sharpe_ratio'] / max(metrics['max_drawdown'], 0.01),
-                max_drawdown=metrics['max_drawdown'],
-                max_drawdown_duration=20,
-                avg_drawdown=metrics['max_drawdown'] / 2,
-                ulcer_index=metrics['max_drawdown'] / 3,
-                total_return=metrics['profit_factor'] - 1,
-                annualized_return=(metrics['profit_factor'] - 1) * 12,
-                volatility=0.15,
-                downside_volatility=0.12,
-                consecutive_wins=5,
-                consecutive_losses=3,
-                max_consecutive_wins=8,
-                max_consecutive_losses=5
-            )
-            
-            result_id = self.results_db.save_backtest_result(
+            # Use pipeline bridge for proper format conversion
+            result_id = self.pipeline_bridge.save_step10_result(
                 config_name=f"genetic_optimized_gen{self.generation}",
                 config=self.best_individual.to_config(),
-                metrics=perf_metrics,
-                trades=[],
-                notes=f"Genetic algorithm optimization - Generation {self.generation}"
+                metrics=metrics,
+                generation=self.generation,
+                fitness=self.best_individual.fitness
             )
             
             print(f"\nSaved to database (ID: {result_id})")
