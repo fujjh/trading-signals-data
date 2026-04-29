@@ -127,6 +127,13 @@ def calculate_hma(close: pd.Series, period: int = 13) -> pd.Series:
     return hma
 
 
+def calculate_rolling_high_low(high: pd.Series, low: pd.Series, period: int = 252) -> tuple:
+    """Calculate rolling high/low (e.g., 52-week)."""
+    rolling_high = high.rolling(window=period, min_periods=1).max()
+    rolling_low = low.rolling(window=period, min_periods=1).min()
+    return rolling_high, rolling_low
+
+
 def calculate_elder_impulse(close: pd.Series, macd_hist: pd.Series, ema_period: int = 13) -> pd.Series:
     """Calculate Elder Impulse System."""
     ema = calculate_ema(close, ema_period)
@@ -171,6 +178,7 @@ def generate_technical_analysis():
     # Trend indicators
     df['sma_20'] = calculate_sma(df['close'], 20)
     df['sma_50'] = calculate_sma(df['close'], 50)
+    df['sma_200'] = calculate_sma(df['close'], 200)  # NEW: 200-day SMA
     df['ema_12'] = calculate_ema(df['close'], 12)
     df['ema_26'] = calculate_ema(df['close'], 26)
     
@@ -185,6 +193,13 @@ def generate_technical_analysis():
     # HMA and Elder Impulse
     df['hma_13'] = calculate_hma(df['close'], 13)
     df['elder_impulse'] = calculate_elder_impulse(df['close'], df['macd_hist'])
+    
+    # NEW: 52-week high/low (252 trading days)
+    df['high_52w'], df['low_52w'] = calculate_rolling_high_low(df['high'], df['low'], 252)
+    
+    # NEW: Distance from 52-week high (as percentage)
+    df['pct_from_52w_high'] = (df['close'] - df['high_52w']) / df['high_52w'] * 100
+    df['pct_from_52w_low'] = (df['close'] - df['low_52w']) / df['low_52w'] * 100
     
     # Reset index to make date a column
     df.reset_index(inplace=True)
@@ -208,8 +223,14 @@ def generate_technical_analysis():
     print(f"MACD: {latest['macd']:.3f}")
     print(f"SMA 20: ${latest['sma_20']:.2f}")
     print(f"SMA 50: ${latest['sma_50']:.2f}")
+    print(f"SMA 200: ${latest['sma_200']:.2f}")
     print(f"HMA 13: ${latest['hma_13']:.2f}")
     print(f"Elder Impulse: {latest['elder_impulse']}")
+    print(f"\n52-Week Range:")
+    print(f"  High: ${latest['high_52w']:.2f}")
+    print(f"  Low: ${latest['low_52w']:.2f}")
+    print(f"  From High: {latest['pct_from_52w_high']:.1f}%")
+    print(f"  From Low: {latest['pct_from_52w_low']:.1f}%")
     print("=" * 70)
 
 
