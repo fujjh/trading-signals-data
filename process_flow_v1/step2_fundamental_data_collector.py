@@ -306,6 +306,58 @@ def fetch_fundamental_data(ticker: str) -> Dict[str, Any]:
             except:
                 pass
         
+        # Calculate Price to Free Cash Flow
+        if data.get('marketCap') and data.get('cashflow_free'):
+            try:
+                fcf = data['cashflow_free']
+                if fcf and fcf > 0:
+                    data['priceToFreeCashFlow'] = data['marketCap'] / fcf
+                elif fcf and fcf < 0:
+                    data['priceToFreeCashFlow'] = None  # Negative FCF - can't calculate ratio
+                    data['freeCashFlow_negative'] = True
+            except:
+                pass
+        
+        # Calculate Free Cash Flow Yield
+        if data.get('cashflow_free') and data.get('marketCap'):
+            try:
+                fcf_yield = (data['cashflow_free'] / data['marketCap']) * 100
+                data['freeCashFlowYield_percent'] = fcf_yield
+            except:
+                pass
+        
+        # Add earnings date tracking with "as of" information
+        if data.get('earningsDate'):
+            try:
+                # Parse earnings date for additional analysis
+                earnings_date = data['earningsDate']
+                collection_date = datetime.now()
+                
+                # Calculate days until next earnings
+                if isinstance(earnings_date, str):
+                    try:
+                        earnings_dt = datetime.fromisoformat(earnings_date.replace('Z', '+00:00'))
+                        days_until = (earnings_dt - collection_date).days
+                        data['days_until_earnings'] = days_until
+                        data['earnings_as_of_date'] = collection_date.strftime('%Y-%m-%d')
+                    except:
+                        pass
+            except:
+                pass
+        
+        # Store latest available earnings date information
+        if data.get('earningsDateStart') and data.get('earningsDateEnd'):
+            data['earnings_date_range'] = f"{data['earningsDateStart']} to {data['earningsDateEnd']}"
+            data['earnings_data_as_of'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
+        # Add FCF per share if shares outstanding available
+        if data.get('cashflow_free') and data.get('sharesOutstanding'):
+            try:
+                fcf_per_share = data['cashflow_free'] / data['sharesOutstanding']
+                data['freeCashFlowPerShare'] = fcf_per_share
+            except:
+                pass
+        
         if data.get('returnOnEquity') is not None:
             data['roe_percent'] = data['returnOnEquity'] * 100
         
