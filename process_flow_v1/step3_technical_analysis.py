@@ -897,7 +897,92 @@ def get_tickers_with_time_series() -> List[str]:
                 tickers.append(ticker_dir.name)
     return tickers
 
-def process_ticker(ticker: str) -> Dict[str, pd.DataFrame]:
+def get_time_series_timestamp(ticker: str) -> Optional[pd.Timestamp]:
+    """Get the latest timestamp from time series data for a ticker"""
+    ticker_dir = TIME_SERIES_DIR / ticker
+    if not ticker_dir.exists():
+        return None
+    
+    latest_ts = None
+    for interval in INTERVALS:
+        price_file = ticker_dir / f"{ticker}_{interval}.csv"
+        if price_file.exists():
+            try:
+                df = pd.read_csv(price_file)
+                if len(df) > 0 and 'date' in df.columns:
+                    df['date'] = pd.to_datetime(df['date'], utc=True)
+                    file_latest = df['date'].max()
+                    if latest_ts is None or file_latest > latest_ts:
+                        latest_ts = file_latest
+            except Exception:
+                pass
+    return latest_ts
+
+def get_technical_analysis_timestamp(ticker: str) -> Optional[pd.Timestamp]:
+    """Get the timestamp when technical analysis was last generated"""
+    ticker_dir = OUTPUT_DIR / ticker
+    if not ticker_dir.exists():
+        return None
+    
+    # Check for completion marker file
+    completion_file = ticker_dir / '.last_updated'
+    if completion_file.exists():
+        try:
+            with open(completion_file, 'r') as f:
+                data = json.load(f)
+                return pd.Timestamp(data.get('timestamp'))
+        except Exception:
+            pass
+    
+    # Fallback: check file modification times
+    latest_mtime = None
+    for interval in INTERVALS:
+        tech_file = ticker_dir / f"{ticker}_{interval}_technical.csv"
+        if tech_file.exists():
+            mtime = pd.Timestamp(tech_file.stat().st_mtime, unit='s', tz='UTC')
+            if latest_mtime is None or mtime > latest_mtime:
+                latest_mtime = mtime
+    return latest_mtime
+
+def save_technical_analysis_timestamp(ticker: str, timestamp: pd.Timestamp):
+    """Save timestamp when technical analysis was completed"""
+    ticker_dir = OUTPUT_DIR / ticker
+    ticker_dir.mkdir(parents=True, exist_ok=True)
+    completion_file = ticker_dir / '.last_updated'
+    try:
+        with open(completion_file, 'w') as f:
+            json.dump({
+                'timestamp': timestamp.isoformat(),
+                'ticker': ticker
+            }, f, indent=2)
+    except Exception as e:
+        print(f"Warning: Could not save timestamp for {ticker}: {e}")
+
+def needs_update(ticker: str, buffer_hours: int = 1) -> bool:
+    """Check if technical analysis needs to be regenerated
+    
+    Returns True if:
+    - No technical analysis exists
+    - Time series data is newer than technical analysis
+    - Time series has data beyond what technical analysis was generated with
+    """
+    ts_time = get_time_series_timestamp(ticker)
+    ta_time = get_technical_analysis_timestamp(ticker)
+    
+    if ta_time is None:
+        return True  # No technical analysis exists
+    
+    if ts_time is None:
+        return False  # No time series data (shouldn't happen if we got here)
+    
+    # Check if time series has newer data
+    # Add buffer to avoid regenerating for very recent updates
+    if ts_time > ta_time + pd.Timedelta(hours=buffer_hours):
+        return True
+    
+    return False
+
+def process_ticker(ticker: str, force_update: bool = False) -> Dict[str, pd.DataFrame]:
     """Process a single ticker - skip if no time series files exist"""
     ticker_dir = TIME_SERIES_DIR / ticker
     if not ticker_dir.exists():
@@ -908,6 +993,10 @@ def process_ticker(ticker: str) -> Dict[str, pd.DataFrame]:
     if not csv_files:
         print(f"Skipping {ticker}: no time series files found")
         return {}
+    
+    # Check if update is needed (unless force_update is True)
+    if not force_update and not needs_update(ticker):
+        return {}  # Return empty to indicate skipped (no update needed)
     
     results = {}
     for interval in INTERVALS:
@@ -935,6 +1024,8 @@ def save_technical_analysis(ticker: str, results: Dict[str, pd.DataFrame]):
     for interval, df in results.items():
         output_file = ticker_dir / f"{ticker}_{interval}_technical.csv"
         df.to_csv(output_file, index=False)
+    # Save timestamp after successful save
+    save_technical_analysis_timestamp(ticker, pd.Timestamp.now(tz='UTC'))
 
 def load_progress() -> set:
     """Load set of already processed tickers"""
@@ -999,10 +1090,11 @@ def validate_technical_output(ticker: str, require_new_columns: bool = True) -> 
     
     return valid_count > 0
 
-def process_batch(tickers: List[str], batch_num: int, total_batches: int, failed_tickers: set) -> Tuple[int, int, set]:
+def process_batch(tickers: List[str], batch_num: int, total_batches: int, failed_tickers: set) -> Tuple[int, int, set, int]:
     """Process a batch of tickers"""
     processed = 0
     errors = 0
+    skipped = 0
     processed_set = set()
     
     print(f"\nBatch {batch_num}/{total_batches}: Processing {len(tickers)} tickers...")
@@ -1015,17 +1107,22 @@ def process_batch(tickers: List[str], batch_num: int, total_batches: int, failed
                 processed += 1
                 processed_set.add(ticker)
             else:
-                # Ticker failed validation, add to failed set
-                failed_tickers.add(ticker)
-                errors += 1
-                print(f"Failed validation: {ticker}")
+                # Check if it's a skip (up to date) or a failure
+                if not needs_update(ticker):
+                    skipped += 1
+                    print(f"  Skipping {ticker}: already up to date")
+                else:
+                    # Ticker failed validation, add to failed set
+                    failed_tickers.add(ticker)
+                    errors += 1
+                    print(f"Failed validation: {ticker}")
         except Exception as e:
             errors += 1
             failed_tickers.add(ticker)
             print(f"Error: {ticker} - {e}")
     
-    print(f"  Batch {batch_num}: {processed} processed, {errors} errors")
-    return processed, errors, processed_set
+    print(f"  Batch {batch_num}: {processed} updated, {skipped} skipped (up to date), {errors} errors")
+    return processed, errors, processed_set, skipped
 
 def load_failed_tickers() -> set:
     """Load set of tickers that have failed processing"""
@@ -1104,20 +1201,20 @@ def main():
             # Filter to tickers that need processing (missing or invalid)
             tickers_to_process = []
             for t in batch_tickers:
-                if not validate_technical_output(t):
+                if needs_update(t):
                     tickers_to_process.append(t)
             
             if not tickers_to_process:
-                print(f"Skipping batch {batch_num}/{total_batches} (all tickers valid)")
+                print(f"Skipping batch {batch_num}/{total_batches} (all tickers up to date)")
                 total_processed += len(batch_tickers)
                 continue
             
             if len(tickers_to_process) != len(batch_tickers):
-                print(f"Batch {batch_num}: Re-processing {len(tickers_to_process)}/{len(batch_tickers)} tickers (some invalid/partial)")
+                print(f"Batch {batch_num}: Processing {len(tickers_to_process)}/{len(batch_tickers)} tickers (some up to date)")
             
-            # Process tickers that need re-processing
-            processed, errors, _ = process_batch(tickers_to_process, batch_num, total_batches, failed_tickers)
-            total_processed += processed
+            # Process tickers that need updating
+            processed, errors, _, skipped = process_batch(tickers_to_process, batch_num, total_batches, failed_tickers)
+            total_processed += processed + skipped
             total_errors += errors
             batches_run += 1
             
@@ -1133,6 +1230,7 @@ def main():
         # Process all at once
         processed = 0
         errors = 0
+        skipped = 0
         
         for ticker in tickers:
             try:
@@ -1142,16 +1240,19 @@ def main():
                     processed += 1
                     if processed % 100 == 0:
                         print(f"Processed {processed}/{len(tickers)} tickers...")
+                else:
+                    if not needs_update(ticker):
+                        skipped += 1
             except Exception as e:
                 errors += 1
                 print(f"Error: {ticker} - {e}")
         
-        total_processed = processed
+        total_processed = processed + skipped
         total_errors = errors
     
     print()
     print("="*70)
-    print(f"Complete: {total_processed} tickers processed, {total_errors} errors")
+    print(f"Complete: {processed} tickers updated, {skipped} tickers skipped (up to date), {total_errors} errors")
     print("="*70)
 
 if __name__ == "__main__":
