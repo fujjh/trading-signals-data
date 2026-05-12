@@ -161,7 +161,7 @@ PROGRESS_FILE = DATA_DIR / ".step3_progress"
 INTERVALS = ['1d', '1wk', '1mo']
 
 # Batch processing configuration
-BATCH_SIZE = 20  # Process 20 tickers per batch
+BATCH_SIZE = 5  # Process 5 tickers per batch (smaller for OCI)
 MAX_BATCHES = 5000  # Process all tickers in one run
 
 ADX_TREND_THRESHOLD = 25
