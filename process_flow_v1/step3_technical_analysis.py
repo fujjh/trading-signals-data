@@ -1027,16 +1027,16 @@ def save_technical_analysis(ticker: str, results: Dict[str, pd.DataFrame]):
     # Save timestamp after successful save
     save_technical_analysis_timestamp(ticker, pd.Timestamp.now(tz='UTC'))
 
-def load_progress() -> set:
-    """Load set of already processed tickers"""
+def load_progress() -> Tuple[set, int]:
+    """Load set of already processed tickers and last batch number"""
     if PROGRESS_FILE.exists():
         try:
             with open(PROGRESS_FILE, 'r') as f:
                 data = json.load(f)
-                return set(data.get('processed_tickers', []))
+                return set(data.get('processed_tickers', [])), data.get('last_batch', 0)
         except Exception as e:
             print(f"Warning: Could not load progress: {e}")
-    return set()
+    return set(), 0
 
 def save_progress(processed_tickers: set, batch_count: int):
     """Save progress to resume later"""
@@ -1045,6 +1045,7 @@ def save_progress(processed_tickers: set, batch_count: int):
             json.dump({
                 'processed_tickers': list(processed_tickers),
                 'batch_count': batch_count,
+                'last_batch': batch_count,
                 'timestamp': pd.Timestamp.now().isoformat()
             }, f, indent=2)
     except Exception as e:
@@ -1166,6 +1167,11 @@ def main():
     if failed_tickers:
         print(f"Note: {len(failed_tickers)} tickers previously failed, will skip")
     
+    # Load progress to resume from last batch
+    processed_set, resume_batch = load_progress()
+    if resume_batch > 0:
+        print(f"Resuming from batch {resume_batch}...")
+    
     tickers = get_tickers_with_time_series()
     tickers.sort()
     
@@ -1193,7 +1199,10 @@ def main():
         total_errors = 0
         batches_run = 0
         
-        for batch_num in range(1, total_batches + 1):
+        # Start from resume_batch if available
+        start_batch = resume_batch + 1 if resume_batch > 0 else 1
+        
+        for batch_num in range(start_batch, total_batches + 1):
             start_idx = (batch_num - 1) * BATCH_SIZE
             end_idx = min(start_idx + BATCH_SIZE, total_tickers)
             batch_tickers = tickers[start_idx:end_idx]
@@ -1213,10 +1222,14 @@ def main():
                 print(f"Batch {batch_num}: Processing {len(tickers_to_process)}/{len(batch_tickers)} tickers (some up to date)")
             
             # Process tickers that need updating
-            processed, errors, _, skipped = process_batch(tickers_to_process, batch_num, total_batches, failed_tickers)
+            processed, errors, processed_in_batch, skipped = process_batch(tickers_to_process, batch_num, total_batches, failed_tickers)
             total_processed += processed + skipped
             total_errors += errors
             batches_run += 1
+            
+            # Update processed set and save progress after each batch
+            processed_set.update(processed_in_batch)
+            save_progress(processed_set, batch_num)
             
             # Save failed tickers after each batch
             if failed_tickers:
